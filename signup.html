@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign up — StandpointHQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B33; --ink-deep:#081127; --teal:#12A594; --teal-light:#E1F5EE;
+    --paper:#F4F6F5; --paper-card:#FFFFFF; --paper-alt:#EDF1EF; --slate:#3E4C60; --amber:#E8A33D;
+    --line:rgba(15,27,51,0.10); --line-strong:rgba(15,27,51,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.6;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; font-weight:600; letter-spacing:-0.02em; color:var(--ink);}
+  a{color:inherit; text-decoration:none;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:900px; margin:0 auto; padding:0 28px;}
+
+  .topbar{padding:26px 0;}
+  .back-link{display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:500; color:var(--slate); transition:color .15s ease;}
+  .back-link:hover{color:var(--ink);}
+  .back-link svg{width:14px; height:14px;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--teal); display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:16px;
+  }
+  .eyebrow::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--teal);}
+
+  .stage{padding:20px 0 90px; text-align:center;}
+  .stage h1{font-size:clamp(30px,4vw,42px); line-height:1.15; margin-bottom:12px;}
+  .stage .sub{font-size:16px; color:var(--slate); max-width:520px; margin:0 auto 48px;}
+
+  /* ---------- STEP 1: INDUSTRY GRID ---------- */
+  .industry-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; text-align:left;}
+  .ind-card{
+    background:var(--paper-card); border:1.5px solid var(--line-strong); border-radius:16px;
+    padding:22px 18px; cursor:pointer; transition:all .2s cubic-bezier(.2,.8,.2,1);
+  }
+  .ind-card:hover{border-color:var(--teal); transform:translateY(-3px); box-shadow:0 16px 32px -16px rgba(18,165,148,0.35);}
+  .ind-card .ic-badge{
+    width:38px; height:38px; border-radius:10px; background:var(--teal-light); color:var(--teal);
+    display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;
+    font-weight:700; font-size:15px; margin-bottom:14px;
+  }
+  .ind-card b{display:block; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; margin-bottom:4px;}
+  .ind-card span{font-size:12.5px; color:var(--slate);}
+
+  /* ---------- STEP 2: FORM ---------- */
+  #formStage{display:none; text-align:left;}
+  .form-context{
+    display:flex; align-items:center; justify-content:space-between; margin-bottom:36px;
+    background:var(--paper-card); border:1px solid var(--line); border-radius:12px; padding:16px 20px;
+  }
+  .form-context .fc-left{display:flex; align-items:center; gap:12px;}
+  .form-context .fc-badge{
+    width:36px; height:36px; border-radius:9px; background:var(--teal-light); color:var(--teal);
+    display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700;
+  }
+  .form-context .fc-text .fc-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--slate); text-transform:uppercase; letter-spacing:.05em;}
+  .form-context .fc-text b{font-family:'Space Grotesk',sans-serif; font-size:15px;}
+  .change-link{font-size:12.5px; font-family:'IBM Plex Mono',monospace; color:var(--teal); cursor:pointer;}
+
+  .form-card{background:var(--paper-card); border:1px solid var(--line); border-radius:20px; padding:40px;}
+  .form-section{margin-bottom:32px;}
+  .form-section:last-child{margin-bottom:0;}
+  .fs-label{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--teal); margin-bottom:14px; display:block; font-weight:600;
+  }
+  .fs-sub{font-size:12.5px; color:var(--slate); margin:-8px 0 16px;}
+  .field{margin-bottom:18px;}
+  .field:last-child{margin-bottom:0;}
+  .field label{display:block; font-size:13.5px; font-weight:600; margin-bottom:7px; color:var(--ink);}
+  .field .hint{font-size:12px; color:var(--slate); margin-top:6px;}
+  .field input[type=text], .field input[type=number], .field input[type=date], .field input[type=tel], .field input[type=email], .field input[type=password], .field select, .field textarea{
+    width:100%; padding:13px 16px; border-radius:10px; border:1.5px solid var(--line-strong);
+    font-family:'Inter',sans-serif; font-size:14px; color:var(--ink); background:var(--paper);
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .field select{appearance:none; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="%233E4C60" stroke-width="2"><path d="M2 4l5 5 5-5"/></svg>'); background-repeat:no-repeat; background-position:right 16px center;}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px var(--teal-light); background:var(--paper-card);}
+  .field textarea{resize:vertical; min-height:88px; font-family:'Inter',sans-serif;}
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .three-col{display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;}
+
+  .check-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .check-pill{
+    display:flex; align-items:center; gap:10px; border:1.5px solid var(--line-strong); border-radius:10px;
+    padding:11px 14px; cursor:pointer; transition:all .15s ease; font-size:13.5px; font-weight:500;
+  }
+  .check-pill:hover{border-color:var(--teal);}
+  .check-pill input{width:16px; height:16px; accent-color:var(--teal);}
+
+  .class-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+  .class-grid .field label{font-size:12px; color:var(--slate); font-weight:600;}
+  .class-grid input{padding:10px 12px; font-size:13px;}
+
+  .avatar-upload{display:flex; align-items:center; gap:18px;}
+  .logo-circle{
+    width:80px; height:80px; border-radius:18px; background:var(--paper-alt); border:2px dashed var(--line-strong);
+    display:flex; align-items:center; justify-content:center; color:var(--slate); position:relative; overflow:hidden; flex-shrink:0;
+    background-size:cover; background-position:center;
+  }
+  .logo-circle svg{width:26px; height:26px;}
+  .upload-btn-row{display:flex; flex-direction:column; gap:6px;}
+  .upload-label{
+    display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--ink);
+    border:1.5px solid var(--line-strong); padding:9px 16px; border-radius:8px; cursor:pointer; width:fit-content;
+    transition:all .15s ease;
+  }
+  .upload-label:hover{border-color:var(--teal); background:var(--teal-light);}
+  .upload-label input{display:none;}
+
+  .radio-pills{display:flex; gap:10px;}
+  .radio-pill{
+    flex:1; border:1.5px solid var(--line-strong); border-radius:10px; padding:13px 16px; cursor:pointer;
+    display:flex; align-items:center; gap:10px; transition:all .15s ease;
+  }
+  .radio-pill:hover{border-color:var(--teal);}
+  .radio-pill.active{border-color:var(--teal); background:var(--teal-light);}
+  .radio-pill .rp-dot{width:16px; height:16px; border-radius:50%; border:2px solid var(--line-strong); flex-shrink:0; position:relative;}
+  .radio-pill.active .rp-dot{border-color:var(--teal);}
+  .radio-pill.active .rp-dot::after{content:''; position:absolute; inset:3px; border-radius:50%; background:var(--teal);}
+  .radio-pill span{font-size:13.5px; font-weight:500;}
+
+  #cofounderField{display:none; margin-top:14px;}
+  #commissionField{display:none; margin-top:14px;}
+  #schoolClassBreakdown{display:none; margin-top:16px;}
+
+  .industry-block{display:none;}
+  .industry-block.active{display:block;}
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%;
+    font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; padding:16px 0; border-radius:999px;
+    cursor:pointer; border:none; background:var(--ink); color:#fff; transition:all .2s ease;
+    box-shadow:0 14px 28px -12px rgba(8,17,39,0.4);
+  }
+  .btn:hover{background:var(--ink-deep); transform:translateY(-2px);}
+  .form-foot{text-align:center; margin-top:22px; font-size:13.5px; color:var(--slate);}
+  .form-foot a{color:var(--teal); font-weight:600;}
+
+  .success-note{display:none; background:var(--teal-light); border:1px solid var(--teal); border-radius:12px; padding:16px 20px; margin-top:18px; font-size:13.5px; color:var(--ink);}
+
+  .site-logo-slot{
+    margin-top:36px; padding-top:26px; border-top:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; height:42px;
+  }
+  .site-logo-slot img{height:100%; width:auto; max-width:170px; object-fit:contain;}
+
+  @media (max-width:760px){
+    .industry-grid{grid-template-columns:repeat(2,1fr);}
+    .two-col, .three-col, .class-grid, .check-grid{grid-template-columns:1fr;}
+    .form-card{padding:26px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="topbar">
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      Back to Home
+    </a>
+  </div>
+
+  <!-- STEP 1 -->
+  <div id="industryStage" class="stage">
+    <div class="eyebrow">Step 1 of 2</div>
+    <h1>Select your business type</h1>
+    <p class="sub">We'll set up your dashboard with the tools that actually match how you work.</p>
+
+    <div class="industry-grid">
+      <div class="ind-card" onclick="selectIndustry('restaurant','Restaurant','R')">
+        <div class="ic-badge">R</div><b>Restaurant</b><span>Tables, orders, kitchen flow</span>
+      </div>
+      <div class="ind-card" onclick="selectIndustry('salon','Salon','S')">
+        <div class="ic-badge">S</div><b>Salon</b><span>Bookings, staff commission</span>
+      </div>
+      <div class="ind-card" onclick="selectIndustry('retail','Retail shop','R')">
+        <div class="ic-badge">R</div><b>Retail shop</b><span>POS, stock, receipts</span>
+      </div>
+      <div class="ind-card" onclick="selectIndustry('pharmacy','Pharmacy','P')">
+        <div class="ic-badge">P</div><b>Pharmacy</b><span>Batch &amp; expiry tracking</span>
+      </div>
+      <div class="ind-card" onclick="selectIndustry('school','School','S')">
+        <div class="ic-badge">S</div><b>School</b><span>Fees, records, attendance</span>
+      </div>
+      <div class="ind-card" onclick="selectIndustry('hotel','Hotel','H')">
+        <div class="ic-badge">H</div><b>Hotel</b><span>Rooms, bookings, invoices</span>
+      </div>
+      <div class="ind-card" onclick="selectIndustry('construction','Construction','C')">
+        <div class="ic-badge">C</div><b>Construction</b><span>Projects &amp; milestones</span>
+      </div>
+      <div class="ind-card" onclick="selectIndustry('freelancer','Freelancer','F')">
+        <div class="ic-badge">F</div><b>Freelancer</b><span>Invoicing, time tracking</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="formStage" class="stage">
+    <div class="form-context">
+      <div class="fc-left">
+        <div class="fc-badge" id="fcBadge">R</div>
+        <div class="fc-text">
+          <span class="fc-label">Setting up your workspace</span>
+          <b id="fcName">Retail shop</b>
+        </div>
+      </div>
+      <span class="change-link" onclick="backToIndustries()">&larr; Change business type</span>
+    </div>
+
+    <form class="form-card" onsubmit="return submitSignup(event)">
+
+      <!-- BUSINESS PROFILE -->
+      <div class="form-section">
+        <span class="fs-label">Business profile</span>
+        <div class="field avatar-upload">
+          <div class="logo-circle" id="logoPreview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+          </div>
+          <div class="upload-btn-row">
+            <label class="upload-label">
+              Upload business logo
+              <input type="file" accept="image/*" onchange="previewImage(this,'logoPreview')">
+            </label>
+            <span class="hint">Shown on receipts, invoices, and anything you send customers.</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Business name</label>
+          <input type="text" placeholder="e.g. Ajayi Stores" required>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label>Business location</label>
+            <input type="text" placeholder="e.g. Ikeja, Lagos" required>
+          </div>
+          <div class="field">
+            <label>When did this business start?</label>
+            <input type="date" required>
+          </div>
+        </div>
+      </div>
+
+      <!-- INDUSTRY-SPECIFIC DASHBOARD SETUP -->
+      <div class="form-section">
+        <span class="fs-label" id="dashSetupLabel">Dashboard setup for your retail shop</span>
+        <p class="fs-sub" id="dashSetupSub">A few details so your inventory, staff, and reports are ready from day one.</p>
+
+        <div class="industry-block" id="block-restaurant">
+          <div class="two-col">
+            <div class="field"><label>Number of tables</label><input type="number" placeholder="e.g. 12"></div>
+            <div class="field"><label>Kitchen &amp; service staff</label><input type="number" placeholder="e.g. 6"></div>
+          </div>
+          <div class="field">
+            <label>How do customers order?</label>
+            <div class="check-grid">
+              <label class="check-pill"><input type="checkbox"> Dine-in</label>
+              <label class="check-pill"><input type="checkbox"> Takeout</label>
+              <label class="check-pill"><input type="checkbox"> Delivery</label>
+              <label class="check-pill"><input type="checkbox"> WhatsApp orders</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Should we track stock by ingredient or by finished dish?</label>
+            <select><option>Track by ingredient (rice, oil, meat, etc.)</option><option>Track by finished dish sold</option></select>
+          </div>
+        </div>
+
+        <div class="industry-block" id="block-salon">
+          <div class="field">
+            <label>Services you offer</label>
+            <div class="check-grid">
+              <label class="check-pill"><input type="checkbox"> Haircuts &amp; grooming</label>
+              <label class="check-pill"><input type="checkbox"> Braiding &amp; weaving</label>
+              <label class="check-pill"><input type="checkbox"> Manicure &amp; pedicure</label>
+              <label class="check-pill"><input type="checkbox"> Makeup</label>
+              <label class="check-pill"><input type="checkbox"> Massage &amp; spa</label>
+              <label class="check-pill"><input type="checkbox"> Other</label>
+            </div>
+          </div>
+          <div class="two-col">
+            <div class="field"><label>Number of stylists / staff</label><input type="number" placeholder="e.g. 5"></div>
+            <div class="field">
+              <label>Do stylists work on commission?</label>
+              <select onchange="toggleCommission(this)"><option value="no">No, fixed pay</option><option value="yes">Yes, commission-based</option></select>
+            </div>
+          </div>
+          <div class="field" id="commissionField">
+            <label>Typical commission rate</label>
+            <input type="text" placeholder="e.g. 30% per service">
+          </div>
+        </div>
+
+        <div class="industry-block" id="block-retail">
+          <div class="two-col">
+            <div class="field"><label>Approx. number of products</label><input type="number" placeholder="e.g. 120"></div>
+            <div class="field"><label>Sales staff on the floor</label><input type="number" placeholder="e.g. 3"></div>
+          </div>
+          <div class="two-col">
+            <div class="field">
+              <label>Where do you sell?</label>
+              <select><option>In-store only</option><option>Online only</option><option>Both in-store and online</option></select>
+            </div>
+            <div class="field">
+              <label>How often do you restock?</label>
+              <select><option>Weekly</option><option>Monthly</option><option>As needed</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="industry-block" id="block-pharmacy">
+          <div class="two-col">
+            <div class="field"><label>Pharmacy license number</label><input type="text" placeholder="e.g. PCN/12345"></div>
+            <div class="field"><label>Pharmacists / staff on duty</label><input type="number" placeholder="e.g. 4"></div>
+          </div>
+          <div class="two-col">
+            <div class="field"><label>Approx. number of products stocked</label><input type="number" placeholder="e.g. 300"></div>
+            <div class="field">
+              <label>Do you stock prescription-only medicine?</label>
+              <select><option>Yes — batch &amp; expiry tracking needed</option><option>No, over-the-counter only</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="industry-block" id="block-school">
+          <div class="field">
+            <label>Is this a primary or secondary school?</label>
+            <div class="radio-pills">
+              <div class="radio-pill active" onclick="setSchoolLevel(this,'primary')"><span class="rp-dot"></span><span>Primary</span></div>
+              <div class="radio-pill" onclick="setSchoolLevel(this,'secondary')"><span class="rp-dot"></span><span>Secondary</span></div>
+            </div>
+          </div>
+          <div id="schoolClassBreakdown">
+            <label style="display:block; font-size:13.5px; font-weight:600; margin-bottom:10px;" id="classBreakdownLabel">Students per class</label>
+            <div class="class-grid" id="primaryClasses">
+              <div class="field"><label>Primary 1</label><input type="number" placeholder="0"></div>
+              <div class="field"><label>Primary 2</label><input type="number" placeholder="0"></div>
+              <div class="field"><label>Primary 3</label><input type="number" placeholder="0"></div>
+              <div class="field"><label>Primary 4</label><input type="number" placeholder="0"></div>
+              <div class="field"><label>Primary 5</label><input type="number" placeholder="0"></div>
+              <div class="field"><label>Primary 6</label><input type="number" placeholder="0"></div>
+            </div>
+            <div class="class-grid" id="secondaryClasses" style="display:none;">
+              <div class="field"><label>JSS 1</label><input type="number" placeholder="0"></div>
+              <div class="field"><label>JSS 2</label><input type="number" placeholder="0"></div>
+              <div class="field"><label>JSS 3</label><input type="number" placeholder="0"></div>
+              <div class="field"><label>SS 1</label><input type="number" placeholder="0"></div>
+              <div class="field"><label>SS 2</label><input type="number" placeholder="0"></div>
+              <div class="field"><label>SS 3</label><input type="number" placeholder="0"></div>
+            </div>
+          </div>
+          <div class="two-col" style="margin-top:16px;">
+            <div class="field"><label>Teaching staff</label><input type="number" placeholder="e.g. 22"></div>
+            <div class="field"><label>Non-teaching staff</label><input type="number" placeholder="e.g. 8"></div>
+          </div>
+        </div>
+
+        <div class="industry-block" id="block-hotel">
+          <div class="two-col">
+            <div class="field"><label>Number of rooms</label><input type="number" placeholder="e.g. 18"></div>
+            <div class="field"><label>Front desk &amp; housekeeping staff</label><input type="number" placeholder="e.g. 9"></div>
+          </div>
+          <div class="field">
+            <label>Room types you offer</label>
+            <div class="check-grid">
+              <label class="check-pill"><input type="checkbox"> Standard</label>
+              <label class="check-pill"><input type="checkbox"> Deluxe</label>
+              <label class="check-pill"><input type="checkbox"> Suite</label>
+              <label class="check-pill"><input type="checkbox"> Executive</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Other services on-site</label>
+            <div class="check-grid">
+              <label class="check-pill"><input type="checkbox"> Restaurant</label>
+              <label class="check-pill"><input type="checkbox"> Spa</label>
+              <label class="check-pill"><input type="checkbox"> Laundry</label>
+              <label class="check-pill"><input type="checkbox"> Event hall</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="industry-block" id="block-construction">
+          <div class="two-col">
+            <div class="field"><label>Typical project budget range</label><input type="text" placeholder="e.g. ₦5M – ₦20M"></div>
+            <div class="field"><label>Active projects at a time</label><input type="number" placeholder="e.g. 3"></div>
+          </div>
+          <div class="two-col">
+            <div class="field"><label>Site workers / staff</label><input type="number" placeholder="e.g. 15"></div>
+            <div class="field">
+              <label>Do you need materials tracking?</label>
+              <select><option>Yes, track cement, blocks, materials</option><option>No, not needed right now</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="industry-block" id="block-freelancer">
+          <div class="two-col">
+            <div class="field"><label>Primary service or skill</label><input type="text" placeholder="e.g. Graphic design"></div>
+            <div class="field"><label>Active clients right now</label><input type="number" placeholder="e.g. 4"></div>
+          </div>
+          <div class="two-col">
+            <div class="field">
+              <label>How do you usually bill?</label>
+              <select><option>Per project</option><option>Hourly</option><option>Monthly retainer</option></select>
+            </div>
+            <div class="field">
+              <label>Work solo or with contractors?</label>
+              <select><option>Just me</option><option>Occasional contractors</option></select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <span class="fs-label">Looking ahead</span>
+        <div class="field">
+          <label>Where do you want this business to be in 2 years?</label>
+          <textarea placeholder="e.g. Two more locations in Lagos, a full-time delivery team, and no more spreadsheets."></textarea>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <span class="fs-label">Ownership</span>
+        <div class="field">
+          <label>Is this a solo business or do you have a co-founder?</label>
+          <div class="radio-pills">
+            <div class="radio-pill active" onclick="setOwnership(this,false)">
+              <span class="rp-dot"></span><span>Just me</span>
+            </div>
+            <div class="radio-pill" onclick="setOwnership(this,true)">
+              <span class="rp-dot"></span><span>I have a co-founder</span>
+            </div>
+          </div>
+          <div id="cofounderField" class="field">
+            <label>Co-founder's name</label>
+            <input type="text" placeholder="e.g. Chidinma Okafor">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <span class="fs-label">Stay connected</span>
+        <div class="field">
+          <label>WhatsApp number</label>
+          <input type="tel" placeholder="+234 800 000 0000" required>
+          <p class="hint">We'll link this number so customer orders and receipts flow straight into your dashboard.</p>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <span class="fs-label">Login details</span>
+        <div class="two-col">
+          <div class="field">
+            <label>Email address</label>
+            <input type="email" placeholder="you@business.com" required>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" placeholder="At least 8 characters" required>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn">Create my dashboard</button>
+      <div class="success-note" id="successNote">You're set — this is a demo form, so no account was actually created. Wire this up to your backend when you're ready.</div>
+      <p class="form-foot">Already have an account? <a href="login.html">Log in</a></p>
+
+      <div class="site-logo-slot">
+        <img src="img/LOGO/Untitled design.png" alt="StandpointHQ Logo">
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  var dashLabels = {
+    restaurant: 'Dashboard setup for your restaurant',
+    salon: 'Dashboard setup for your salon',
+    retail: 'Dashboard setup for your retail shop',
+    pharmacy: 'Dashboard setup for your pharmacy',
+    school: 'Dashboard setup for your school',
+    hotel: 'Dashboard setup for your hotel',
+    construction: 'Dashboard setup for your construction business',
+    freelancer: 'Dashboard setup for your freelance work'
+  };
+  var dashSubs = {
+    restaurant: 'A few details so tables, kitchen stock, and staff are ready from day one.',
+    salon: 'Tell us what you offer so bookings and staff commission are set up right.',
+    retail: 'A few details so your inventory, staff, and reports are ready from day one.',
+    pharmacy: 'Regulatory details matter here — this keeps batch and expiry tracking accurate.',
+    school: 'This shapes how fees, attendance, and class records are organized.',
+    hotel: 'Room and service details so bookings and invoicing match how you actually run things.',
+    construction: 'Project scale shapes how budgets, materials, and site staff get tracked.',
+    freelancer: 'Keeps invoicing and client tracking matched to how you actually bill.'
+  };
+
+  function selectIndustry(key, label, badge){
+    document.getElementById('industryStage').style.display = 'none';
+    document.getElementById('formStage').style.display = 'block';
+    document.getElementById('fcName').textContent = label;
+    document.getElementById('fcBadge').textContent = badge;
+    document.getElementById('dashSetupLabel').textContent = dashLabels[key];
+    document.getElementById('dashSetupSub').textContent = dashSubs[key];
+    document.querySelectorAll('.industry-block').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('block-' + key).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  function backToIndustries(){
+    document.getElementById('formStage').style.display = 'none';
+    document.getElementById('industryStage').style.display = 'block';
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  function setOwnership(el, hasCofounder){
+    el.parentElement.querySelectorAll('.radio-pill').forEach(function(p){ p.classList.remove('active'); });
+    el.classList.add('active');
+    document.getElementById('cofounderField').style.display = hasCofounder ? 'block' : 'none';
+  }
+  function setSchoolLevel(el, level){
+    el.parentElement.querySelectorAll('.radio-pill').forEach(function(p){ p.classList.remove('active'); });
+    el.classList.add('active');
+    document.getElementById('schoolClassBreakdown').style.display = 'block';
+    document.getElementById('primaryClasses').style.display = level === 'primary' ? 'grid' : 'none';
+    document.getElementById('secondaryClasses').style.display = level === 'secondary' ? 'grid' : 'none';
+    document.getElementById('classBreakdownLabel').textContent = level === 'primary' ? 'Students per class (Primary 1–6)' : 'Students per class (JSS 1 – SS 3)';
+  }
+  function toggleCommission(sel){
+    document.getElementById('commissionField').style.display = sel.value === 'yes' ? 'block' : 'none';
+  }
+  function previewImage(input, targetId){
+    if(input.files && input.files[0]){
+      var reader = new FileReader();
+      reader.onload = function(e){
+        var el = document.getElementById(targetId);
+        el.style.backgroundImage = 'url(' + e.target.result + ')';
+        el.innerHTML = '';
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  function submitSignup(e){
+    e.preventDefault();
+    document.getElementById('successNote').style.display = 'block';
+    return false;
+  }
+  // show retail block by default so the form isn't empty if someone lands mid-flow
+  document.getElementById('block-retail').classList.add('active');
+</script>
+</body>
+</html>

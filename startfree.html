@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start free — StandpointHQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B33; --ink-deep:#081127; --teal:#0F8C7F; --teal-light:#E4F1EE;
+    --paper:#F1F3F2; --paper-card:#FAFBFA; --paper-alt:#EDEFEE; --slate:#4A5568; --amber:#D89530;
+    --line:rgba(15,27,51,0.12); --line-strong:rgba(15,27,51,0.20);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.6;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; font-weight:500; letter-spacing:-0.01em; color:var(--ink);}
+  a{color:inherit; text-decoration:none;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:980px; margin:0 auto; padding:0 28px;}
+
+  .topbar{padding:26px 0;}
+  .back-link{display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:500; color:var(--slate); transition:color .15s ease;}
+  .back-link:hover{color:var(--ink);}
+  .back-link svg{width:14px; height:14px;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--teal); display:flex; align-items:center; gap:8px; margin-bottom:14px;
+  }
+  .eyebrow::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--teal);}
+  .center .eyebrow{justify-content:center;}
+
+  .hero-block{text-align:center; padding:10px 0 48px;}
+  .hero-block h1{font-size:clamp(26px,3.4vw,34px); line-height:1.25; margin-bottom:12px;}
+  .hero-block .sub{font-size:15px; color:var(--slate); max-width:540px; margin:0 auto;}
+
+  .layout{display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:stretch; padding-bottom:100px;}
+
+  /* ---------- COMPARISON PANEL ---------- */
+  .compare-card{
+    background:var(--paper-card); border:1px solid var(--line); border-radius:14px;
+    padding:40px 36px; border-top:3px solid var(--teal); display:flex; flex-direction:column;
+  }
+  .plan-tag{
+    display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:.05em; background:var(--teal-light); color:var(--teal);
+    padding:5px 12px; border-radius:999px; margin-bottom:20px; width:fit-content;
+  }
+  .compare-card h3{font-size:19px; margin-bottom:12px; font-weight:600;}
+  .compare-card .price{font-family:'Space Grotesk',sans-serif; font-size:34px; font-weight:600; margin-bottom:28px; display:flex; align-items:baseline; gap:10px;}
+  .compare-card .price span{font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:400; color:var(--slate); letter-spacing:.02em;}
+
+  .feat-list{list-style:none;}
+  .feat-list li{display:flex; align-items:center; gap:12px; font-size:14px; padding:11px 0; color:var(--ink); border-bottom:1px solid var(--line);}
+  .feat-list li:last-child{border-bottom:none;}
+  .feat-list li .check-badge{
+    width:22px; height:22px; border-radius:50%; background:var(--teal-light); color:var(--teal);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .feat-list li .check-badge svg{width:12px; height:12px;}
+
+  .locked-block{
+    margin-top:28px; padding:20px 22px; background:var(--paper-alt); border-radius:12px;
+  }
+  .locked-block .lb-head{margin-bottom:14px;}
+  .locked-block .lb-head span{font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--slate); font-weight:600;}
+  .locked-list{list-style:none;}
+  .locked-list li{
+    display:flex; align-items:center; justify-content:space-between; padding:9px 0; font-size:13.5px; color:var(--slate);
+  }
+  .locked-list li .ll-left{display:flex; align-items:center; gap:10px;}
+  .locked-list li .lock-badge{
+    width:22px; height:22px; border-radius:50%; background:var(--paper-card); border:1px solid var(--line-strong);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--slate);
+  }
+  .locked-list li svg{width:12px; height:12px; flex-shrink:0;}
+  .premium-chip{
+    font-family:'IBM Plex Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:.04em;
+    background:var(--paper-card); color:var(--slate); padding:3px 8px; border-radius:999px; border:1px solid var(--line-strong);
+  }
+  .compare-link{
+    display:block; text-align:center; margin-top:auto; padding-top:24px; font-size:13px; font-weight:600; color:var(--teal);
+  }
+
+  /* ---------- SIGNUP FORM PANEL ---------- */
+  .signup-card{
+    background:var(--paper-card); border:1px solid var(--line); border-radius:14px;
+    padding:40px 36px; border-top:3px solid var(--ink); display:flex; flex-direction:column;
+  }
+  .signup-card h3{font-size:19px; margin-bottom:8px; font-weight:600;}
+  .signup-card .sc-sub{font-size:13px; color:var(--slate); margin-bottom:28px;}
+
+  .contact-toggle{display:flex; background:var(--paper-alt); border-radius:10px; padding:4px; gap:4px; margin-bottom:20px;}
+  .contact-toggle button{
+    flex:1; border:none; background:transparent; padding:10px 0; border-radius:8px; cursor:pointer;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:var(--slate); transition:all .15s ease;
+  }
+  .contact-toggle button.active{background:var(--paper-card); color:var(--ink); box-shadow:0 4px 10px -4px rgba(15,27,51,0.15);}
+
+  .field{margin-bottom:20px;}
+  .field label{display:block; font-size:13px; font-weight:600; margin-bottom:8px; color:var(--ink);}
+  .field input{
+    width:100%; padding:13px 16px; border-radius:10px; border:1.5px solid var(--line-strong);
+    font-family:'Inter',sans-serif; font-size:14px; color:var(--ink); background:var(--paper);
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .field input:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px var(--teal-light); background:var(--paper-card);}
+
+  .terms-row{display:flex; align-items:flex-start; gap:10px; margin:22px 0 24px; font-size:12.5px; color:var(--slate); line-height:1.5;}
+  .terms-row input{width:16px; height:16px; margin-top:2px; accent-color:var(--teal); flex-shrink:0;}
+  .terms-row a{color:var(--teal); font-weight:600;}
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%;
+    font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14.5px; padding:14px 0; border-radius:10px;
+    cursor:pointer; border:none; background:var(--ink); color:#fff; transition:all .18s ease;
+  }
+  .btn:hover{background:var(--ink-deep);}
+
+  .form-foot{text-align:center; margin-top:20px; font-size:13px; color:var(--slate);}
+  .form-foot a{color:var(--teal); font-weight:600;}
+
+  .success-note{display:none; background:var(--teal-light); border:1px solid var(--teal); border-radius:12px; padding:14px 18px; margin-top:16px; font-size:13px; color:var(--ink);}
+
+  .site-logo-slot{
+    padding:0 0 60px; display:flex; align-items:center; justify-content:center; height:42px;
+  }
+  .site-logo-slot img{height:100%; width:auto; max-width:170px; object-fit:contain;}
+
+  @media (max-width:860px){
+    .layout{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="topbar">
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      Back to Home
+    </a>
+  </div>
+
+  <div class="hero-block center">
+    <div class="eyebrow">Start free</div>
+    <h1>Set up a free account and see how it fits.</h1>
+    <p class="sub">This is a working account, not a demo. Log real sales, track real stock, then decide if you want more than what's here.</p>
+  </div>
+
+  <div class="layout">
+    <div class="compare-card">
+      <span class="plan-tag">Free plan</span>
+      <h3>What's included</h3>
+      <div class="price">$0 <span>stays free, no time limit</span></div>
+      <ul class="feat-list">
+        <li><span class="check-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Point of sale = up to 30 sales logged a month</li>
+        <li><span class="check-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Inventory = track up to 75 products</li>
+        <li><span class="check-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> 7-day rolling sales history</li>
+        <li><span class="check-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Simple printable receipts</li>
+        <li><span class="check-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> 1 user account</li>
+      </ul>
+
+      <div class="locked-block">
+        <div class="lb-head"><span>Unlocks with a paid plan</span></div>
+        <ul class="locked-list">
+          <li><span class="ll-left"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg></span> WhatsApp order sync</span><span class="premium-chip">Premium</span></li>
+          <li><span class="ll-left"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg></span> Automatic WhatsApp receipts</span><span class="premium-chip">Premium</span></li>
+          <li><span class="ll-left"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg></span> Bank &amp; wallet view</span><span class="premium-chip">Premium</span></li>
+          <li><span class="ll-left"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg></span> Staff &amp; payroll</span><span class="premium-chip">Premium</span></li>
+          <li><span class="ll-left"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg></span> Unlimited history &amp; full reports</span><span class="premium-chip">Premium</span></li>
+          <li><span class="ll-left"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg></span> AI suggestions &amp; business monitor</span><span class="premium-chip">Premium</span></li>
+        </ul>
+      </div>
+      <a href="index.html#pricing" class="compare-link">See what plans cost →</a>
+    </div>
+
+    <div class="signup-card">
+      <h3>Create your account</h3>
+      <p class="sc-sub">Just the basics for now. Add the rest of your business details once you're in.</p>
+
+      <form onsubmit="return submitFree(event)">
+        <div class="field">
+          <label>Full name</label>
+          <input type="text" placeholder="e.g. Ade Ojo" required>
+        </div>
+
+        <div class="contact-toggle">
+          <button type="button" class="active" onclick="setContactMode(this,'email')">Email</button>
+          <button type="button" onclick="setContactMode(this,'phone')">Phone number</button>
+        </div>
+        <div class="field">
+          <label id="contactLabel">Email address</label>
+          <input type="email" id="contactInput" placeholder="you@business.com" required>
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <input type="password" placeholder="At least 8 characters" required>
+        </div>
+        <div class="field">
+          <label>Confirm password</label>
+          <input type="password" placeholder="Re-enter your password" required>
+        </div>
+
+        <div class="terms-row">
+          <input type="checkbox" required>
+          <span>I agree to Standpoint's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</span>
+        </div>
+
+        <button type="submit" class="btn">Create my free account</button>
+        <div class="success-note" id="successNote">You're in this is a demo form, so no account was actually created yet. Wire this up to your backend when you're ready.</div>
+      </form>
+
+      <p class="form-foot">Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+  </div>
+
+  <div class="site-logo-slot">
+    <div class="logo-placehold"><img src="img/LOGO/Untitled design.png" class="w-100 big" alt="StandpointLogo"></div>
+  </div>
+</div>
+
+<script>
+  function setContactMode(btn, mode){
+    document.querySelectorAll('.contact-toggle button').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var input = document.getElementById('contactInput');
+    var label = document.getElementById('contactLabel');
+    if(mode === 'email'){
+      input.type = 'email';
+      input.placeholder = 'you@business.com';
+      label.textContent = 'Email address';
+    } else {
+      input.type = 'tel';
+      input.placeholder = '+234 800 000 0000';
+      label.textContent = 'Phone number';
+    }
+  }
+  function submitFree(e){
+    e.preventDefault();
+    document.getElementById('successNote').style.display = 'block';
+    return false;
+  }
+</script>
+</body>
+</html>
