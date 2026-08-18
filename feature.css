@@ -25,13 +25,13 @@ nav .wrap{max-width:1180px; display:flex; align-items:center; justify-content:sp
 .btn:hover{opacity:.85;}
 .btn-primary{background:var(--ink); color:#fff;}
 .btn-ghost{color:var(--ink); border-color:var(--line-strong);}
-.btn-deep{background:var(--ink); color:#fff; border-radius:999px; box-shadow:0 10px 24px -10px rgba(240, 241, 243, 0.541);}
+.btn-deep{background:var(--ink); color:#fff; border-radius:999px; box-shadow:0 10px 24px -10px rgba(8,17,39,0.45);}
 
 /* mobile nav toggle */
 .nav-menu-btn{display:none; align-items:center; justify-content:center; width:38px; height:38px; border:1px solid var(--line-strong); border-radius:8px; background:#fff; cursor:pointer; padding:0;}
 .nav-menu-bar,.nav-menu-bar::before,.nav-menu-bar::after{content:'';display:block;width:16px;height:2px;background:var(--ink);border-radius:2px;position:relative;transition:transform .2s ease,background .2s ease;}
 .nav-menu-bar::before{position:absolute;top:-5px;} .nav-menu-bar::after{position:absolute;top:5px;}
-.nav-menu-btn.is-open .nav-menu-bar{background:transparent white;}
+.nav-menu-btn.is-open .nav-menu-bar{background:transparent;}
 .nav-menu-btn.is-open .nav-menu-bar::before{transform:translateY(5px) rotate(45deg);}
 .nav-menu-btn.is-open .nav-menu-bar::after{transform:translateY(-5px) rotate(-45deg);}
 .nav-mobile-panel{max-height:0; overflow:hidden; background:var(--paper-card); border-bottom:1px solid transparent; transition:max-height .3s ease, border-color .3s ease;}
@@ -51,11 +51,19 @@ nav .wrap{max-width:1180px; display:flex; align-items:center; justify-content:sp
   .logo-placehold{height:32px;}
 }
 
-/* ---------- HERO ---------- */
+/* ---------- HERO — heading slides in from the side, subtext drops from the top ---------- */
 .page-hero{padding:52px 0 40px; text-align:center;}
-.page-hero h1{font-size:clamp(28px,4.2vw,46px); line-height:1.16; max-width:680px; margin:0 auto 12px; text-shadow: 0 3px 10px rgba(18, 165, 148, 0.25);
+.page-hero h1{
+  font-size:clamp(28px,4.2vw,46px); line-height:1.16; max-width:680px; margin:0 auto 12px;
+  opacity:0; animation:fromLeft .7s cubic-bezier(.16,.84,.44,1) 0s both;
 }
-.page-hero p{font-size:15.5px; color:var(--slate); max-width:460px; margin:0 auto;}
+.page-hero p{
+  font-size:15.5px; color:var(--slate); max-width:460px; margin:0 auto;
+  opacity:0; animation:fromTop .7s cubic-bezier(.16,.84,.44,1) .3s both;
+}
+@keyframes fromLeft{ from{ opacity:0; transform:translateX(-46px); } to{ opacity:1; transform:translateX(0); } }
+@keyframes fromTop{ from{ opacity:0; transform:translateY(-32px); } to{ opacity:1; transform:translateY(0); } }
+@keyframes fromBottom{ from{ opacity:0; transform:translateY(40px); } to{ opacity:1; transform:translateY(0); } }
 
 /* ---------- FEATURE LIST — editorial rows, not boxed cards ---------- */
 .features-list{
@@ -66,9 +74,20 @@ nav .wrap{max-width:1180px; display:flex; align-items:center; justify-content:sp
   display:flex; gap:16px; align-items:flex-start;
   padding:18px 4px; border-bottom:1px solid var(--line);
   transition:background .18s ease;
+  opacity:0;
 }
 .feat-col .feature-row:first-child{padding-top:2px;}
 .feature-row:hover{background:rgba(18,165,148,0.035);}
+
+/* one at a time, alternating side / top, in reading order: Point of sale → Reports */
+.feat-col:nth-child(1) .feature-row:nth-child(1){ animation:fromLeft .7s cubic-bezier(.16,.84,.44,1) .65s both; } /* Point of sale */
+.feat-col:nth-child(1) .feature-row:nth-child(2){ animation:fromTop  .7s cubic-bezier(.16,.84,.44,1) .95s both; } /* WhatsApp orders */
+.feat-col:nth-child(1) .feature-row:nth-child(3){ animation:fromLeft .7s cubic-bezier(.16,.84,.44,1) 1.25s both; } /* Receipt & invoice generator */
+.feat-col:nth-child(1) .feature-row:nth-child(4){ animation:fromTop  .7s cubic-bezier(.16,.84,.44,1) 1.55s both; } /* Inventory */
+.feat-col:nth-child(2) .feature-row:nth-child(1){ animation:fromLeft .7s cubic-bezier(.16,.84,.44,1) 1.85s both; } /* Sales & booking calendar */
+.feat-col:nth-child(2) .feature-row:nth-child(2){ animation:fromTop  .7s cubic-bezier(.16,.84,.44,1) 2.15s both; } /* Bank & wallet view */
+.feat-col:nth-child(2) .feature-row:nth-child(3){ animation:fromLeft .7s cubic-bezier(.16,.84,.44,1) 2.45s both; } /* Staff & payroll */
+.feat-col:nth-child(2) .feature-row:nth-child(4){ animation:fromTop  .7s cubic-bezier(.16,.84,.44,1) 2.75s both; } /* Reports */
 
 .ffc-icon{
   width:42px; height:42px; border-radius:12px; flex-shrink:0;
@@ -88,25 +107,30 @@ nav .wrap{max-width:1180px; display:flex; align-items:center; justify-content:sp
 
 /* ---------- CTA BAND ---------- */
 .cta-band{
-  position:relative; background:var(--ink); border-radius:38px; padding:28px 22px;
-  text-align:center; margin-bottom:28px; overflow:hidden;
+  position:relative; background:var(--ink); border-radius:18px; padding:48px 32px;
+  text-align:center; margin-bottom:20px; overflow:hidden;
+  opacity:0; animation:fromBottom .75s cubic-bezier(.16,.84,.44,1) 3.15s both;
 }
 .cta-band::before{
-  content:''; position:absolute; top:0; left:14%; right:14%; height:8px;
+  content:''; position:absolute; top:0; left:14%; right:14%; height:2px;
   background:linear-gradient(90deg, transparent, var(--teal), transparent);
 }
 .cta-band h3{
   color:#fff; font-size:clamp(20px,2.8vw,28px); margin-bottom:12px;
-  display:inline-block; animation:ctaZoom 3.4s ease-in-out infinite;
+  display:inline-block; animation:ctaZoom 3.4s ease-in-out 4.0s infinite;
 }
 @keyframes ctaZoom{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.06); } }
 .cta-band p{color:rgba(255,255,255,0.6); margin-bottom:22px; max-width:440px; margin-left:auto; margin-right:auto; font-size:14px;}
 .cta-band .btn-deep{background:#fff; color:var(--ink);}
 
 @media (max-width:860px){ .cta-band{padding:36px 22px;} }
-@media (prefers-reduced-motion: reduce){ .cta-band h3{animation:none;} }
+@media (prefers-reduced-motion: reduce){
+  .page-hero h1, .page-hero p, .feature-row, .cta-band, .cta-band h3{
+    animation:none; opacity:1; transform:none;
+  }
+}
 
-footer{background:var(--ink); color:rgba(255,255,255,0.55); padding:20px 0;}
+footer{background:var(--ink); color:rgba(255,255,255,0.55); padding:26px 0;}
 .foot-row{display:flex; justify-content:space-between; align-items:center; font-size:12.5px; flex-wrap:wrap; gap:10px; max-width:1180px; margin:0 auto; padding:0 32px;}
 .foot-row a{color:rgba(255,255,255,0.55); margin-left:16px;}
 .foot-row a:hover{color:#fff;}
