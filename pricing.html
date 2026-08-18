@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing: Standpoint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B33; --ink-deep:#081127; --teal:#12A594; --teal-light:#E1F5EE;
+    --paper:#F4F6F5; --paper-card:#FFFFFF; --paper-alt:#EDF1EF; --slate:#3E4C60; --amber:#E8A33D;
+    --line:rgba(15,27,51,0.10); --line-strong:rgba(15,27,51,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.65;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; font-weight:600; letter-spacing:-0.02em; color:var(--ink);}
+  a{color:inherit; text-decoration:none;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  nav{position:sticky; top:0; z-index:50; background:var(--paper-card); border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:90px;}
+  .logo-placehold{display:flex; align-items:center; height:49px; max-width:200px;}
+  .logo-placehold img{height:100%; width:auto; max-width:100%; object-fit:contain;}
+  .nav-links{display:flex; gap:6px; font-size:14px; font-weight:600;}
+  .nav-links a{color:var(--slate); padding:10px 14px; border-radius:8px; transition:all .18s ease;}
+  .nav-links a:hover, .nav-links a.active{color:var(--ink); background:var(--paper-alt);}
+  .nav-cta{display:flex; align-items:center; gap:12px;}
+
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14.5px; padding:12px 22px; border-radius:9px; cursor:pointer; border:1.5px solid transparent; transition:all .2s ease; white-space:nowrap;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--ink); color:#fff;}
+  .btn-ghost{color:var(--ink); border-color:var(--line-strong);}
+  .btn-deep{background:var(--ink); color:#fff; border-radius:999px; box-shadow:0 10px 24px -10px rgba(8,17,39,0.45);}
+  .btn-outline-deep{background:transparent; color:var(--ink); border:1.5px solid var(--ink); border-radius:999px;}
+
+  /* ---------- CURRENCY GATE (first thing on the page) ---------- */
+  .gate{padding:88px 0 30px; text-align:center;}
+  .gate h1{font-size:clamp(32px,4.8vw,50px); line-height:1.16; max-width:640px; margin:0 auto 16px;}
+  .gate p{font-size:16.5px; color:var(--slate); max-width:520px; margin:0 auto;}
+
+  .currency-choice{display:flex; gap:18px; justify-content:center; padding:40px 0 30px;}
+  .currency-choice-btn{
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    width:180px; padding:34px 0; border-radius:16px; border:1.5px solid var(--line-strong);
+    background:var(--paper-card); cursor:pointer; transition:all .2s ease;
+  }
+  .currency-choice-btn:hover, .currency-choice-btn.active{border-color:var(--teal); background:var(--teal-light); transform:translateY(-3px);}
+  .cc-sign{font-family:'Space Grotesk',sans-serif; font-size:36px; font-weight:700; color:var(--teal);}
+  .cc-label{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--slate); text-transform:uppercase; letter-spacing:.05em;}
+  .cc-sub{font-size:11px; color:var(--slate); max-width:130px;}
+
+  .change-currency{
+    text-align:center; padding-bottom:6px; font-family:'IBM Plex Mono',monospace; font-size:12px;
+    color:var(--teal); cursor:pointer; display:none;
+  }
+  .change-currency.show{display:block;}
+
+  /* ---------- PLANS ---------- */
+  .plans-section{display:none;}
+  .plans-section.show{display:block;}
+  .plan-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; padding:32px 0 70px;}
+  .plan-grid.hidden{display:none;}
+  .plan-card{
+    position:relative; background:var(--paper-card); border:1.5px solid var(--line); border-radius:16px;
+    padding:26px 20px; display:flex; flex-direction:column;
+  }
+  .plan-card.featured{border-color:var(--teal); box-shadow:0 16px 34px -18px rgba(18,165,148,0.4);}
+  .plan-badge{
+    position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+    background:var(--teal); color:#fff; font-family:'IBM Plex Mono',monospace; font-size:9.5px;
+    padding:4px 12px; border-radius:999px; white-space:nowrap; text-transform:uppercase; letter-spacing:.04em;
+  }
+  .plan-badge-trial{background:var(--amber);}
+  .plan-name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; margin-top:8px; color:var(--ink);}
+  .plan-price{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:28px; color:var(--ink); margin:8px 0 18px;}
+  .plan-price span{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:400; color:var(--slate); margin-left:3px;}
+  .plan-features{list-style:none; flex:1; margin-bottom:20px;}
+  .plan-features li{font-size:12.5px; color:var(--slate); padding:6px 0 6px 20px; position:relative;}
+  .plan-features li::before{content:'✓'; position:absolute; left:0; color:var(--teal); font-weight:700; font-size:11px;}
+  .plan-cta{width:100%; font-size:13px; padding:11px 0; border-radius:8px;}
+
+  .cta-band{background:var(--ink); border-radius:20px; padding:56px 40px; text-align:center; margin-bottom:20px;}
+  .cta-band h3{color:#fff; font-size:clamp(22px,3vw,30px); margin-bottom:14px;}
+  .cta-band p{color:rgba(255,255,255,0.6); margin-bottom:26px; max-width:480px; margin-left:auto; margin-right:auto;}
+  .cta-band .btn-deep{background:#fff; color:var(--ink);}
+
+  /* ---------- LOGO-ONLY FOOTER ---------- */
+  .logo-footer{padding:40px 0 56px; display:flex; align-items:center; justify-content:center; border-top:1px solid var(--line); margin-top:20px;}
+  .logo-footer .logo-placehold{height:34px;}
+
+  @media (max-width:860px){
+    .nav-links{display:none;}
+    .plan-grid{grid-template-columns:1fr;}
+    .currency-choice{flex-direction:column; align-items:center;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html"><div class="logo-placehold"><img src="img/LOGO/Untitled design.png" alt="Standpoint Logo"></div></a>
+    <div class="nav-links">
+      <a href="why-standpoint.html">Why Standpoint</a>
+      <a href="feature.html">Features</a>
+      <a href="pricing.html" class="active">Pricing</a>
+      <a href="workings.html">How it works</a>
+    </div>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-ghost">Log in</a>
+      <a href="signup.html" class="btn btn-primary">Sign up</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="gate" id="gateSection">
+    <h1>How would you like to see pricing?</h1>
+    <p>The plans are the same either way. Pick the currency you actually pay in, and every number on this page will be the real one, not a rough conversion.</p>
+
+    <div class="currency-choice">
+      <button class="currency-choice-btn" id="ccUSD" onclick="selectCurrency('USD')">
+        <span class="cc-sign">$</span><span class="cc-label">Dollar</span>
+        <span class="cc-sub">Billed in USD</span>
+      </button>
+      <button class="currency-choice-btn" id="ccNGN" onclick="selectCurrency('NGN')">
+        <span class="cc-sign">₦</span><span class="cc-label">Naira</span>
+        <span class="cc-sub">Billed in NGN</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="change-currency" id="changeCurrencyLink" onclick="showGate()">&larr; Change currency</div>
+
+  <div class="plans-section" id="plansSection">
+    <div class="plan-grid" id="planGrid-USD">
+      <div class="plan-card">
+        <span class="plan-badge plan-badge-trial">18-day trial</span>
+        <div class="plan-name">New Business</div>
+        <div class="plan-price">$3<span>one-time</span></div>
+        <ul class="plan-features">
+          <li>Point of sale</li>
+          <li>Inventory</li>
+          <li>WhatsApp orders</li>
+          <li>Calendar &amp; notifications</li>
+          <li>3-week history limit</li>
+        </ul>
+        <button class="btn btn-outline-deep plan-cta">Start trial</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">$5<span>/month</span></div>
+        <ul class="plan-features">
+          <li>Point of sale</li>
+          <li>Inventory</li>
+          <li>WhatsApp orders</li>
+          <li>Calendar &amp; notifications</li>
+          <li>3-week history limit</li>
+        </ul>
+        <button class="btn btn-outline-deep plan-cta">Choose Starter</button>
+      </div>
+      <div class="plan-card featured">
+        <span class="plan-badge">Most popular</span>
+        <div class="plan-name">Growth</div>
+        <div class="plan-price">$7.60<span>/month</span></div>
+        <ul class="plan-features">
+          <li>Everything in Starter</li>
+          <li>Wallet view</li>
+          <li>Staff &amp; payroll</li>
+          <li>Full reports</li>
+          <li>Unlimited history</li>
+        </ul>
+        <button class="btn btn-deep plan-cta">Choose Growth</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">VIP</div>
+        <div class="plan-price">$10<span>/month</span></div>
+        <ul class="plan-features">
+          <li>Everything in Growth</li>
+          <li>AI suggestions</li>
+          <li>AI business monitor</li>
+          <li>Auto-calculator</li>
+        </ul>
+        <button class="btn btn-outline-deep plan-cta">Choose VIP</button>
+      </div>
+    </div>
+
+    <div class="plan-grid hidden" id="planGrid-NGN">
+      <div class="plan-card">
+        <span class="plan-badge plan-badge-trial">18-day trial</span>
+        <div class="plan-name">New Business</div>
+        <div class="plan-price">₦4,500<span>one-time</span></div>
+        <ul class="plan-features">
+          <li>Point of sale</li>
+          <li>Inventory</li>
+          <li>WhatsApp orders</li>
+          <li>Calendar &amp; notifications</li>
+          <li>3-week history limit</li>
+        </ul>
+        <button class="btn btn-outline-deep plan-cta">Start trial</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">₦7,500<span>/month</span></div>
+        <ul class="plan-features">
+          <li>Point of sale</li>
+          <li>Inventory</li>
+          <li>WhatsApp orders</li>
+          <li>Calendar &amp; notifications</li>
+          <li>3-week history limit</li>
+        </ul>
+        <button class="btn btn-outline-deep plan-cta">Choose Starter</button>
+      </div>
+      <div class="plan-card featured">
+        <span class="plan-badge">Most popular</span>
+        <div class="plan-name">Growth</div>
+        <div class="plan-price">₦11,500<span>/month</span></div>
+        <ul class="plan-features">
+          <li>Everything in Starter</li>
+          <li>Wallet view</li>
+          <li>Staff &amp; payroll</li>
+          <li>Full reports</li>
+          <li>Unlimited history</li>
+        </ul>
+        <button class="btn btn-deep plan-cta">Choose Growth</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">VIP</div>
+        <div class="plan-price">₦15,000<span>/month</span></div>
+        <ul class="plan-features">
+          <li>Everything in Growth</li>
+          <li>AI suggestions</li>
+          <li>AI business monitor</li>
+          <li>Auto-calculator</li>
+        </ul>
+        <button class="btn btn-outline-deep plan-cta">Choose VIP</button>
+      </div>
+    </div>
+
+    <div class="cta-band">
+      <h3>Not sure which plan yet?</h3>
+      <p>Start free, no card needed, and upgrade the moment a locked feature is one you actually need.</p>
+      <a href="startfree.html" class="btn btn-deep">Start free instead</a>
+    </div>
+  </div>
+</div>
+
+<div class="logo-footer">
+  <div class="logo-placehold"><img src="img/LOGO/Untitled design.png" alt="Standpoint Logo"></div>
+</div>
+
+<script>
+  function selectCurrency(cur){
+    document.getElementById('ccUSD').classList.toggle('active', cur === 'USD');
+    document.getElementById('ccNGN').classList.toggle('active', cur === 'NGN');
+    document.getElementById('planGrid-USD').classList.toggle('hidden', cur !== 'USD');
+    document.getElementById('planGrid-NGN').classList.toggle('hidden', cur !== 'NGN');
+    document.getElementById('plansSection').classList.add('show');
+    document.getElementById('changeCurrencyLink').classList.add('show');
+    var url = new URL(window.location);
+    url.searchParams.set('currency', cur);
+    window.history.replaceState({}, '', url);
+    document.getElementById('plansSection').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function showGate(){
+    document.getElementById('plansSection').classList.remove('show');
+    document.getElementById('changeCurrencyLink').classList.remove('show');
+    document.getElementById('gateSection').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  // only skip the gate if arriving with an explicit ?currency= (e.g. from the homepage topbar)
+  var params = new URLSearchParams(window.location.search);
+  var initial = params.get('currency');
+  if(initial === 'USD' || initial === 'NGN'){
+    selectCurrency(initial);
+  }
+</script>
+
+</body>
+</html>

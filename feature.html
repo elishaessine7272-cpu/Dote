@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Features  everything inside Standpoint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="feature.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html"><div class="logo-placehold"><img src="img/LOGO/Untitled design.png" alt="Standpoint Logo"></div></a>
+
+    <div class="nav-links">
+      <a href="why-standpoint.html">Why Standpoint</a>
+      <a href="feature.html" class="active">Features</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-ghost">Log in</a>
+      <a href="signup.html" class="btn btn-primary">Sign up</a>
+      <button type="button" class="nav-menu-btn" id="navMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navMobilePanel">
+        <span class="nav-menu-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="nav-mobile-panel" id="navMobilePanel">
+    <a href="why-standpoint.html">Why Standpoint</a>
+    <a href="feature.html" class="active">Features</a>
+    <a href="pricing.html">Pricing</a>
+    <div class="nav-mobile-cta">
+      <a href="login.html" class="btn btn-ghost">Log in</a>
+      <a href="signup.html" class="btn btn-primary">Sign up</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-hero">
+    <h1>Built around what you actually do, each day.</h1>
+    <p>Every tool here shares one dashboard nothing sits in its own silo.</p>
+  </div>
+
+  <div class="features-list">
+    <div class="feat-col">
+      <div class="feature-row">
+        <div class="ffc-icon"><i class="bi bi-credit-card"></i></div>
+        <div><h3>Point of sale</h3><p>Ring up sales from a phone or tablet. Works offline, syncs the moment you're back.</p></div>
+      </div>
+      <div class="feature-row">
+        <div class="ffc-icon"><i class="bi bi-whatsapp"></i></div>
+        <div><h3>WhatsApp orders</h3><p>Orders placed on WhatsApp land straight in your dashboard no re-typing details.</p></div>
+      </div>
+      <div class="feature-row">
+        <div class="ffc-icon"><i class="bi bi-receipt"></i></div>
+        <div><h3>Receipt &amp; invoice generator</h3><p>Every sale generates a clean receipt automatically sent by WhatsApp or email in one tap.</p></div>
+      </div>
+      <div class="feature-row">
+        <div class="ffc-icon"><i class="bi bi-box-seam"></i></div>
+        <div><h3>Inventory</h3><p>Stock deducts automatically on every sale. Low-stock alerts before you run out, not after.</p></div>
+      </div>
+    </div>
+
+    <div class="feat-col">
+      <div class="feature-row">
+        <div class="ffc-icon"><i class="bi bi-calendar3"></i></div>
+        <div><h3>Sales &amp; booking calendar</h3><p>See your best and worst days at a glance, with history you can page back through.</p></div>
+      </div>
+      <div class="feature-row">
+        <div class="ffc-icon"><i class="bi bi-wallet2"></i></div>
+        <div><h3>Bank &amp; wallet view</h3><p>OPay, Moniepoint and bank balances next to your sales no separate app or login.</p></div>
+      </div>
+      <div class="feature-row">
+        <div class="ffc-icon"><i class="bi bi-people"></i></div>
+        <div><h3>Staff &amp; payroll</h3><p>Shifts, attendance and pay in one place, with deductions calculated correctly the first time.</p></div>
+      </div>
+      <div class="feature-row">
+        <div class="ffc-icon"><i class="bi bi-bar-chart-line"></i></div>
+        <div><h3>Reports</h3><p>Plain-language weekly summaries what sold, what didn't, what's owed to you.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <h3>See these running on real data.</h3>
+    <p>Start free and every feature above is live in your dashboard from the first sale.</p>
+    <a href="startfree.html" class="btn btn-deep">Start free</a>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <span class="mono">© 2026 Standpoint</span>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="why-standpoint.html">Why Standpoint</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+  </div>
+</footer>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+  var menuBtn = document.getElementById('navMenuBtn');
+  var panel = document.getElementById('navMobilePanel');
+  if (!menuBtn || !panel) return;
+
+  menuBtn.addEventListener('click', function () {
+    var isOpen = panel.classList.toggle('is-open');
+    menuBtn.classList.toggle('is-open', isOpen);
+    menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  });
+
+  panel.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      panel.classList.remove('is-open');
+      menuBtn.classList.remove('is-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.setAttribute('aria-label', 'Open menu');
+    });
+  });
+});
+</script>
+<script src="feature.js" defer></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Standpoint — One vantage point over your whole business</title>
+<title>Standpoint: One vantage point over your whole business</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -19,6 +19,8 @@
     --paper-alt:#EDF1EF;
     --slate:#3E4C60;
     --amber:#E8A33D;
+    --red:#DC2626;
+    --red-light:#FEF2F2;
     --line:rgba(15,27,51,0.10);
     --line-strong:rgba(15,27,51,0.18);
   }
@@ -31,6 +33,13 @@
     line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
+  #siteNav {
+    transition: transform 0.3s ease-in-out;
+}
+
+#siteNav.navbar-hidden {
+    transform: translateY(-100%);
+}
   h1,h2,h3{font-family:'Space Grotesk',sans-serif; font-weight:600; letter-spacing:-0.02em; color:var(--ink);}
   .mono{font-family:'IBM Plex Mono',monospace;}
   .eyebrow{
@@ -53,7 +62,7 @@
   .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
   img,svg{display:block;}
 
-  /* ---------- TOP UTILITY BAR ---------- */
+  /* ---------- TOP UTILITY BAR (desktop only) ---------- */
   .topbar{
     background:var(--ink-deep); color:rgba(255,255,255,0.85);
     display:flex; align-items:center; justify-content:space-between;
@@ -76,35 +85,24 @@
   }
   .topbar-currency button.active{background:var(--teal); border-color:var(--teal); color:#fff;}
 
-  /* ---------- NAV ---------- */
+  /* ---------- NAV (auto-hide on scroll, mobile only) ---------- */
   nav{
     position:sticky; top:0; z-index:50;
     background:var(--paper-card);
     border-bottom:1px solid var(--line);
+    transition:transform .3s ease;
   }
   nav .wrap{
     display:flex; align-items:center; justify-content:space-between;
     height:90px;
   }
-  .logo{display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px; letter-spacing:-0.03em;}
-  .logo svg{width:26px; height:26px;}
-  .logo .hq{color:var(--teal); font-weight:400;}
+  .logo-link{display:flex; align-items:center;}
   .logo-placehold{
     display:flex; align-items:center; height:49px; max-width:200px;
   }
   .logo-placehold img{
     height:100%; width:auto; max-width:100%; object-fit:contain; display:block;
   }
-  @keyframes eyebrowBlink {
-  0%, 100% { color: var(--teal); }
-  70% { color: #a35151; }
-}
-.eyebrow-blink {
-  animation: eyebrowBlink 1.7s ease-in-out infinite;
-}
-.eyebrow-blink::before {
-  background: currentColor;
-}
   .nav-links{display:flex; gap:6px; font-size:14px; font-weight:500; align-items:center;}
   .nav-links > a, .nav-links > .has-dropdown > .drop-trigger{
     color:var(--slate); position:relative; padding:10px 14px; display:inline-flex; align-items:center; gap:5px;
@@ -153,9 +151,27 @@
   .btn-sm{padding:9px 16px; font-size:13px;}
 
   /* ---------- HERO ---------- */
-  header.hero{padding:88px 0 0; position:relative; overflow:hidden;}
+  header.hero{padding:64px 0 0; position:relative; overflow:hidden;}
   .hero-inner{max-width:800px; margin:0 auto; text-align:center;}
-  .hero-inner .eyebrow{justify-content:center; margin-bottom:22px;}
+
+  /* protective, positive-framed banner — "this saves your business" not "danger" */
+  .hero-alert-wrap{display:flex; justify-content:center; margin-bottom:20px; min-height:38px;}
+  .hero-alert{
+    display:inline-flex; align-items:center; gap:9px;
+    background:var(--teal-light); border:1px solid rgba(18,165,148,0.35); color:#0B6F63;
+    padding:9px 18px; border-radius:8px;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; letter-spacing:.02em;
+    animation:alertCycle 6s ease-in-out infinite;
+  }
+  .hero-alert svg{width:15px; height:15px; flex-shrink:0; color:var(--teal);}
+  @keyframes alertCycle{
+    0%{opacity:0; transform:translateY(-8px);}
+    8%{opacity:1; transform:translateY(0);}
+    75%{opacity:1; transform:translateY(0);}
+    85%{opacity:0; transform:translateY(-8px);}
+    100%{opacity:0; transform:translateY(-8px);}
+  }
+
   h1.headline{font-size:clamp(46px,6.4vw,78px); line-height:1.05; margin-bottom:24px; color:var(--ink);}
   h1.headline .accent{color:var(--teal); display:inline-block; animation:driftBiz 3.2s ease-in-out infinite;}
   @keyframes driftBiz{
@@ -165,35 +181,14 @@
     50%{transform:translateX(0);}
   }
   .sub{font-size:18.5px; color:var(--slate); max-width:580px; margin:0 auto 36px; font-weight:400;}
-  .hero-actions{display:flex; gap:22px; justify-content:center; margin-bottom:22px;}
+  .hero-actions{display:flex; gap:22px; justify-content:center; margin-bottom:0;}
   .btn-lg{padding:16px 38px; font-size:15.5px;}
-  .microcopy-row{display:flex; align-items:center; justify-content:center; margin-top:26px;}
-  .microcopy{font-size:13px; color:var(--slate); font-family:'IBM Plex Mono',monospace; display:block; text-align:center; margin-top:14px;}
-  .calc-trigger{
-    position:relative; display:inline-flex; align-items:center; gap:12px;
-    background:linear-gradient(180deg, #14B8A6, #0B7A6E); color:#fff;
-    border:1.5px solid rgba(255,255,255,0.25);
-    padding:18px 40px; border-radius:999px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16.5px;
-    box-shadow:0 20px 40px -10px rgba(18,165,148,0.7), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -2px 4px rgba(0,0,0,0.15);
-  }
-  .calc-trigger:hover{background:linear-gradient(180deg, #18CDB8, #0B7A6E); transform:translateY(-3px) scale(1.02);}
-  .calc-trigger::after{
-    content:''; position:absolute; inset:-8px; border-radius:999px; border:2px solid var(--teal);
-    opacity:0; animation:calcPulse 2.2s ease-out infinite;
-  }
-  @keyframes calcPulse{0%{opacity:.65; transform:scale(1);} 100%{opacity:0; transform:scale(1.35);}}
-  .calc-trigger svg{width:16px; height:16px; position:relative; z-index:1;}
-  .calc-trigger span{position:relative; z-index:1;}
-  .calc-icon-badge{
-    display:flex; align-items:center; justify-content:center;
-    width:34px; height:34px; border-radius:50%;
-    background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3);
-    position:relative; z-index:1; flex-shrink:0;
-  }
 
-  .horizon{position:relative; margin-top:56px; padding:0 0 70px;}
+  .horizon{position:relative; margin-top:48px; padding:0 0 70px;}
   .horizon-line{position:relative; height:1px; background:var(--line-strong); max-width:1180px; margin:0 auto;}
   .horizon-dot{position:absolute; top:-4px; width:9px; height:9px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 5px var(--teal-light);}
+
+  /* calculator now lives inside the dashboard toolbar — see .m-calc-btn below */
 
   /* ---------- CALCULATOR MODAL ---------- */
   .calc-overlay{
@@ -222,170 +217,30 @@
   .calc-grid button.op:hover{background:#0E8E80;}
   .calc-grid button.eq{background:var(--amber); grid-column:span 2;}
 
-  /* ---------- PRICING MODAL ---------- */
-  .pricing-overlay{
-    position:fixed; inset:0; background:rgba(8,17,39,0.6); backdrop-filter:blur(3px);
-    display:none; align-items:center; justify-content:center; z-index:200; padding:24px;
-  }
-  .pricing-overlay.open{display:flex;}
-  .pricing-modal{
-    width:100%; max-width:760px; max-height:88vh; overflow-y:auto;
-    background:var(--paper-card); border-radius:20px; padding:26px 30px;
-    box-shadow:0 40px 90px -20px rgba(0,0,0,0.45);
-    animation:pricingIn .3s cubic-bezier(.2,.8,.2,1);
-  }
-  @keyframes pricingIn{ from{opacity:0; transform:translateY(16px) scale(0.98);} to{opacity:1; transform:translateY(0) scale(1);} }
-  .pricing-modal .calc-head span{color:var(--ink);}
-  .pricing-modal .calc-close{color:var(--slate);}
-  .pricing-step.hidden{display:none;}
-  .pricing-step-q{font-family:'Space Grotesk',sans-serif; font-size:18px; text-align:center; margin-bottom:22px; color:var(--ink);}
-  .currency-choice{display:flex; gap:16px; justify-content:center; padding-bottom:8px;}
-  .currency-choice-btn{
-    display:flex; flex-direction:column; align-items:center; gap:6px;
-    width:150px; padding:26px 0; border-radius:14px; border:1.5px solid var(--line-strong);
-    background:var(--paper); cursor:pointer; transition:all .2s ease;
-  }
-  .currency-choice-btn:hover{border-color:var(--teal); background:var(--teal-light); transform:translateY(-2px);}
-  .cc-sign{font-family:'Space Grotesk',sans-serif; font-size:30px; font-weight:700; color:var(--teal);}
-  .cc-label{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--slate); text-transform:uppercase; letter-spacing:.05em;}
-  .pricing-back{
-    background:none; border:none; cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:12px;
-    color:var(--teal); margin-bottom:18px; padding:0;
-  }
-  .plan-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
-  .plan-grid.hidden{display:none;}
-  .plan-card{
-    position:relative; background:var(--paper); border:1.5px solid var(--line); border-radius:14px;
-    padding:20px 16px; display:flex; flex-direction:column;
-  }
-  .plan-card.featured{border-color:var(--teal); box-shadow:0 12px 28px -14px rgba(18,165,148,0.4);}
-  .plan-badge{
-    position:absolute; top:-11px; left:50%; transform:translateX(-50%);
-    background:var(--teal); color:#fff; font-family:'IBM Plex Mono',monospace; font-size:9.5px;
-    padding:4px 10px; border-radius:999px; white-space:nowrap; text-transform:uppercase; letter-spacing:.04em;
-  }
-  .plan-badge-trial{background:var(--amber);}
-  .plan-name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; margin-top:6px; color:var(--ink);}
-  .plan-price{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:24px; color:var(--ink); margin:6px 0 14px;}
-  .plan-price span{font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:400; color:var(--slate); margin-left:3px;}
-  .plan-features{list-style:none; flex:1; margin-bottom:16px;}
-  .plan-features li{
-    font-size:11.5px; color:var(--slate); padding:5px 0 5px 18px; position:relative;
-  }
-  .plan-features li::before{
-    content:'✓'; position:absolute; left:0; color:var(--teal); font-weight:700; font-size:11px;
-  }
-  .plan-cta{width:100%; font-size:12.5px; padding:10px 0; border-radius:8px;}
-
   section{padding:88px 0;}
   .section-head{max-width:640px; margin:0 0 52px; position:relative;}
-  .section-head .ghost-num{
-    position:absolute; top:-38px; left:-6px; font-family:'Space Grotesk',sans-serif; font-size:90px; font-weight:700;
-    color:rgba(15,27,51,0.05); z-index:0; user-select:none;
-  }
-
-  .section-head.centered {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-.section-head.centered .eyebrow {
-  justify-content: center;
-}
-.section-head.centered p {
-  margin-left: auto;
-  margin-right: auto;
-}
+  .section-head.centered{text-align:center; margin-left:auto; margin-right:auto;}
+  .section-head.centered .eyebrow{justify-content:center;}
+  .section-head.centered p{margin-left:auto; margin-right:auto;}
   .section-head h2{font-size:clamp(28px,3.4vw,40px); line-height:1.16; margin:14px 0 14px; position:relative; z-index:1;}
-  .section-head h2 .underline-accent{position:relative; display:inline-block;}
-  .section-head h2 .underline-accent::after{
-    content:''; position:absolute; left:0; right:0; bottom:2px; height:9px; background:var(--teal-light); z-index:-1; border-radius:3px;
-  }
   .section-head p{color:var(--slate); font-size:16.5px; position:relative; z-index:1;}
-  .section-head.features-head h2{
-    background:linear-gradient(90deg, var(--ink) 20%, var(--teal) 90%);
+  .section-head.testimonial-head{max-width:560px;}
+  .section-head.testimonial-head h2{
+    font-size:clamp(26px,3.4vw,38px);
+    background:linear-gradient(90deg, var(--ink) 25%, var(--teal) 95%);
     -webkit-background-clip:text; background-clip:text; color:transparent;
-    font-size:clamp(30px,3.8vw,44px); letter-spacing:-0.02em;
   }
-
-  @keyframes eyebrowCycle{
-    0%, 100%{color:var(--teal);}
-    33%{color:var(--amber);}
-    66%{color:var(--ink);}
-  }
-  .eyebrow-cycle{animation:eyebrowCycle 2s ease-in-out infinite;}
-  .eyebrow-cycle::before{background:currentColor;}
-
-  /* ---------- PROBLEM ---------- */
-  .duct-tape{display:grid; grid-template-columns:1fr auto 1fr; gap:56px; align-items:center;}
-  .tool-pile{display:flex; flex-wrap:wrap; gap:10px;}
-  .tool-chip{
-    font-family:'IBM Plex Mono',monospace; font-size:13px;
-    background:var(--paper-card); border:1px solid var(--line-strong);
-    padding:9px 14px; border-radius:999px; color:var(--slate);
-    text-decoration:line-through; text-decoration-color:rgba(232,163,61,0.7); text-decoration-thickness:1.5px;
-  }
-  .arrow-col{display:flex; align-items:center; justify-content:center; color:var(--teal);}
-  .arrow-col svg{width:32px; height:32px;}
-  .single-card{
-    background:var(--ink); color:#fff; border-radius:16px; padding:32px;
-    opacity:0; transform:translateY(28px) scale(0.98);
-    transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
-  }
-  .single-card.is-visible{opacity:1; transform:translateY(0) scale(1);}
-  .single-card .mono{color:var(--teal); font-size:12px; text-transform:uppercase; letter-spacing:.06em;}
-  .single-card h3{color:#fff; font-size:23px; margin:12px 0 10px;}
-  .single-card p{color:rgba(255,255,255,0.65); font-size:14.5px;}
-
-  /* ---------- FEATURES ACCORDION ---------- */
-  .feat-accordion{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--paper-card);}
-  .feat-item{border-bottom:1px solid var(--line); position:relative;}
-  .feat-item:last-child{border-bottom:none;}
-  .feat-item::before{
-    content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--teal);
-    transform:scaleY(0); transition:transform .3s ease;
-  }
-  .feat-item.open::before{transform:scaleY(1);}
-  .feat-summary{
-    all:unset; box-sizing:border-box; width:100%; cursor:pointer; position:relative;
-    display:flex; align-items:center; justify-content:center; text-align:center;
-    padding:20px 64px; transition:background .25s ease;
-  }
-  .feat-summary:hover{background:var(--teal-light);}
-  .feat-item.open .feat-summary{background:var(--paper-alt);}
-  .feat-item.open .feat-summary:hover{background:var(--teal-light);}
-  .feat-title{
-    font-size:16.5px; font-weight:600; font-family:'Space Grotesk',sans-serif; letter-spacing:-0.01em;
-    color:var(--teal);
-    transition:opacity .25s ease;
-  }
-  .feat-item.open .feat-title{opacity:0.75;}
-  .feat-chev{width:16px; height:16px; color:var(--teal); transition:transform .35s cubic-bezier(.4,0,.2,1); position:absolute; right:30px; top:50%; transform:translateY(-50%);}
-  .feat-item.open .feat-chev{transform:translateY(-50%) rotate(180deg);}
-  .feat-body-wrap{max-height:0; overflow:hidden; transition:max-height .4s cubic-bezier(.4,0,.2,1);}
-  .feat-body{padding:0 60px 24px; color:var(--slate); font-size:14.5px; max-width:600px; margin:0 auto; text-align:center;}
-
-  /* ---------- TESTIMONIALS + COUNTERS ---------- */
-  .test-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:56px;}
-  .test-card{background:var(--paper-card); border:1px solid var(--line); border-radius:14px; padding:26px;}
-  .test-card .stars{color:var(--amber); font-size:13px; margin-bottom:14px; letter-spacing:2px;}
-  .test-card p{font-size:14.5px; color:var(--ink); margin-bottom:18px; line-height:1.6;}
-  .test-card .who{display:flex; align-items:center; gap:10px;}
-  .test-card .avatar{width:34px; height:34px; border-radius:50%; background:var(--teal-light); color:var(--teal); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px;}
-  .test-card .who b{display:block; font-size:13px;}
-  .test-card .who span{font-size:12px; color:var(--slate);}
-  .counter-row{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);
-    border:1px solid var(--line); border-radius:16px; overflow:hidden;
-  }
-  .counter{background:var(--ink); padding:34px 28px; text-align:center;}
-  .counter .num{font-family:'Space Grotesk',sans-serif; font-size:36px; font-weight:700; color:#fff;}
-  .counter .lbl{font-family:'IBM Plex Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:rgba(255,255,255,0.55); margin-top:8px;}
+  .section-head.testimonial-head p{font-size:15.5px;}
 
   /* ---------- DASHBOARD MOCKUP ---------- */
   .preview-wrap{padding:0 0 96px;}
-  .preview-label{text-align:center; margin-bottom:24px;}
-  .dash-tabs{display:flex; justify-content:center; gap:8px; margin-bottom:22px;}
+  .preview-label{text-align:center; margin-bottom:32px;}
+  .preview-label h2{
+    font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(24px,3vw,32px);
+    color:var(--ink); letter-spacing:-0.01em;
+  }
+  .preview-label h2 .accent{color:var(--teal);}
+  .dash-tabs{display:flex; justify-content:center; gap:8px; margin-bottom:22px; flex-wrap:wrap; padding:0 12px;}
   .dash-tab{
     font-family:'Space Grotesk',sans-serif; font-size:12.5px; font-weight:600;
     padding:9px 18px; border-radius:999px; border:1px solid var(--line-strong);
@@ -402,10 +257,11 @@
     background:var(--paper-card);
   }
   .mockup-topbar{display:flex; align-items:center; gap:16px; padding:12px 18px; background:#EDEFEF; border-bottom:1px solid var(--line);}
-  .mockup-dots{display:flex; gap:6px;}
+  .mockup-dots{display:flex; gap:6px; flex-shrink:0;}
   .mockup-dots span{width:9px; height:9px; border-radius:50%; background:#C9CDD1;}
   .mockup-url{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--slate); background:#fff; border:1px solid var(--line); border-radius:6px; padding:5px 14px; flex:1; max-width:420px; overflow:hidden; position:relative; height:26px; display:flex; align-items:center;}
   .mockup-url-track{display:inline-block; white-space:nowrap; animation:urlScroll 12s linear infinite;}
+  .mockup-url-static{display:none;}
   @keyframes urlScroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
   .mockup-body{display:flex; min-height:560px;}
   .mockup-sidebar{width:200px; background:var(--ink); padding:24px 16px; flex-shrink:0;}
@@ -417,12 +273,83 @@
   .m-nav-item.active .m-ico{background:var(--teal);}
 
   .mockup-main{flex:1; padding:28px 32px; background:var(--paper);}
-  .m-header-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:22px;}
+  .m-header-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; flex-wrap:wrap; gap:10px;}
   .m-header-row h4{font-family:'Space Grotesk',sans-serif; font-size:18px;}
   .m-header-row .mono{font-size:11.5px; color:var(--slate);}
   .m-toolbar{display:flex; align-items:center; gap:14px;}
-  .m-tool-btn{width:28px; height:28px; border-radius:7px; background:var(--paper-card); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--slate); cursor:pointer;}
+  .m-tool-btn{width:28px; height:28px; border-radius:7px; background:var(--paper-card); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--slate); cursor:pointer; flex-shrink:0;}
   .m-tool-btn svg{width:14px; height:14px;}
+
+  /* dashboard calculator — small, icon-only, pulses to signal it's clickable */
+  .m-calc-btn{
+    position:relative; display:flex; align-items:center; justify-content:center; cursor:pointer;
+    width:28px; height:28px; border-radius:50%; flex-shrink:0;
+    background:linear-gradient(180deg, #14B8A6, #0B7A6E); color:#fff; border:1px solid rgba(255,255,255,0.25);
+    box-shadow:0 6px 14px -6px rgba(18,165,148,0.55);
+  }
+  .m-calc-btn:hover{background:linear-gradient(180deg, #18CDB8, #0B7A6E);}
+  .m-calc-btn::after{
+    content:''; position:absolute; inset:-5px; border-radius:50%; border:1.5px solid var(--teal);
+    opacity:0; animation:calcRing 2.4s ease-out infinite;
+  }
+  @keyframes calcRing{0%{opacity:.65; transform:scale(1);} 100%{opacity:0; transform:scale(1.6);}}
+  .m-calc-btn svg{width:13px; height:13px; position:relative; z-index:1;}
+
+  /* ---------- BARCODE STOCK INTAKE ---------- */
+  .m-barcode-btn{
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    width:28px; height:28px; border-radius:50%; flex-shrink:0;
+    background:var(--paper-card); border:1px solid var(--line); color:var(--slate);
+    transition:all .15s ease;
+  }
+  .m-barcode-btn:hover{border-color:var(--teal); color:var(--teal);}
+  .m-barcode-btn svg{width:14px; height:14px;}
+
+  .barcode-overlay{
+    position:fixed; inset:0; background:rgba(8,17,39,0.55); backdrop-filter:blur(3px);
+    display:none; align-items:center; justify-content:center; z-index:200;
+  }
+  .barcode-overlay.open{display:flex;}
+  .barcode-modal{width:300px; background:var(--ink); border-radius:18px; padding:20px;}
+  .barcode-scan-box{
+    border:2px dashed rgba(255,255,255,0.3); border-radius:12px; padding:26px 16px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:rgba(255,255,255,0.55); margin-bottom:14px; text-align:center;
+  }
+  .barcode-scan-box svg{width:38px; height:38px; margin-bottom:10px; color:rgba(255,255,255,0.4);}
+  .barcode-scan-box p{font-size:11.5px; margin-bottom:14px;}
+  .barcode-scan-btn, .barcode-add-btn{
+    width:100%; padding:11px; border-radius:8px; border:none; background:var(--teal); color:#fff;
+    font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:13px; cursor:pointer;
+  }
+  .barcode-result{display:none;}
+  .barcode-result.show{display:block;}
+  .barcode-result .br-name{color:#fff; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14px; margin-bottom:3px;}
+  .barcode-result .br-meta{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:rgba(255,255,255,0.5); margin-bottom:14px;}
+  .barcode-qty-row{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .barcode-qty-row label{font-size:11.5px; color:rgba(255,255,255,0.6); flex-shrink:0;}
+  .barcode-qty-row input{
+    flex:1; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); border-radius:8px;
+    padding:9px 10px; color:#fff; font-family:'IBM Plex Mono',monospace; font-size:13px;
+  }
+  .barcode-success{display:none; text-align:center; padding:16px 0; color:var(--teal); font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:13.5px;}
+  .barcode-success.show{display:block;}
+
+  /* ---------- HOTEL: RENEWAL PAYMENT CONFIRMATION ---------- */
+  .renew-overlay{
+    position:fixed; inset:0; background:rgba(8,17,39,0.55); backdrop-filter:blur(3px);
+    display:none; align-items:center; justify-content:center; z-index:200;
+  }
+  .renew-overlay.open{display:flex;}
+  .renew-modal{width:290px; background:var(--ink); border-radius:18px; padding:20px;}
+  .renew-body{text-align:center; padding:10px 0 18px;}
+  .renew-body p{color:rgba(255,255,255,0.6); font-size:12.5px; margin-bottom:4px;}
+  .renew-body .rn-name{color:#fff; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; margin-bottom:2px;}
+  .renew-body .rn-amt{color:var(--teal); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:24px; margin-top:8px;}
+  .renew-actions{display:flex; gap:10px;}
+  .renew-actions button{flex:1; padding:11px 0; border-radius:8px; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:12.5px; cursor:pointer; border:none;}
+  .renew-confirm{background:var(--teal); color:#fff;}
+  .renew-cancel{background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.7);}
   .m-stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:18px;}
   .m-stat{background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; border-top:3px solid var(--teal); position:relative;}
   .m-stat.acc-amber{border-top-color:var(--amber);}
@@ -435,25 +362,29 @@
 
   .m-panels{display:grid; grid-template-columns:1.25fr 1fr; gap:14px;}
   .m-panel{background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:16px 18px;}
-  .m-panel .m-panel-title{font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--teal); font-weight:600; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;}
+  .m-panel .m-panel-title{font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--teal); font-weight:600; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;}
+  .panel-title-actions{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
   .m-hist-btn{font-family:'IBM Plex Mono',monospace; font-size:10px; background:var(--paper-alt); border:1px solid var(--line); padding:4px 8px; border-radius:6px; cursor:pointer; color:var(--slate); text-transform:none; letter-spacing:0;}
 
-  /* real calendar */
+  /* calendar */
   .m-cal-nav{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-family:'Space Grotesk',sans-serif; font-size:12.5px; font-weight:600;}
   .m-cal-weekdays{display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:4px;}
-  .m-cal-weekdays span{font-family:'IBM Plex Mono',monospace; font-size:9px; text-align:center; color:var(--slate);}
+  .m-cal-weekdays span{font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:600; text-align:center; color:var(--teal);}
   .m-cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px;}
   .m-cal-cell{
     aspect-ratio:1; border-radius:8px; background:var(--paper-card); border:1px solid var(--line);
     display:flex; align-items:center; justify-content:center; position:relative;
     font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:500; color:var(--ink);
-    transition:box-shadow .15s ease;
   }
   .m-cal-cell.blank{background:transparent; border:none;}
   .m-cal-cell.high{background:#FFF4F3; border-color:#FBD5D2;}
-  .m-cal-cell.high::before{content:''; position:absolute; top:4px; left:4px; width:6px; height:6px; border-radius:50%; background:#E5484D; box-shadow:0 0 0 2px rgba(229,72,77,0.18);}
-  .m-cal-cell.today{background:var(--teal); border-color:var(--teal); color:#fff; font-weight:700; box-shadow:0 6px 16px -6px rgba(18,165,148,0.6);}
-  .m-cal-best{margin-top:14px; font-size:11px; color:var(--slate); display:flex; align-items:center; gap:6px;}
+  .m-cal-cell.high::before{content:''; position:absolute; top:4px; left:4px; width:6px; height:6px; border-radius:50%; background:#E5484D;}
+  .m-cal-cell.today{background:var(--teal); border-color:var(--teal); color:#fff; font-weight:700;}
+  .m-cal-legend{display:flex; gap:16px; margin-top:12px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--slate); flex-wrap:wrap;}
+  .m-cal-legend span{display:inline-flex; align-items:center; gap:5px;}
+  .m-cal-legend .lg-dot{width:6px; height:6px; border-radius:50%; background:#E5484D; display:inline-block;}
+  .m-cal-legend .lg-sq{width:8px; height:8px; border-radius:2px; background:var(--teal); display:inline-block;}
+  .m-cal-best{margin-top:10px; font-size:11px; color:var(--slate); display:flex; align-items:center; gap:6px;}
   .m-cal-best::before{content:''; width:6px; height:6px; border-radius:50%; background:#E5484D;}
   .m-cal-best b{color:var(--ink); font-family:'IBM Plex Mono',monospace; font-weight:600;}
   .m-hist-view{display:none;}
@@ -476,37 +407,383 @@
   .m-wa-bubble .wa-total{font-weight:600; margin-top:6px;}
   .m-wa-meta{display:flex; justify-content:flex-end; align-items:center; gap:4px; margin-top:6px; font-size:10px; color:#5B8A5E;}
 
-  /* ---------- PRICING ---------- */
-  .price-strip{
-    position:relative; overflow:hidden;
-    display:flex; flex-direction:column; align-items:center; text-align:center; gap:18px;
-    border-radius:18px; padding:48px 40px;
-    background:var(--ink); color:#fff;
+  /* ---------- SCHOOL DASHBOARD COMPONENTS ---------- */
+  .m-toggle-row{display:inline-flex; background:var(--paper-alt); padding:3px; border-radius:8px; gap:2px;}
+  .m-toggle-row button{border:none; background:transparent; padding:6px 14px; border-radius:6px; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; color:var(--slate); cursor:pointer; transition:all .15s ease;}
+  .m-toggle-row button.active{background:var(--paper-card); color:var(--ink); box-shadow:0 2px 6px -2px rgba(15,27,51,0.2);}
+
+  .m-roster-view, .m-attend-view{display:none;}
+  .m-roster-view.active, .m-attend-view.active{display:block;}
+
+  .m-roster-row{display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--line); font-size:12px;}
+  .m-roster-row:last-child{border-bottom:none;}
+  .m-roster-row .mr-name{font-weight:500; color:var(--ink);}
+  .m-roster-row .mr-class{font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--teal); background:var(--teal-light); padding:2px 8px; border-radius:999px;}
+
+  .m-attend-summary{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--teal); font-weight:600; margin-bottom:10px; display:block;}
+  .m-attend-row{display:flex; align-items:center; gap:9px; padding:6px 0; border-bottom:1px solid var(--line); font-size:11.5px;}
+  .m-attend-row:last-child{border-bottom:none;}
+  .m-attend-icon{width:19px; height:19px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .m-attend-icon.in{background:var(--teal-light); color:var(--teal);}
+  .m-attend-icon.out{background:var(--paper-alt); color:var(--slate);}
+  .m-attend-icon svg{width:10px; height:10px;}
+  .m-attend-name{flex:1; color:var(--ink); font-weight:500;}
+  .m-attend-time{font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--slate);}
+
+  .m-manual-row{display:flex; align-items:center; gap:9px; padding:6px 0; border-bottom:1px solid var(--line); font-size:12px;}
+  .m-manual-row:last-child{border-bottom:none;}
+  .m-manual-check{width:16px; height:16px; border-radius:4px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:9px; font-weight:700;}
+  .m-manual-check.present{background:var(--teal); color:#fff;}
+  .m-manual-check.absent{background:var(--paper-alt); border:1px solid var(--line-strong); color:var(--slate);}
+  .m-manual-row .absent-label{color:var(--slate); font-style:italic;}
+
+  .m-expense-row{display:flex; justify-content:space-between; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--line); font-size:12px;}
+  .m-expense-row:last-child{border-bottom:none;}
+  .m-expense-desc{color:var(--ink); font-weight:500;}
+  .m-expense-note{display:block; font-size:10px; color:var(--slate); margin-top:2px;}
+  .m-expense-amt{font-family:'IBM Plex Mono',monospace; color:var(--ink); font-weight:600; white-space:nowrap; margin-left:10px;}
+  .m-expense-total{display:flex; justify-content:space-between; padding-top:10px; margin-top:2px; border-top:1.5px solid var(--line-strong); font-weight:600; font-size:12.5px;}
+  .m-expense-add{display:flex; gap:6px; margin-top:12px;}
+  .m-expense-add input{flex:1; min-width:0; border:1px solid var(--line-strong); border-radius:6px; padding:7px 9px; font-size:10.5px; font-family:'Inter',sans-serif; background:var(--paper);}
+  .m-expense-add button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0 12px; font-size:16px; cursor:pointer; line-height:1; flex-shrink:0;}
+
+  .m-cal-cell.midterm{background:#FFF8E8; border-color:#F3D98B;}
+  .m-cal-cell.midterm::before{content:''; position:absolute; top:4px; left:4px; width:6px; height:6px; border-radius:50%; background:var(--amber);}
+  .m-cal-cell.holiday{background:#FEF2F2; border-color:#FBB6B6;}
+  .m-cal-cell.holiday::before{content:''; position:absolute; top:4px; left:4px; width:6px; height:6px; border-radius:50%; background:#E5484D;}
+  .lg-amber{width:6px; height:6px; border-radius:50%; background:var(--amber); display:inline-block;}
+  .lg-red{width:6px; height:6px; border-radius:50%; background:#E5484D; display:inline-block;}
+
+  .m-wa-incoming{background:#fff; border:1px solid var(--line); border-radius:10px 10px 10px 2px; padding:10px 12px; font-size:11px; font-family:'Inter',sans-serif; color:#1B1F1E; box-shadow:0 1px 1px rgba(0,0,0,0.06); margin-bottom:10px;}
+  .m-wa-incoming:last-of-type{margin-bottom:0;}
+  .m-wa-incoming .wa-sender{font-weight:600; color:var(--teal); font-size:10.5px; margin-bottom:4px;}
+  .m-wa-incoming .wa-attach{display:flex; align-items:center; gap:8px; background:var(--paper-alt); border-radius:8px; padding:8px 10px; margin:6px 0;}
+  .m-wa-incoming .wa-attach svg{width:15px; height:15px; color:var(--slate); flex-shrink:0;}
+  .m-wa-incoming .wa-attach span{font-size:10px; color:var(--slate);}
+  .confirm-btn{width:100%; padding:8px; border-radius:7px; border:1.5px solid var(--teal); background:var(--teal-light); color:var(--teal); font-family:'Space Grotesk',sans-serif; font-size:11.5px; font-weight:600; cursor:pointer; margin-top:6px;}
+
+  .m-panels-2{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px;}
+  .m-panel-full{margin-top:14px;}
+
+  /* clickable manual attendance */
+  .m-attend-legend{font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--slate); margin-bottom:10px; display:flex; gap:12px; flex-wrap:wrap;}
+  .m-manual-row{cursor:pointer; user-select:none; transition:background .15s ease;}
+  .m-manual-row:hover{background:var(--paper-alt);}
+  .m-manual-row.is-absent .m-attend-name{color:#DC2626;}
+  .m-manual-row.is-absent .m-manual-check{background:#FEF2F2; border:1px solid #FCA5A5; color:#DC2626;}
+  .panel-title-actions{display:flex; align-items:center; gap:8px;}
+  .m-summary-view{display:none; padding-top:8px;}
+  .m-summary-view.active{display:block;}
+  .m-summary-view .ms-line{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink); padding:4px 0;}
+
+  /* roster: clickable present/absent + class grouping */
+  .m-roster-row{cursor:pointer; user-select:none; transition:background .15s ease;}
+  .m-roster-row:hover{background:var(--paper-alt);}
+  .m-roster-row .mr-tick{width:16px; height:16px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; background:var(--teal); color:#fff; flex-shrink:0; margin-right:8px;}
+  .m-roster-row.is-absent .mr-tick{background:#FEF2F2; border:1px solid #FCA5A5; color:#DC2626;}
+  .m-roster-row.is-absent .mr-name{color:#DC2626;}
+  .mr-left{display:flex; align-items:center;}
+
+  .m-view-toggle{margin-top:10px; margin-bottom:2px;}
+  .m-class-view{display:none;}
+  .m-class-view.active{display:block;}
+  .m-class-group{margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid var(--line);}
+  .m-class-group:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+  .m-class-group-head{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:12.5px; color:var(--ink); margin-bottom:6px;}
+  .m-teacher-line{font-size:10.5px; color:var(--slate); margin-bottom:8px; display:flex; align-items:center; gap:6px;}
+  .sex-badge{font-family:'IBM Plex Mono',monospace; font-size:8px; padding:2px 7px; border-radius:999px; font-weight:600;}
+  .sex-badge.f{background:#FCE7F3; color:#BE185D;}
+  .sex-badge.m{background:#DBEAFE; color:#1D4ED8;}
+  .prefect-row{display:flex; align-items:center; gap:7px; padding:4px 0; font-size:11.5px;}
+  .prefect-row .mr-name{font-weight:600;}
+  .prefect-badge{font-family:'IBM Plex Mono',monospace; font-size:8px; text-transform:uppercase; padding:2px 8px; border-radius:999px; font-weight:700; letter-spacing:.03em; flex-shrink:0;}
+  .prefect-badge.head{background:var(--amber); color:#fff;}
+  .prefect-badge.senior{background:var(--teal); color:#fff;}
+  .prefect-badge.assistant{background:var(--teal-light); color:var(--teal);}
+  .pupil-list{margin-top:4px;}
+
+  /* by-class accordion covering every class, Daycare through SS3 */
+  .m-class-view[data-mode="byclass"]{max-height:380px; overflow-y:auto; padding-right:2px;}
+  .m-class-acc-item{border-bottom:1px solid var(--line);}
+  .m-class-acc-item:last-child{border-bottom:none;}
+  .m-class-acc-head{
+    display:flex; justify-content:space-between; align-items:center; padding:11px 2px; cursor:pointer;
+    font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:12.5px; color:var(--ink); transition:color .15s ease;
   }
-  .price-strip::before{
-    content:''; position:absolute; top:-40%; left:50%; transform:translateX(-50%); width:360px; height:360px; border-radius:50%;
-    background:radial-gradient(circle, rgba(18,165,148,0.35), transparent 70%);
+  .m-class-acc-head:hover{color:var(--teal);}
+  .m-class-acc-head .acc-chev{width:12px; height:12px; color:var(--teal); transition:transform .3s ease; flex-shrink:0;}
+  .m-class-acc-item.open .acc-chev{transform:rotate(180deg);}
+  .m-class-acc-body{max-height:0; overflow:hidden; transition:max-height .35s cubic-bezier(.4,0,.2,1);}
+  .m-class-acc-body-inner{padding:0 2px 14px;}
+
+  .m-captain-line{font-size:10.5px; color:var(--slate); margin-bottom:8px; display:flex; align-items:center; gap:6px;}
+  .m-captain-line b{color:var(--teal); font-weight:600;}
+
+  .prefect-block{margin-bottom:2px;}
+  .prefect-func{font-size:9.5px; color:var(--slate); margin:1px 0 7px 0; padding-left:2px;}
+
+  /* livelier calendar */
+  .m-cal-cell{transition:transform .15s ease;}
+  .m-cal-cell:not(.blank):hover{transform:scale(1.08);}
+  .m-cal-cell.midterm{background:linear-gradient(160deg,#FFF8E8,#FFEFC7);}
+  .m-cal-cell.holiday{background:linear-gradient(160deg,#FEF2F2,#FDE0E0);}
+  .m-cal-cell.today{background:linear-gradient(160deg,var(--teal),#0E8E80);}
+
+  /* expense category chips */
+  .m-expense-cat{
+    font-family:'IBM Plex Mono',monospace; font-size:8.5px; text-transform:uppercase; letter-spacing:.03em;
+    color:var(--slate); background:var(--paper-alt); padding:2px 7px; border-radius:999px; margin-right:6px;
   }
-  .price-strip .left{position:relative; z-index:1;}
-  .price-strip .left h3{color:#fff; font-size:22px; margin-bottom:8px;}
-  .price-strip .left p{color:rgba(255,255,255,0.6); font-size:14.5px; max-width:420px; margin:0 auto;}
-  .price-tag{position:relative; z-index:1; font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--teal); background:rgba(18,165,148,0.15); padding:8px 14px; border-radius:8px;}
-  .price-strip .btn-deep{position:relative; z-index:1; background:#fff; color:var(--ink); border-color:#fff;}
-  .price-strip .btn-deep:hover{background:var(--teal-light);}
+
+  /* payments: WhatsApp / POS toggle */
+  .m-pos-row{display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid var(--line); font-size:11.5px;}
+  .m-pos-row:last-child{border-bottom:none;}
+  .m-pos-row .pos-who{font-weight:500; color:var(--ink);}
+  .m-pos-row .pos-meta{font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--slate); display:block; margin-top:2px;}
+  .m-pos-row .pos-amt{font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--teal);}
+  .m-pay-view{display:none;}
+  .m-pay-view.active{display:block;}
+
+  /* ---------- HOTEL: LIVE GUEST TIMERS ---------- */
+  .guest-row{display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); gap:10px; flex-wrap:wrap;}
+  .guest-row:last-child{border-bottom:none;}
+  .guest-info{flex:1; min-width:0;}
+  .guest-name{font-weight:600; font-size:12px; color:var(--ink);}
+  .renewed-dot{
+    display:none; width:7px; height:7px; border-radius:50%; background:var(--teal); margin-left:6px;
+    box-shadow:0 0 0 2px var(--teal-light);
+  }
+  .renewed-dot.show{display:inline-block;}
+  .guest-meta{font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--slate); display:block; margin-top:2px;}
+  .guest-timer-wrap{display:flex; align-items:center; gap:8px; flex-shrink:0;}
+  .guest-timer{font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:11.5px; color:var(--teal); white-space:nowrap;}
+  .guest-timer.warn{color:#B7791F;}
+  .guest-timer.overdue{color:#DC2626; animation:timerBlink 1s step-start infinite;}
+  @keyframes timerBlink{50%{opacity:.25;}}
+  .renew-btn{font-family:'IBM Plex Mono',monospace; font-size:9px; background:var(--paper-alt); border:1px solid var(--line-strong); padding:5px 10px; border-radius:999px; cursor:pointer; color:var(--slate); flex-shrink:0; transition:all .15s ease;}
+  .renew-btn:hover{border-color:var(--teal); color:var(--teal); background:var(--teal-light);}
+
+  /* ---------- HOTEL: ROOM TIERS + CLICKABLE DETAILS ---------- */
+  .m-room-cell{position:relative; cursor:pointer;}
+  .tier-dot{position:absolute; top:3px; right:3px; width:6px; height:6px; border-radius:50%;}
+  .tier-dot.vip{background:var(--amber);}
+  .tier-dot.premium{background:#8B5CF6;}
+  .room-detail{background:var(--paper-card); border:1px solid var(--line-strong); border-radius:10px; padding:16px 18px; margin-top:12px;}
+  .room-detail.empty{color:var(--slate); font-size:11.5px; text-align:center; padding:20px;}
+  .rd-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+  .rd-head b{font-family:'Space Grotesk',sans-serif; font-size:14px;}
+  .rd-tier{font-family:'IBM Plex Mono',monospace; font-size:9px; text-transform:uppercase; padding:3px 9px; border-radius:999px; font-weight:700; letter-spacing:.03em;}
+  .rd-tier.standard{background:var(--paper-alt); color:var(--slate);}
+  .rd-tier.vip{background:var(--amber); color:#fff;}
+  .rd-tier.premium{background:#8B5CF6; color:#fff;}
+  .rd-price{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; color:var(--ink); margin-bottom:10px;}
+  .rd-amenities{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;}
+  .rd-amenities span{font-family:'IBM Plex Mono',monospace; font-size:9.5px; background:var(--paper-alt); padding:4px 9px; border-radius:999px; color:var(--slate);}
+
+  /* ---------- HOTEL: HOUSEKEEPING ---------- */
+  .m-house-row{display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--line); font-size:12px;}
+  .m-house-row:last-child{border-bottom:none;}
+  .m-house-row.done .house-label{text-decoration:line-through; opacity:.45;}
+  .house-mark-btn{font-family:'IBM Plex Mono',monospace; font-size:9px; background:var(--teal-light); border:1px solid var(--teal); color:var(--teal); padding:5px 10px; border-radius:999px; cursor:pointer; flex-shrink:0; transition:all .15s ease;}
+  .house-mark-btn:hover{background:var(--teal); color:#fff;}
+  .m-house-row.done .house-mark-btn{background:var(--paper-alt); border-color:var(--line-strong); color:var(--slate);}
+
+
+  /* ---------- PHARMACY DASHBOARD COMPONENTS ---------- */
+  .m-drug-row{display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--line); font-size:11.5px;}
+  .m-drug-row:last-child{border-bottom:none;}
+  .m-drug-name{color:var(--ink); font-weight:500;}
+  .m-drug-meta{display:block; font-size:10px; color:var(--slate); margin-top:2px;}
+  .drug-status{font-family:'IBM Plex Mono',monospace; font-size:8.5px; text-transform:uppercase; padding:3px 9px; border-radius:999px; font-weight:700; letter-spacing:.03em; flex-shrink:0; margin-left:10px;}
+  .drug-status.fresh{background:var(--teal-light); color:var(--teal);}
+  .drug-status.aging{background:#FFF4DC; color:#B7791F;}
+  .drug-status.urgent{background:#FEF2F2; color:#DC2626;}
+
+  .m-emerg-row{padding:9px 0; border-bottom:1px solid var(--line); font-size:11.5px;}
+  .m-emerg-row:last-child{border-bottom:none;}
+  .m-emerg-top{display:flex; justify-content:space-between; margin-bottom:3px;}
+  .m-emerg-patient{font-weight:600; color:var(--ink);}
+  .m-emerg-time{font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--slate);}
+  .m-emerg-detail{color:var(--slate); font-size:11px;}
+
+  .m-shift-block{margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--line);}
+  .m-shift-block:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+  .m-shift-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;}
+  .m-shift-head b{font-family:'Space Grotesk',sans-serif; font-size:12px;}
+  .m-shift-head span{font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--slate);}
+  .m-shift-names{font-size:11px; color:var(--ink);}
+
+  /* ---------- HOTEL ROOM STATUS ---------- */
+  .m-room-grid{display:grid; grid-template-columns:repeat(6,1fr); gap:6px;}
+  .m-room-cell{
+    aspect-ratio:1; border-radius:7px; display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:700; border:1px solid var(--line);
+  }
+  .m-room-cell.occupied{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .m-room-cell.vacant-clean{background:var(--teal-light); color:var(--teal); border-color:transparent;}
+  .m-room-cell.vacant-dirty{background:#FFF4DC; color:#B7791F; border-color:transparent;}
+  .m-room-cell.maintenance{background:#FEF2F2; color:#DC2626; border-color:transparent;}
+  .m-room-legend{display:flex; gap:12px; margin-top:12px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--slate);}
+  .m-room-legend span{display:inline-flex; align-items:center; gap:5px;}
+  .m-room-legend i{width:8px; height:8px; border-radius:2px; display:inline-block;}
+  .m-room-legend .rl-occ{background:var(--ink);}
+  .m-room-legend .rl-clean{background:var(--teal);}
+  .m-room-legend .rl-dirty{background:var(--amber);}
+  .m-room-legend .rl-maint{background:#E5484D;}
+
+  /* attendance status badges + summary */
+  .status-badge{font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:600; padding:2px 7px; border-radius:999px; margin-left:auto;}
+  .status-badge.early, .status-badge.ontime{background:var(--teal-light); color:var(--teal);}
+  .status-badge.late{background:#FEF2F2; color:#DC2626;}
+  .m-time-legend{font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--slate); margin-bottom:10px; line-height:1.7;}
+  .m-time-legend b{color:var(--ink);}
+  .panel-title-actions{display:flex; align-items:center; gap:8px;}
+  .summary-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:9.5px; background:var(--paper-alt); border:1px solid var(--line);
+    padding:4px 9px; border-radius:6px; cursor:pointer; color:var(--slate);
+  }
+  .summary-btn.active{background:var(--teal); color:#fff; border-color:var(--teal);}
+  .m-summary-box{display:none; background:var(--teal-light); border-radius:8px; padding:10px 12px; margin-bottom:10px; font-size:11px;}
+  .m-summary-box.open{display:block;}
+  .m-summary-box .sb-count{font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--teal); font-size:13px;}
+  .m-summary-box .sb-names{color:var(--slate); margin-top:4px; line-height:1.6;}
+
+  /* clickable manual attendance rows */
+  .m-manual-row{display:flex; align-items:center; gap:9px; padding:7px 0; border-bottom:1px solid var(--line); font-size:12px; cursor:pointer; transition:background .12s ease;}
+  .m-manual-row:hover{background:var(--paper-alt);}
+  .m-manual-row:last-child{border-bottom:none;}
+  .m-manual-check{width:18px; height:18px; border-radius:5px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:10px; font-weight:700; transition:all .15s ease;}
+  .m-manual-check.present{background:var(--teal); color:#fff;}
+  .m-manual-check.absent{background:#E5484D; color:#fff;}
+  .m-attend-name.is-absent-name{color:#DC2626; font-weight:600;}
+  .m-manual-hint{font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--slate); margin-bottom:8px; display:block;}
+
+  /* roster presence toggle + class grouping */
+  .m-roster-row{cursor:pointer; transition:background .12s ease;}
+  .m-roster-row:hover{background:var(--paper-alt);}
+  .m-roster-row .mr-presence{
+    width:18px; height:18px; border-radius:5px; display:flex; align-items:center; justify-content:center;
+    font-size:10px; font-weight:700; flex-shrink:0; margin-right:8px;
+  }
+  .mr-presence.present{background:var(--teal); color:#fff;}
+  .mr-presence.absent{background:#E5484D; color:#fff;}
+  .mr-name.is-absent-name{color:#DC2626; font-weight:600;}
+  .m-roster-row-flex{display:flex; align-items:center; flex:1; min-width:0;}
+
+  .m-class-select{
+    width:100%; padding:8px 12px; border-radius:8px; border:1.5px solid var(--line-strong); background:var(--paper);
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink); margin-bottom:12px;
+  }
+  .m-class-group{display:none;}
+  .m-class-group.active{display:block;}
+  .m-class-teacher{
+    font-size:12px; padding:8px 10px; background:var(--paper-alt); border-radius:8px; margin-bottom:8px;
+  }
+  .m-class-teacher b{color:var(--ink);}
+  .m-class-teacher .mono{color:var(--teal); font-size:10px; margin-left:4px;}
+  .prefect-section{margin-bottom:10px; padding-bottom:10px; border-bottom:1.5px dashed var(--line-strong);}
+  .prefect-label{font-family:'IBM Plex Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--amber); display:block; margin-bottom:6px; font-weight:600;}
+  .m-prefect-row{display:flex; justify-content:space-between; align-items:center; padding:5px 0; font-size:12px;}
+  .prefect-badge{
+    font-family:'Space Grotesk',sans-serif; font-size:9.5px; font-weight:700; padding:3px 9px; border-radius:999px;
+    background:linear-gradient(135deg, var(--amber), #C77E1E); color:#fff;
+  }
+  .prefect-badge.rank2{background:linear-gradient(135deg, #C9CFCE, #9AA3A2);}
+
+  /* calendar excitement */
+  .m-cal-view{position:relative;}
+  .m-cal-month-title{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; color:var(--ink);}
+  .m-cal-cell.today{animation:calToday 2s ease-in-out infinite;}
+  @keyframes calToday{0%,100%{box-shadow:0 4px 10px -4px rgba(18,165,148,0.5);} 50%{box-shadow:0 6px 16px -4px rgba(18,165,148,0.8);}}
+  .m-cal-cell.holiday-icon::after, .m-cal-cell.midterm-icon::after{
+    content:''; position:absolute; bottom:2px; right:2px; width:5px; height:5px; border-radius:50%;
+  }
+
+  /* expense category icons */
+  .m-expense-row{align-items:center;}
+  .expense-icon{
+    width:26px; height:26px; border-radius:7px; background:var(--paper-alt); color:var(--slate);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-right:10px;
+  }
+  .expense-icon svg{width:13px; height:13px;}
+  .m-expense-main{display:flex; align-items:flex-start; flex:1; min-width:0;}
+  .m-expense-text{min-width:0;}
+
+  /* WhatsApp / POS toggle */
+  .m-wa-pos-view{display:none;}
+  .m-wa-pos-view.active{display:block;}
+  .pos-row{display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid var(--line); font-size:11.5px;}
+  .pos-row:last-child{border-bottom:none;}
+  .pos-row .pos-left{display:flex; align-items:center; gap:9px;}
+  .pos-icon{width:24px; height:24px; border-radius:6px; background:var(--teal-light); color:var(--teal); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .pos-icon svg{width:12px; height:12px;}
+  .pos-row .pos-name{color:var(--ink); font-weight:500; display:block;}
+  .pos-row .pos-meta{color:var(--slate); font-size:10px; font-family:'IBM Plex Mono',monospace;}
+  .pos-row .pos-amt{font-family:'IBM Plex Mono',monospace; color:var(--ink); font-weight:600;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .circle-sm {
+    width: 35px !important;
+    height: 37px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: -8px;
+}
+  .test-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:32px;}
+  .test-card{background:var(--paper-card); border:1px solid var(--line); border-radius:14px; padding:26px; position:relative; transition:transform .2s ease, box-shadow .2s ease;}
+  .test-card:hover{transform:translateY(-3px); box-shadow:0 20px 40px -20px rgba(15,27,51,0.2);}
+  .test-card .quote-mark{position:absolute; top:16px; right:20px; font-family:'Space Grotesk',sans-serif; font-size:40px; color:var(--teal-light); line-height:1;}
+  .test-card .stars{color:var(--amber); font-size:13px; margin-bottom:14px; border-radius:50%}
+  .test-card p{font-size:14.5px; color:var(--ink); margin-bottom:18px; line-height:1.6; position:relative; z-index:1;}
+  .test-card .who{display:flex; align-items:center; gap:10px;}
+  .test-card .avatar{width:34px; height:34px; border-radius:50%; background:var(--teal-light); color:var(--teal); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px; flex-shrink:0;}
+  .test-card .who b{display:block; font-size:13px;}
+  .test-card .who span{font-size:12px; color:var(--slate);}
+  .verify-badge{
+    display:inline-flex; align-items:center; gap:4px; margin-top:6px;
+    font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--teal);
+  }
+  .verify-badge svg{width:11px; height:11px;}
+
+  .see-more-row{text-align:center; margin-bottom:56px;}
+  .see-more-link{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--slate);
+    border:1px solid var(--line-strong); padding:6px 16px; border-radius:999px; display:inline-block;
+    transition:all .15s ease;
+  }
+  .see-more-link:hover{color:var(--teal); border-color:var(--teal); background:var(--teal-light);}
+
+  .counter-row{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:16px; overflow:hidden;
+  }
+  .counter{background:var(--ink); padding:34px 28px; text-align:center;}
+  .counter .num{font-family:'Space Grotesk',sans-serif; font-size:36px; font-weight:700; color:#fff;}
+  .counter .lbl{font-family:'IBM Plex Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:rgba(255,255,255,0.55); margin-top:8px;}
 
   /* ---------- FINAL CTA ---------- */
-  .final-cta{text-align:center; padding:100px 0 70px; position:relative; overflow:hidden;}
+  .final-cta{
+    text-align:center; padding:70px 40px; position:relative; overflow:hidden;
+    background:var(--paper-card); border:1px solid var(--line); border-radius:24px; margin:0 32px;
+  }
   .final-cta::before{
-    content:''; position:absolute; inset:0; z-index:-1;
-    background-image:radial-gradient(rgba(15,27,51,0.08) 1.5px, transparent 1.5px);
+    content:''; position:absolute; inset:0; z-index:0;
+    background-image:radial-gradient(rgba(15,27,51,0.06) 1.5px, transparent 1.5px);
     background-size:22px 22px;
     mask-image:radial-gradient(ellipse 60% 60% at center, black 30%, transparent 75%);
   }
-  .final-cta h2{font-size:clamp(30px,4vw,46px); max-width:660px; margin:16px auto 32px;}
+  .final-cta > *{position:relative; z-index:1;}
+  .final-cta .eyebrow{justify-content:center;}
+  .final-cta h2{
+    font-size:clamp(28px,3.6vw,42px); max-width:600px; margin:16px auto 30px;
+    background:linear-gradient(90deg, var(--ink) 25%, var(--teal) 95%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
 
-  footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:56px 0 0;}
-  .foot-top{display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:32px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.10);}
-  .foot-brand .logo{color:#fff; margin-bottom:12px;}
+  footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:56px 0 0; margin-top:88px;}
+  .foot-top{display:grid; grid-template-columns:1.4fr repeat(2,1fr); gap:32px; padding-bottom:32px; border-bottom:1px solid rgba(255,255,255,0.10);}
+  .foot-brand .logo-placehold{height:32px; display:flex; align-items:center; margin-bottom:14px;}
+  .foot-brand .logo-placehold img{height:100%; width:auto; max-width:150px; object-fit:contain;}
   .foot-brand p{font-size:13px; line-height:1.6; max-width:220px; color:rgba(255,255,255,0.5);}
   .foot-social{display:flex; gap:10px; margin-top:18px;}
   .foot-social a{width:30px; height:30px; border-radius:8px; background:rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:center; transition:background .15s ease;}
@@ -524,19 +801,26 @@
   .reveal.is-visible{opacity:1; transform:translateY(0);}
 
   @media (max-width:860px){
+    .topbar{display:none;}
     .nav-links{display:none;}
-    .duct-tape{grid-template-columns:1fr; text-align:center;}
-    .arrow-col svg{transform:rotate(90deg);}
+    nav.nav-hidden{transform:translateY(-100%);}
+    header.hero{padding:36px 0 0;}
+    .mockup-sidebar{display:none;}
+    .mockup-main{padding:18px 16px;}
+    .m-stat-grid{grid-template-columns:repeat(2,1fr); gap:8px;}
+    .m-stat{padding:11px 12px;}
+    .m-panels{grid-template-columns:1fr; gap:10px;}
+    .m-panels-2{grid-template-columns:1fr; gap:10px;}
+    .m-room-grid{grid-template-columns:repeat(4,1fr);}
+    .mockup-url-track{display:none;}
+    .mockup-url-static{display:block; font-size:11px;}
     .test-grid{grid-template-columns:1fr;}
     .counter-row{grid-template-columns:1fr;}
-    .mockup-sidebar{display:none;}
-    .m-stat-grid{grid-template-columns:repeat(2,1fr);}
-    .m-panels{grid-template-columns:1fr;}
-    .price-strip{flex-direction:column; align-items:flex-start; text-align:left;}
-    .plan-grid{grid-template-columns:1fr;}
-    .currency-choice{flex-direction:column; align-items:center;}
+    .final-cta{margin:0 16px; padding:48px 22px;}
     .foot-top{grid-template-columns:1fr 1fr; gap:28px;}
     .foot-brand{grid-column:1/-1;}
+    .foot-brand .logo-placehold{height:26px;}
+    .foot-brand .logo-placehold img{max-width:120px;}
     .foot-bottom{flex-direction:column; gap:12px; text-align:center;}
   }
 </style>
@@ -548,16 +832,18 @@
     <span class="signs-track"><span class="sign-white">₦</span> <span class="sign-teal">$</span> <span class="sign-white">₦</span> <span class="sign-teal">$</span> <span class="sign-white">₦</span> <span class="sign-teal">$</span> <span class="sign-white">₦</span> <span class="sign-teal">$</span></span>
   </div>
   <div class="topbar-currency">
-    <button class="active" id="curNGN" onclick="setCurrency('NGN')">₦ NGN</button>
-    <button id="curUSD" onclick="setCurrency('USD')">$ USD</button>
+    <button class="active" id="curNGN" onclick="goPricing('NGN')">₦ NGN</button>
+    <button id="curUSD" onclick="goPricing('USD')">$ USD</button>
   </div>
 </div>
 
-<nav>
+<nav id="siteNav" class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="wrap">
-    <div class="logo-placehold"> <img src="img/LOGO/Untitled design.png" class="w-100 big" alt="Standpoint Logo"></div>
+    <a href="index.html" class="logo-link">
+      <div class="logo-placehold"><img src="img/LOGO/Untitled design.png" class="w-100 big" alt="Standpoint Logo"></div>
+    </a>
     <div class="nav-links">
-      <a href="#problem" class="fw-bold">Why Standpoint</a>
+      <a href="why-standpoint.html" class="fw-bold">Why Standpoint</a>
       <div class="has-dropdown">
         <span class="drop-trigger fw-bold">Industries <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
         <div class="dropdown">
@@ -568,11 +854,12 @@
           <a href="#"><span class="di">S</span><span class="dtext"><b>Schools</b><span>Fees, records, attendance</span></span></a>
           <a href="#"><span class="di">H</span><span class="dtext"><b>Hotels</b><span>Rooms, bookings, invoices</span></span></a>
           <a href="#"><span class="di">C</span><span class="dtext"><b>Construction</b><span>Projects &amp; milestones</span></span></a>
-          <a href="#"><span class="di">F</span><span class="dtext"><b>Freelancers</b><span>Invoicing, time tracking</span></span></a>
+          <a href="#"><span class="di">F</span><span class="dtext"><b>Supermarket</b><span>Stock, chash, stock tracking</span></span></a>
         </div>
       </div>
-      <a href="#features" class="fw-bold">Features</a>
-      <a href="#pricing" class="fw-bold">Pricing</a>
+      <a href="feature.html" class="fw-bold">Features</a>
+      <a href="pricing.html" class="fw-bold">Pricing</a>
+      <a href="workings.html" class="fw-bold">Setup guide</a>
     </div>
     <div class="nav-cta">
         <a href="login.html" class="btn btn-ghost">Log in</a>
@@ -583,20 +870,18 @@
 
 <header class="hero">
   <div class="wrap hero-inner">
-    <div class="eyebrow eyebrow-blink fw-bold ">SAVE YOUR BUSSINES, SAFE YOUR TIME</div> <br> 
+    <div class="hero-alert-wrap">
+      <div class="hero-alert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        SAVE YOUR BUSSINES, SAFE YOUR TIME
+      </div>
+    </div>
     <h1 class="headline">One vantage point<br>over your whole <span class="accent">business.</span></h1>
-    <p class="sub">Stock, sales, staff and money off your notebook, off Excel, off five different apps, and onto one dashboard your business actually runs on.</p>
+    <p class="sub">Track stock, sales, staff and money from one dashboard, instead of a notebook, Excel, and five different apps that don't talk to each other.</p>
     <div class="hero-actions">
       <a href="startfree.html" class="btn btn-deep btn-lg">Start free</a>
       <a href="#" class="btn btn-outline-deep btn-lg border-danger">Watch demo</a>
     </div>
-    <div class="microcopy-row">
-      <button class="btn calc-trigger" onclick="toggleCalc(true)">
-        <span class="calc-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span>
-        <span>Try the quick calculator</span>
-      </button>
-    <!-- </div>
-    <span class="microcopy">Works offline · WhatsApp receipts built in</span> -->
   </div>
 
   <div class="wrap horizon">
@@ -623,22 +908,68 @@
   </div>
 </div>
 
+<div class="barcode-overlay" id="barcodeOverlay">
+  <div class="barcode-modal">
+    <div class="calc-head"><span>Scan barcode</span><span class="calc-close" onclick="toggleBarcode(false)">&times;</span></div>
+    <div id="barcodeStep1">
+      <div class="barcode-scan-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7v10M10 7v10M13 7v3M13 14v3M16 7v10"/></svg>
+        <p>Point the camera at a barcode, or use a handheld scanner connected to your phone or till.</p>
+        <button class="barcode-scan-btn" onclick="simulateScan()">Scan now</button>
+      </div>
+    </div>
+    <div id="barcodeStep2" class="barcode-result">
+      <div class="br-name">Peak Milk Tin, 400g</div>
+      <span class="br-meta">Barcode 6009123456789, currently 18 in stock</span>
+      <div class="barcode-qty-row">
+        <label>Add quantity</label>
+        <input type="text" id="barcodeQty" value="12">
+      </div>
+      <button class="barcode-add-btn" onclick="confirmBarcodeAdd()">Add to stock</button>
+    </div>
+    <div id="barcodeSuccess" class="barcode-success">Stock updated, 30 units now on hand.</div>
+  </div>
+</div>
+
+<div class="renew-overlay" id="renewOverlay">
+  <div class="renew-modal">
+    <div class="calc-head"><span>Confirm renewal payment</span><span class="calc-close" onclick="closeRenew()">&times;</span></div>
+    <div class="renew-body">
+      <p>Extend the stay for</p>
+      <div class="rn-name" id="renewGuestName">--</div>
+      <p id="renewGuestRoom">--</p>
+      <div class="rn-amt" id="renewAmount">--</div>
+      <p style="margin-top:6px;">Confirm once payment is received</p>
+    </div>
+    <div class="renew-actions">
+      <button class="renew-cancel" onclick="closeRenew()">Cancel</button>
+      <button class="renew-confirm" onclick="confirmRenew()">Confirm payment</button>
+    </div>
+  </div>
+</div>
+
 <div class="wrap preview-wrap">
-  <div class="preview-label"><span class="eyebrow" style="justify-content:center;"><h3>Preview an early look at the dashboard</h3></span></div>
+  <div class="preview-label"><h2>See an early look at your <span class="accent">dashboard</span></h2></div>
   <div class="dash-tabs">
-    <button class="dash-tab active" onclick="switchDash(this,'retail')">Retail, Pharmacy &amp; Salons</button>
-    <button class="dash-tab" onclick="switchDash(this,'hospitality')">Restaurants, Hotels &amp; Bookings</button>
+    <button class="dash-tab active" onclick="switchDash(this,'retail')">Retail &amp; Salons</button>
+    <button class="dash-tab" onclick="switchDash(this,'pharmacy')">Pharmacy</button>
+    <button class="dash-tab" onclick="switchDash(this,'restaurant')">Restaurants</button>
+    <button class="dash-tab" onclick="switchDash(this,'hotel')">Hotels</button>
+    <button class="dash-tab" onclick="switchDash(this,'school')">Schools</button>
   </div>
 
   <div class="dash-panel active" id="dash-retail">
     <div class="mockup-frame">
       <div class="mockup-topbar">
         <div class="mockup-dots"><span></span><span></span><span></span></div>
-        <div class="mockup-url"><span class="mockup-url-track">Your whole business, one screen · Sales · Stock · Staff · Wallet ·&nbsp;&nbsp;&nbsp;Your whole business, one screen · Sales · Stock · Staff · Wallet ·&nbsp;&nbsp;&nbsp;</span></div>
+        <div class="mockup-url">
+          <span class="mockup-url-track">Your whole business, one screen · Sales · Stock · Staff · Wallet ·&nbsp;&nbsp;&nbsp;Your whole business, one screen · Sales · Stock · Staff · Wallet ·&nbsp;&nbsp;&nbsp;</span>
+          <span class="mockup-url-static">Live dashboard preview</span>
+        </div>
       </div>
       <div class="mockup-body">
         <div class="mockup-sidebar">
-          <div class="m-logo"><span class="dot"></span> STANDPOINT<span style="color:var(--teal); font-weight:400;"></span></div>
+          <div class="m-logo"><span class="dot"></span> STANDPOINT</div>
           <div class="m-nav-item active"><span class="m-ico"></span> Overview</div>
           <div class="m-nav-item"><span class="m-ico"></span> Point of sale</div>
           <div class="m-nav-item"><span class="m-ico"></span> Inventory</div>
@@ -652,7 +983,8 @@
             <h4>Overview</h4>
             <div class="m-toolbar">
               <span class="mono">Thu, 9 Jul · Kate B. Stores</span>
-              <div class="m-tool-btn" title="Quick calculator" onclick="toggleCalc(true)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></div>
+              <div class="m-barcode-btn" onclick="toggleBarcode(true)" title="Scan barcode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7v10M10 7v10M13 7v3M13 14v3M16 7v10"/></svg></div>
+              <div class="m-calc-btn" onclick="toggleCalc(true)" title="Calculator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></div>
             </div>
           </div>
           <div class="m-stat-grid">
@@ -674,6 +1006,7 @@
                   <div class="m-cal-cell" title="₦198,000">12</div><div class="m-cal-cell" title="₦110,000">13</div><div class="m-cal-cell high" title="₦382,000 · High sales">14</div><div class="m-cal-cell" title="₦204,000">15</div><div class="m-cal-cell" title="₦96,000">16</div><div class="m-cal-cell" title="₦42,000">17</div><div class="m-cal-cell today" title="₦482,600 · Today">18</div>
                   <div class="m-cal-cell">19</div><div class="m-cal-cell">20</div><div class="m-cal-cell">21</div><div class="m-cal-cell">22</div><div class="m-cal-cell">23</div><div class="m-cal-cell">24</div><div class="m-cal-cell">25</div>
                 </div>
+                <div class="m-cal-legend"><span><i class="lg-dot"></i> High sales day</span><span><i class="lg-sq"></i> Today</span></div>
                 <div class="m-cal-best">Best day so far: <b>Jul 6 · ₦512,000</b></div>
               </div>
               <div class="m-hist-view" id="histView-retail">
@@ -693,7 +1026,7 @@
               </div>
               <div class="m-wa-preview">
                 <div class="m-wa-bubble">
-                  <div class="wa-line">🧾 Receipt — Kate B. Stores</div>
+                  <div class="wa-line">🧾 Receipt: Kate B. Stores</div>
                   <div class="wa-line">Bag of rice ×2 = ₦24,000</div>
                   <div class="wa-line">Cooking oil ×5 = ₦12,500</div>
                   <div class="wa-total">Total: ₦36,500</div>
@@ -708,18 +1041,144 @@
     </div>
   </div>
 
-  <div class="dash-panel" id="dash-hospitality">
+  <div class="dash-panel" id="dash-pharmacy">
     <div class="mockup-frame">
       <div class="mockup-topbar">
         <div class="mockup-dots"><span></span><span></span><span></span></div>
-        <div class="mockup-url"><span class="mockup-url-track">Your whole business, one screen · Sales · Stock · Staff · Wallet ·&nbsp;&nbsp;&nbsp;Your whole business, one screen · Sales · Stock · Staff · Wallet ·&nbsp;&nbsp;&nbsp;</span></div>
+        <div class="mockup-url">
+          <span class="mockup-url-track">Your whole pharmacy, one screen · Stock · Expiry · Emergencies · Lab ·&nbsp;&nbsp;&nbsp;Your whole pharmacy, one screen · Stock · Expiry · Emergencies · Lab ·&nbsp;&nbsp;&nbsp;</span>
+          <span class="mockup-url-static">Live dashboard preview</span>
+        </div>
       </div>
       <div class="mockup-body">
         <div class="mockup-sidebar">
-          <div class="m-logo"><span class="dot"></span> Standpoint<span style="color:var(--teal); font-weight:400;"></span></div>
+          <div class="m-logo"><span class="dot"></span> STANDPOINT</div>
           <div class="m-nav-item active"><span class="m-ico"></span> Overview</div>
-          <div class="m-nav-item"><span class="m-ico"></span> Bookings</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Point of sale</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Inventory</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Expiry tracker</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Emergency treatment</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Lab records</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Staff &amp; shifts</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Reports</div>
+        </div>
+        <div class="mockup-main">
+          <div class="m-header-row">
+            <h4>Overview</h4>
+            <div class="m-toolbar">
+              <span class="mono">Thu, 9 Jul · Kate B. Pharmacy</span>
+              <div class="m-barcode-btn" onclick="toggleBarcode(true)" title="Scan barcode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7v10M10 7v10M13 7v3M13 14v3M16 7v10"/></svg></div>
+              <div class="m-calc-btn" onclick="toggleCalc(true)" title="Calculator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></div>
+            </div>
+          </div>
+          <div class="m-stat-grid">
+            <div class="m-stat"><span class="mono">Sales today</span><div class="m-val">₦214,300<small>↑7%</small></div></div>
+            <div class="m-stat acc-amber"><span class="mono">Near-expiry drugs</span><div class="m-val">4 items</div></div>
+            <div class="m-stat acc-ink"><span class="mono">Staff on shift</span><div class="m-val">5 of 7</div></div>
+            <div class="m-stat"><span class="mono">Emergency cases today</span><div class="m-val">3</div></div>
+          </div>
+
+          <div class="m-panels">
+            <div class="m-panel">
+              <div class="m-panel-title"><span>Drug expiry &amp; aging tracker</span></div>
+              <div class="m-drug-row"><div><div class="m-drug-name">Insulin (refrigerated)</div><span class="m-drug-meta">Expires in 5 days</span></div><span class="drug-status urgent">Expiring soon</span></div>
+              <div class="m-drug-row"><div><div class="m-drug-name">Paracetamol syrup</div><span class="m-drug-meta">Expires in 12 days</span></div><span class="drug-status urgent">Expiring soon</span></div>
+              <div class="m-drug-row"><div><div class="m-drug-name">Amoxicillin 500mg</div><span class="m-drug-meta">In stock 145 days, slow-moving</span></div><span class="drug-status aging">Aging</span></div>
+              <div class="m-drug-row"><div><div class="m-drug-name">Vitamin C tablets</div><span class="m-drug-meta">In stock 20 days</span></div><span class="drug-status fresh">Fresh</span></div>
+            </div>
+
+            <div class="m-panel">
+              <div class="m-panel-title"><span>Emergency treatment log</span></div>
+              <div class="m-emerg-row"><div class="m-emerg-top"><span class="m-emerg-patient">Walk-in, adult male</span><span class="m-emerg-time">11:20 AM</span></div><span class="m-emerg-detail">Suspected malaria. Given artesunate injection + paracetamol.</span></div>
+              <div class="m-emerg-row"><div class="m-emerg-top"><span class="m-emerg-patient">Walk-in, child, age 6</span><span class="m-emerg-time">1:05 PM</span></div><span class="m-emerg-detail">Minor cut, cleaned and dressed. Tetanus booster given.</span></div>
+              <div class="m-emerg-row"><div class="m-emerg-top"><span class="m-emerg-patient">Walk-in, adult female</span><span class="m-emerg-time">3:40 PM</span></div><span class="m-emerg-detail">Severe headache, high BP reading. Referred to clinic.</span></div>
+            </div>
+          </div>
+
+          <div class="m-panels-2">
+            <div class="m-panel">
+              <div class="m-panel-title">
+                <span>Staff shifts</span>
+                <div class="panel-title-actions">
+                  <div class="m-toggle-row">
+                    <button class="active" onclick="toggleAttendModePharm(this,'digital')">Digital scan</button>
+                    <button onclick="toggleAttendModePharm(this,'manual')">Manual</button>
+                  </div>
+                </div>
+              </div>
+              <div class="m-attend-view active" id="attendView-pharm-digital">
+                <div class="m-shift-block">
+                  <div class="m-shift-head"><b>Morning shift</b><span>7:00 AM to 3:00 PM</span></div>
+                  <div class="m-shift-names">Mrs. Kate Bassey, Mr. Chidi Nnamani</div>
+                </div>
+                <div class="m-shift-block">
+                  <div class="m-shift-head"><b>Afternoon shift</b><span>3:00 PM to 11:00 PM</span></div>
+                  <div class="m-shift-names">Mr. Ibrahim Sule, Miss Grace Okon, Mr. Peter Idoko</div>
+                </div>
+              </div>
+              <div class="m-attend-view" id="attendView-pharm-manual">
+                <div class="m-attend-legend"><span>7:00–7:59 early</span><span>8:00–8:09 on time</span><span>8:10–8:17 late</span></div>
+                <div class="m-manual-row" onclick="toggleManualMark(this)"><span class="m-manual-check present">✓</span><span class="m-attend-name">Mrs. Kate Bassey</span></div>
+                <div class="m-manual-row" onclick="toggleManualMark(this)"><span class="m-manual-check present">✓</span><span class="m-attend-name">Mr. Chidi Nnamani</span></div>
+                <div class="m-manual-row is-absent" onclick="toggleManualMark(this)"><span class="m-manual-check">–</span><span class="m-attend-name">Mr. Ibrahim Sule</span></div>
+                <div class="m-manual-row" onclick="toggleManualMark(this)"><span class="m-manual-check present">✓</span><span class="m-attend-name">Miss Grace Okon</span></div>
+              </div>
+            </div>
+
+            <div class="m-panel">
+              <div class="m-panel-title">
+                <span>Lab records</span>
+                <button class="m-hist-btn" onclick="toggleLabSummary()" id="labSummaryBtn">Summary</button>
+              </div>
+              <div class="m-pos-row"><div><div class="pos-who">Blood sugar test, Mrs. Okonkwo</div><span class="pos-meta">Paid via POS · Ref #LB2201</span></div><span class="pos-amt">₦3,500</span></div>
+              <div class="m-pos-row"><div><div class="pos-who">Malaria test, Emeka Nwosu</div><span class="pos-meta">Paid via transfer · Ref #LB2204</span></div><span class="pos-amt">₦2,000</span></div>
+              <div class="m-pos-row"><div><div class="pos-who">Full blood count, Halima S.</div><span class="pos-meta">Paid via POS · Ref #LB2209</span></div><span class="pos-amt">₦6,000</span></div>
+              <div class="m-summary-view" id="labSummary">
+                <div class="ms-line">3 lab tests run today</div>
+                <div class="ms-line">Total lab revenue today: ₦11,500</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="m-panel m-panel-full">
+            <div class="m-panel-title"><span>Receipt &amp; WhatsApp preview</span></div>
+            <div class="m-receipt">
+              <div class="r-head">Kate B. Pharmacy</div>
+              <div class="r-line"><span>Amoxicillin 500mg ×1</span><span>₦2,800</span></div>
+              <div class="r-line"><span>Paracetamol syrup</span><span>₦1,200</span></div>
+              <div class="r-total"><span>Total</span><span>₦4,000</span></div>
+            </div>
+            <div class="m-wa-preview">
+              <div class="m-wa-bubble">
+                <div class="wa-line">🧾 Receipt: Kate B. Pharmacy</div>
+                <div class="wa-line">Amoxicillin 500mg ×1 = ₦2,800</div>
+                <div class="wa-line">Paracetamol syrup = ₦1,200</div>
+                <div class="wa-total">Total: ₦4,000</div>
+                <div class="m-wa-meta">10:42 AM ✓✓</div>
+              </div>
+            </div>
+            <button class="m-receipt-btn" style="margin-top:10px;">Send receipt via WhatsApp or Email</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-panel" id="dash-restaurant">
+    <div class="mockup-frame">
+      <div class="mockup-topbar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">
+          <span class="mockup-url-track">Your whole restaurant, one screen · Orders · Tables · Kitchen ·&nbsp;&nbsp;&nbsp;Your whole restaurant, one screen · Orders · Tables · Kitchen ·&nbsp;&nbsp;&nbsp;</span>
+          <span class="mockup-url-static">Live dashboard preview</span>
+        </div>
+      </div>
+      <div class="mockup-body">
+        <div class="mockup-sidebar">
+          <div class="m-logo"><span class="dot"></span> STANDPOINT</div>
+          <div class="m-nav-item active"><span class="m-ico"></span> Overview</div>
           <div class="m-nav-item"><span class="m-ico"></span> Orders &amp; tables</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Menu</div>
           <div class="m-nav-item"><span class="m-ico"></span> WhatsApp orders</div>
           <div class="m-nav-item"><span class="m-ico"></span> Wallet</div>
           <div class="m-nav-item"><span class="m-ico"></span> Staff &amp; payroll</div>
@@ -729,56 +1188,521 @@
           <div class="m-header-row">
             <h4>Overview</h4>
             <div class="m-toolbar">
-              <span class="mono">Thu, 9 Jul ·Kate B  Suites</span>
-              <div class="m-tool-btn" title="Quick calculator" onclick="toggleCalc(true)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></div>
+              <span class="mono">Thu, 9 Jul · Kate B Kitchen</span>
+              <div class="m-calc-btn" onclick="toggleCalc(true)" title="Calculator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></div>
             </div>
           </div>
           <div class="m-stat-grid">
-            <div class="m-stat"><span class="mono">Bookings today</span><div class="m-val">18<small>↑6%</small></div></div>
-            <div class="m-stat acc-amber"><span class="mono">Rooms free</span><div class="m-val">7</div></div>
-            <div class="m-stat acc-ink"><span class="mono">Staff on shift</span><div class="m-val">11 of 14</div></div>
-            <div class="m-stat"><span class="mono">Pending invoices</span><div class="m-val">$219</div></div>
+            <div class="m-stat"><span class="mono">Sales today</span><div class="m-val">₦186,400<small>↑9%</small></div></div>
+            <div class="m-stat acc-amber"><span class="mono">Tables occupied</span><div class="m-val">9 of 14</div></div>
+            <div class="m-stat acc-ink"><span class="mono">Staff on shift</span><div class="m-val">7 of 9</div></div>
+            <div class="m-stat"><span class="mono">Orders in the kitchen</span><div class="m-val">4</div></div>
           </div>
           <div class="m-panels">
             <div class="m-panel">
-              <div class="m-panel-title"><span>Occupancy calendar · July</span><button class="m-hist-btn" onclick="toggleHistory('hosp')" id="histBtn-hosp">View history</button></div>
-              <div class="m-cal-view" id="calView-hosp">
+              <div class="m-panel-title"><span>Sales calendar · July</span><button class="m-hist-btn" onclick="toggleHistory('rest')" id="histBtn-rest">View history</button></div>
+              <div class="m-cal-view" id="calView-rest">
                 <div class="m-cal-nav"><span>&#9664;</span><span>July 2026</span><span>&#9654;</span></div>
                 <div class="m-cal-weekdays"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
                 <div class="m-cal-grid">
                   <div class="m-cal-cell blank"></div><div class="m-cal-cell blank"></div><div class="m-cal-cell blank"></div>
-                  <div class="m-cal-cell" title="62% booked">1</div><div class="m-cal-cell" title="78% booked">2</div><div class="m-cal-cell" title="40% booked">3</div><div class="m-cal-cell high" title="96% booked · Best day">4</div>
-                  <div class="m-cal-cell" title="58% booked">5</div><div class="m-cal-cell high" title="80% booked · High">6</div><div class="m-cal-cell" title="34% booked">7</div><div class="m-cal-cell" title="55% booked">8</div><div class="m-cal-cell" title="74% booked">9</div><div class="m-cal-cell high" title="82% booked · High">10</div><div class="m-cal-cell" title="20% booked">11</div>
-                  <div class="m-cal-cell" title="60% booked">12</div><div class="m-cal-cell high" title="82% booked · High">13</div><div class="m-cal-cell" title="44% booked">14</div><div class="m-cal-cell" title="66% booked">15</div><div class="m-cal-cell" title="30% booked">16</div><div class="m-cal-cell" title="18% booked">17</div><div class="m-cal-cell today" title="90% booked · Today">18</div>
+                  <div class="m-cal-cell" title="₦98,000">1</div><div class="m-cal-cell" title="₦142,000">2</div><div class="m-cal-cell" title="₦74,000">3</div><div class="m-cal-cell high" title="₦210,000 · High sales">4</div>
+                  <div class="m-cal-cell" title="₦110,000">5</div><div class="m-cal-cell high" title="₦248,000 · Best day">6</div><div class="m-cal-cell" title="₦88,000">7</div><div class="m-cal-cell" title="₦92,000">8</div><div class="m-cal-cell" title="₦120,000">9</div><div class="m-cal-cell high" title="₦196,000 · High sales">10</div><div class="m-cal-cell" title="₦68,000">11</div>
+                  <div class="m-cal-cell" title="₦104,000">12</div><div class="m-cal-cell" title="₦96,000">13</div><div class="m-cal-cell high" title="₦188,000 · High sales">14</div><div class="m-cal-cell" title="₦132,000">15</div><div class="m-cal-cell" title="₦84,000">16</div><div class="m-cal-cell" title="₦60,000">17</div><div class="m-cal-cell today" title="₦186,400 · Today">18</div>
                   <div class="m-cal-cell">19</div><div class="m-cal-cell">20</div><div class="m-cal-cell">21</div><div class="m-cal-cell">22</div><div class="m-cal-cell">23</div><div class="m-cal-cell">24</div><div class="m-cal-cell">25</div>
                 </div>
-                <div class="m-cal-best">Best day so far: <b>Jul 4 · 96% booked</b></div>
+                <div class="m-cal-legend"><span><i class="lg-dot"></i> High sales day</span><span><i class="lg-sq"></i> Today</span></div>
+                <div class="m-cal-best">Best day so far: <b>Jul 6, ₦248,000</b></div>
               </div>
-              <div class="m-hist-view" id="histView-hosp">
-                <div class="m-hist-row"><span>June</span><div class="m-hist-bar"><i style="width:70%"></i></div><span class="mono">$14.1k</span></div>
-                <div class="m-hist-row"><span>May</span><div class="m-hist-bar"><i style="width:58%"></i></div><span class="mono">$11.6k</span></div>
-                <div class="m-hist-row"><span>April</span><div class="m-hist-bar"><i style="width:84%"></i></div><span class="mono">$16.8k</span></div>
-                <div class="m-hist-row"><span>March</span><div class="m-hist-bar"><i style="width:48%"></i></div><span class="mono">$9.6k</span></div>
+              <div class="m-hist-view" id="histView-rest">
+                <div class="m-hist-row"><span>June</span><div class="m-hist-bar"><i style="width:74%"></i></div><span class="mono">₦5.1M</span></div>
+                <div class="m-hist-row"><span>May</span><div class="m-hist-bar"><i style="width:62%"></i></div><span class="mono">₦4.3M</span></div>
+                <div class="m-hist-row"><span>April</span><div class="m-hist-bar"><i style="width:86%"></i></div><span class="mono">₦5.9M</span></div>
+                <div class="m-hist-row"><span>March</span><div class="m-hist-bar"><i style="width:50%"></i></div><span class="mono">₦3.5M</span></div>
               </div>
             </div>
             <div class="m-panel">
-              <div class="m-panel-title"><span>Invoice &amp; WhatsApp preview</span></div>
+              <div class="m-panel-title"><span>Receipt &amp; WhatsApp preview</span></div>
               <div class="m-receipt">
-                <div class="r-head">Horizon Suites</div>
-                <div class="r-line"><span>Deluxe room × 2 nights</span><span>$180</span></div>
-                <div class="r-line"><span>Breakfast package</span><span>$24</span></div>
-                <div class="r-total"><span>Total</span><span>$204</span></div>
+                <div class="r-head">Kate B Kitchen</div>
+                <div class="r-line"><span>Jollof rice &amp; chicken</span><span>₦4,500</span></div>
+                <div class="r-line"><span>Chapman ×2</span><span>₦3,000</span></div>
+                <div class="r-total"><span>Total</span><span>₦7,500</span></div>
               </div>
               <div class="m-wa-preview">
                 <div class="m-wa-bubble">
-                  <div class="wa-line">🧾 Invoice  Horizon Suites</div>
-                  <div class="wa-line">Deluxe room × 2 nights = $180</div>
-                  <div class="wa-line">Breakfast package = $24</div>
-                  <div class="wa-total">Total: $204</div>
+                  <div class="wa-line">🧾 Receipt: Kate B Kitchen</div>
+                  <div class="wa-line">Jollof rice and chicken = ₦4,500</div>
+                  <div class="wa-line">Chapman ×2 = ₦3,000</div>
+                  <div class="wa-total">Total: ₦7,500</div>
                   <div class="m-wa-meta">10:42 AM ✓✓</div>
                 </div>
               </div>
-              <button class="m-receipt-btn" style="margin-top:10px;">Send invoice via WhatsApp Or Email</button>
+              <button class="m-receipt-btn" style="margin-top:10px;">Send receipt via WhatsApp or Email</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-panel" id="dash-hotel">
+    <div class="mockup-frame">
+      <div class="mockup-topbar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">
+          <span class="mockup-url-track">Your whole hotel, one screen · Rooms · Guests · Housekeeping ·&nbsp;&nbsp;&nbsp;Your whole hotel, one screen · Rooms · Guests · Housekeeping ·&nbsp;&nbsp;&nbsp;</span>
+          <span class="mockup-url-static">Live dashboard preview</span>
+        </div>
+      </div>
+      <div class="mockup-body">
+        <div class="mockup-sidebar">
+          <div class="m-logo"><span class="dot"></span> STANDPOINT</div>
+          <div class="m-nav-item active"><span class="m-ico"></span> Overview</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Guest check-in</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Rooms</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Other sales</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Housekeeping</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Staff &amp; shifts</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Reports</div>
+        </div>
+        <div class="mockup-main">
+          <div class="m-header-row">
+            <h4>Overview</h4>
+            <div class="m-toolbar">
+              <span class="mono">Thu, 9 Jul · Kate B Suites</span>
+              <div class="m-calc-btn" onclick="toggleCalc(true)" title="Calculator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></div>
+            </div>
+          </div>
+          <div class="m-stat-grid">
+            <div class="m-stat"><span class="mono">Total rooms</span><div class="m-val">12</div></div>
+            <div class="m-stat acc-ink"><span class="mono">Occupied now</span><div class="m-val">6</div></div>
+            <div class="m-stat"><span class="mono">Free now</span><div class="m-val">3</div></div>
+            <div class="m-stat acc-amber"><span class="mono">Needs attention</span><div class="m-val">3</div></div>
+          </div>
+
+          <div class="m-panels">
+            <div class="m-panel">
+              <div class="m-panel-title"><span>Rooms in service, live</span></div>
+              <div class="guest-row">
+                <div class="guest-info"><span class="guest-name">Chidi Obi<span class="renewed-dot" id="renewed-g1" title="Stay renewed"></span></span><span class="guest-meta">Room 102, VIP, checked in 10:00 AM</span></div>
+                <div class="guest-timer-wrap"><span class="guest-timer" id="timer-g1">--</span><button class="renew-btn" onclick="openRenew('g1','Chidi Obi','102')">Renew</button></div>
+              </div>
+              <div class="guest-row">
+                <div class="guest-info"><span class="guest-name">Amara Chukwu<span class="renewed-dot" id="renewed-g2" title="Stay renewed"></span></span><span class="guest-meta">Room 105, Premium, checked in 1:00 PM</span></div>
+                <div class="guest-timer-wrap"><span class="guest-timer" id="timer-g2">--</span><button class="renew-btn" onclick="openRenew('g2','Amara Chukwu','105')">Renew</button></div>
+              </div>
+              <div class="guest-row">
+                <div class="guest-info"><span class="guest-name">Bassey Etuk<span class="renewed-dot" id="renewed-g3" title="Stay renewed"></span></span><span class="guest-meta">Room 204, Premium, checked in yesterday</span></div>
+                <div class="guest-timer-wrap"><span class="guest-timer" id="timer-g3">--</span><button class="renew-btn" onclick="openRenew('g3','Bassey Etuk','204')">Renew</button></div>
+              </div>
+              <div class="guest-row">
+                <div class="guest-info"><span class="guest-name">Grace Etim<span class="renewed-dot" id="renewed-g4" title="Stay renewed"></span></span><span class="guest-meta">Room 206, VIP, checked in today</span></div>
+                <div class="guest-timer-wrap"><span class="guest-timer" id="timer-g4">--</span><button class="renew-btn" onclick="openRenew('g4','Grace Etim','206')">Renew</button></div>
+              </div>
+            </div>
+
+            <div class="m-panel">
+              <div class="m-panel-title"><span>Room board, tap a room for details</span></div>
+              <div class="m-room-grid">
+                <div class="m-room-cell vacant-clean" onclick="showRoomDetail('101')">101</div>
+                <div class="m-room-cell occupied" onclick="showRoomDetail('102')">102<span class="tier-dot vip"></span></div>
+                <div class="m-room-cell vacant-clean" onclick="showRoomDetail('103')">103</div>
+                <div class="m-room-cell vacant-dirty" onclick="showRoomDetail('104')">104</div>
+                <div class="m-room-cell occupied" onclick="showRoomDetail('105')">105<span class="tier-dot premium"></span></div>
+                <div class="m-room-cell maintenance" onclick="showRoomDetail('106')">106<span class="tier-dot vip"></span></div>
+                <div class="m-room-cell occupied" onclick="showRoomDetail('201')">201</div>
+                <div class="m-room-cell vacant-clean" onclick="showRoomDetail('202')">202<span class="tier-dot vip"></span></div>
+                <div class="m-room-cell occupied" onclick="showRoomDetail('203')">203</div>
+                <div class="m-room-cell occupied" onclick="showRoomDetail('204')">204<span class="tier-dot premium"></span></div>
+                <div class="m-room-cell vacant-dirty" onclick="showRoomDetail('205')">205</div>
+                <div class="m-room-cell occupied" onclick="showRoomDetail('206')">206<span class="tier-dot vip"></span></div>
+              </div>
+              <div class="m-room-legend">
+                <span><i class="rl-occ"></i> Occupied</span>
+                <span><i class="rl-clean"></i> Vacant, clean</span>
+                <span><i class="rl-dirty"></i> Vacant, needs cleaning</span>
+                <span><i class="rl-maint"></i> Under maintenance</span>
+                <span><i style="background:var(--amber);"></i> VIP</span>
+                <span><i style="background:#8B5CF6;"></i> Premium</span>
+              </div>
+              <div class="room-detail empty" id="roomDetail">Tap any room above to see its price and amenities.</div>
+            </div>
+          </div>
+
+          <div class="m-panels-2">
+            <div class="m-panel">
+              <div class="m-panel-title"><span>Other sales, food, drinks &amp; services</span></div>
+              <div class="m-pos-row"><div><div class="pos-who">Suya platter</div><span class="pos-meta">Room 105</span></div><span class="pos-amt">₦4,500</span></div>
+              <div class="m-pos-row"><div><div class="pos-who">Chapman ×2</div><span class="pos-meta">Lobby bar</span></div><span class="pos-amt">₦6,000</span></div>
+              <div class="m-pos-row"><div><div class="pos-who">Bottled water ×3</div><span class="pos-meta">Room 204</span></div><span class="pos-amt">₦1,500</span></div>
+              <div class="m-pos-row"><div><div class="pos-who">Laundry service</div><span class="pos-meta">Room 206</span></div><span class="pos-amt">₦2,500</span></div>
+              <div class="m-expense-total"><span>Total, non-room sales today</span><span>₦14,500</span></div>
+            </div>
+            <div class="m-panel">
+              <div class="m-panel-title"><span>Housekeeping &amp; maintenance</span></div>
+              <div class="m-house-row"><span class="house-label">Room 104, needs cleaning</span><button class="house-mark-btn" onclick="markHouseDone(this)">Mark done</button></div>
+              <div class="m-house-row"><span class="house-label">Room 205, needs cleaning</span><button class="house-mark-btn" onclick="markHouseDone(this)">Mark done</button></div>
+              <div class="m-house-row"><span class="house-label">Room 106, AC under repair</span><button class="house-mark-btn" onclick="markHouseDone(this)">Mark done</button></div>
+            </div>
+          </div>
+
+          <div class="m-panel m-panel-full">
+            <div class="m-panel-title">
+              <span>Payments received</span>
+              <div class="m-toggle-row">
+                <button class="active" onclick="togglePayViewHotel(this,'whatsapp')">WhatsApp</button>
+                <button onclick="togglePayViewHotel(this,'pos')">POS</button>
+              </div>
+            </div>
+            <div class="m-pay-view active" id="payView-hotel-whatsapp">
+              <div class="m-wa-incoming">
+                <div class="wa-sender">Bassey Etuk, Room 204</div>
+                <div class="wa-attach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Payment_proof.jpg</span></div>
+                <div class="wa-line">Bank transfer, ₦306,000, room and breakfast</div>
+                <div class="m-wa-meta">10:42 AM</div>
+              </div>
+              <button class="confirm-btn">Mark as confirmed</button>
+            </div>
+            <div class="m-pay-view" id="payView-hotel-pos">
+              <div class="m-pos-row"><div><div class="pos-who">Chidi Obi, Room 102</div><span class="pos-meta">Front desk terminal, Ref #77213</span></div><span class="pos-amt">₦35,000</span></div>
+              <div class="m-pos-row"><div><div class="pos-who">Grace Etim, Room 206</div><span class="pos-meta">Front desk terminal, Ref #77219</span></div><span class="pos-amt">₦35,000</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-panel" id="dash-school">
+    <div class="mockup-frame">
+      <div class="mockup-topbar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">
+          <span class="mockup-url-track">Your whole school, one screen · Fees · Attendance · Staff · Reports ·&nbsp;&nbsp;&nbsp;Your whole school, one screen · Fees · Attendance · Staff · Reports ·&nbsp;&nbsp;&nbsp;</span>
+          <span class="mockup-url-static">Live dashboard preview</span>
+        </div>
+      </div>
+      <div class="mockup-body">
+        <div class="mockup-sidebar">
+          <div class="m-logo"><span class="dot"></span> STANDPOINT</div>
+          <div class="m-nav-item active"><span class="m-ico"></span> Overview</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Students</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Attendance</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Fees &amp; expenses</div>
+          <div class="m-nav-item"><span class="m-ico"></span> WhatsApp payments</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Staff &amp; payroll</div>
+          <div class="m-nav-item"><span class="m-ico"></span> Reports</div>
+        </div>
+        <div class="mockup-main">
+          <div class="m-header-row">
+            <h4>Overview</h4>
+            <div class="m-toolbar">
+              <span class="mono">Thu, 9 Jul · Kate B Academy</span>
+              <div class="m-calc-btn" onclick="toggleCalc(true)" title="Calculator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></div>
+            </div>
+          </div>
+          <div class="m-stat-grid">
+            <div class="m-stat acc-ink"><span class="mono">Staff on duty</span><div class="m-val">22 of 26</div></div>
+            <div class="m-stat"><span class="mono">Students present</span><div class="m-val">231 of 240</div></div>
+            <div class="m-stat"><span class="mono">Fees collected today</span><div class="m-val">₦318,000<small>↑9%</small></div></div>
+            <div class="m-stat acc-amber"><span class="mono">Spent today</span><div class="m-val">₦27,200</div></div>
+          </div>
+
+          <div class="m-panels">
+            <div class="m-panel">
+              <div class="m-panel-title">
+                <span>Staff attendance</span>
+                <div class="panel-title-actions">
+                  <div class="m-toggle-row">
+                    <button class="active" onclick="toggleAttendMode(this,'digital')">Digital scan</button>
+                    <button onclick="toggleAttendMode(this,'manual')">Manual</button>
+                  </div>
+                  <button class="m-hist-btn" onclick="toggleAttendSummary()" id="attendSummaryBtn">Summary</button>
+                </div>
+              </div>
+              <div class="m-attend-view active" id="attendView-digital">
+                <span class="m-attend-summary">22 of 26 staff scanned in today</span>
+                <div class="m-attend-row"><span class="m-attend-icon in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="m-attend-name">Mrs. Adaeze Bello</span><span class="m-attend-time">In 7:42 AM</span></div>
+                <div class="m-attend-row"><span class="m-attend-icon in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="m-attend-name">Mr. Femi Coker</span><span class="m-attend-time">In 7:55 AM</span></div>
+                <div class="m-attend-row"><span class="m-attend-icon out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span><span class="m-attend-name">Mr. Tunde Alabi</span><span class="m-attend-time">Out 3:58 PM</span></div>
+                <div class="m-attend-row"><span class="m-attend-icon in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="m-attend-name">Mrs. Ngozi Umeh</span><span class="m-attend-time">In 8:01 AM</span></div>
+              </div>
+              <div class="m-attend-view" id="attendView-manual">
+                <div class="m-attend-legend"><span>7:00–7:59 early</span><span>8:00–8:09 on time</span><span>8:10–8:17 late</span></div>
+                <span class="m-attend-summary">Tap a name to mark present or absent</span>
+                <div class="m-manual-row" onclick="toggleManualMark(this)"><span class="m-manual-check present">✓</span><span class="m-attend-name">Mrs. Adaeze Bello</span></div>
+                <div class="m-manual-row" onclick="toggleManualMark(this)"><span class="m-manual-check present">✓</span><span class="m-attend-name">Mr. Femi Coker</span></div>
+                <div class="m-manual-row is-absent" onclick="toggleManualMark(this)"><span class="m-manual-check">–</span><span class="m-attend-name">Mr. Tunde Alabi</span></div>
+                <div class="m-manual-row" onclick="toggleManualMark(this)"><span class="m-manual-check present">✓</span><span class="m-attend-name">Mrs. Ngozi Umeh</span></div>
+                <div class="m-summary-view" id="attendSummary">
+                  <div class="ms-line">3 of 4 staff present today</div>
+                  <div class="ms-line">Present: Adaeze Bello, Femi Coker, Ngozi Umeh</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="m-panel">
+              <div class="m-panel-title">
+                <span>Student roster</span>
+                <div class="m-toggle-row">
+                  <button class="active" onclick="toggleRoster(this,'primary')">Primary</button>
+                  <button onclick="toggleRoster(this,'secondary')">Secondary</button>
+                </div>
+              </div>
+              <div class="m-toggle-row m-view-toggle">
+                <button class="active" onclick="toggleRosterView(this,'individual')">Individual</button>
+                <button onclick="toggleRosterView(this,'byclass')">By class</button>
+              </div>
+
+              <!-- INDIVIDUAL VIEW: tap a name to mark present/absent -->
+              <div class="m-roster-view active" id="rosterView-primary" data-mode="individual">
+                <div class="m-class-view active" data-mode="individual">
+                  <div class="m-roster-row" onclick="toggleManualMark(this)"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Tobenna Eze</span></span><span class="mr-class">Primary 4</span></div>
+                  <div class="m-roster-row" onclick="toggleManualMark(this)"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Amaka Johnson</span></span><span class="mr-class">Primary 2</span></div>
+                  <div class="m-roster-row is-absent" onclick="toggleManualMark(this)"><span class="mr-left"><span class="mr-tick">–</span><span class="mr-name">David Okoro</span></span><span class="mr-class">Primary 6</span></div>
+                  <div class="m-roster-row" onclick="toggleManualMark(this)"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Blessing Chukwu</span></span><span class="mr-class">Primary 1</span></div>
+                  <div class="m-roster-row" onclick="toggleManualMark(this)"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Samuel Effiong</span></span><span class="mr-class">Primary 5</span></div>
+                </div>
+                <!-- BY CLASS VIEW: Daycare through Primary 6, click a class to see teacher then pupils -->
+                <div class="m-class-view" data-mode="byclass">
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>Daycare</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Mrs. Comfort Eze <span class="sex-badge f">F</span></div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Zainab Bello</span> <span class="sex-badge f">F</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">David Okon</span> <span class="sex-badge m">M</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>Primary 1</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Miss Ronke Ajayi <span class="sex-badge f">F</span></div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Ibrahim Datti</span> <span class="sex-badge m">M</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Faith Udo</span> <span class="sex-badge f">F</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Blessing Chukwu</span> <span class="sex-badge f">F</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>Primary 2</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Mr. Emeka Obiora <span class="sex-badge m">M</span></div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Amaka Johnson</span> <span class="sex-badge f">F</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Kelvin Nwachukwu</span> <span class="sex-badge m">M</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>Primary 3</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Mrs. Folake Adisa <span class="sex-badge f">F</span></div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Chioma Nwafor</span> <span class="sex-badge f">F</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Ibrahim Musa</span> <span class="sex-badge m">M</span></span></div>
+                        <div class="m-roster-row is-absent" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">–</span><span class="mr-name">Grace Etim</span> <span class="sex-badge f">F</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>Primary 4</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Mr. Samuel Etim <span class="sex-badge m">M</span></div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Tobenna Eze</span> <span class="sex-badge m">M</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Precious Bassey</span> <span class="sex-badge f">F</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>Primary 5</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Mr. Yusuf Bala <span class="sex-badge m">M</span></div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Samuel Effiong</span> <span class="sex-badge m">M</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Precious Idowu</span> <span class="sex-badge f">F</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>Primary 6</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Mrs. Uche Nweke <span class="sex-badge f">F</span></div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">David Okoro</span> <span class="sex-badge m">M</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Blessing Ogar</span> <span class="sex-badge f">F</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="m-roster-view" id="rosterView-secondary">
+                <div class="m-class-view active" data-mode="individual">
+                  <div class="m-roster-row" onclick="toggleManualMark(this)"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Chidinma Okafor</span></span><span class="mr-class">JSS 2</span></div>
+                  <div class="m-roster-row" onclick="toggleManualMark(this)"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Emeka Nwosu</span></span><span class="mr-class">SS 1</span></div>
+                  <div class="m-roster-row is-absent" onclick="toggleManualMark(this)"><span class="mr-left"><span class="mr-tick">–</span><span class="mr-name">Halima Suleiman</span></span><span class="mr-class">JSS 3</span></div>
+                  <div class="m-roster-row" onclick="toggleManualMark(this)"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Ifeoma Chukwu</span></span><span class="mr-class">SS 3</span></div>
+                  <div class="m-roster-row" onclick="toggleManualMark(this)"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Daniel Ekong</span></span><span class="mr-class">JSS 1</span></div>
+                </div>
+                <div class="m-class-view" data-mode="byclass">
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>JSS 1</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Mr. Chinedu Okafor <span class="sex-badge m">M</span></div>
+                      <div class="m-captain-line">Class captain: <b>Daniel Ekong</b></div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Amina Bello</span> <span class="sex-badge f">F</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Peter Nnaji</span> <span class="sex-badge m">M</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>JSS 2</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Mr. Chuka Eze <span class="sex-badge m">M</span></div>
+                      <div class="m-captain-line">Class captain: <b>Chidinma Okafor</b></div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Bassey Etuk</span> <span class="sex-badge m">M</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Joy Umana</span> <span class="sex-badge f">F</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>JSS 3</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Mrs. Patience Obi <span class="sex-badge f">F</span></div>
+                      <div class="m-captain-line">Class captain: <b>Halima Suleiman</b></div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Victor Umeh</span> <span class="sex-badge m">M</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Joy Effanga</span> <span class="sex-badge f">F</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>SS 1</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Mr. Godwin Isong <span class="sex-badge m">M</span></div>
+                      <div class="m-captain-line">Class captain: <b>Emeka Nwosu</b></div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Kemi Adewale</span> <span class="sex-badge f">F</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Bright Okoye</span> <span class="sex-badge m">M</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>SS 2</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Mrs. Ifeyinwa Uzo <span class="sex-badge f">F</span></div>
+                      <div class="m-captain-line">Class captain: <b>Daniel Bassey</b></div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Ruth Etim</span> <span class="sex-badge f">F</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Michael Obi</span> <span class="sex-badge m">M</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                  <div class="m-class-acc-item" onclick="toggleClassAcc(this)">
+                    <div class="m-class-acc-head"><span>SS 3</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <div class="m-class-acc-body"><div class="m-class-acc-body-inner">
+                      <div class="m-teacher-line">Class teacher: Mrs. Blessing Nnamdi <span class="sex-badge f">F</span></div>
+                      <div class="prefect-block">
+                        <div class="prefect-row"><span class="prefect-badge head">Head boy</span><span class="mr-name">Godwin Peters</span> <span class="sex-badge m">M</span></div>
+                        <div class="prefect-func">Leads the student body and represents students to the school</div>
+                      </div>
+                      <div class="prefect-block">
+                        <div class="prefect-row"><span class="prefect-badge head">Head girl</span><span class="mr-name">Ifeoma Chukwu</span> <span class="sex-badge f">F</span></div>
+                        <div class="prefect-func">Leads the student body and oversees female hostel affairs</div>
+                      </div>
+                      <div class="prefect-block">
+                        <div class="prefect-row"><span class="prefect-badge senior">Senior prefect</span><span class="mr-name">Amina Yusuf</span> <span class="sex-badge f">F</span></div>
+                        <div class="prefect-func">Assists the head boy and head girl, enforces school rules</div>
+                      </div>
+                      <div class="prefect-block">
+                        <div class="prefect-row"><span class="prefect-badge assistant">Asst. senior prefect</span><span class="mr-name">Tega Ogbeide</span> <span class="sex-badge m">M</span></div>
+                        <div class="prefect-func">Deputizes for the senior prefect</div>
+                      </div>
+                      <div class="prefect-block">
+                        <div class="prefect-row"><span class="prefect-badge assistant">Sports prefect</span><span class="mr-name">Rita Obi</span> <span class="sex-badge f">F</span></div>
+                        <div class="prefect-func">Organizes sports activities and inter-house competitions</div>
+                      </div>
+                      <div class="prefect-block">
+                        <div class="prefect-row"><span class="prefect-badge assistant">Health prefect</span><span class="mr-name">Chidi Umana</span> <span class="sex-badge m">M</span></div>
+                        <div class="prefect-func">Oversees hygiene and first-aid needs around the school</div>
+                      </div>
+                      <div class="prefect-block">
+                        <div class="prefect-row"><span class="prefect-badge assistant">Social prefect</span><span class="mr-name">Ada Obinna</span> <span class="sex-badge f">F</span></div>
+                        <div class="prefect-func">Coordinates assemblies and school social events</div>
+                      </div>
+                      <div class="prefect-block">
+                        <div class="prefect-row"><span class="prefect-badge assistant">Library prefect</span><span class="mr-name">Femi Adisa</span> <span class="sex-badge m">M</span></div>
+                        <div class="prefect-func">Manages library use and book borrowing</div>
+                      </div>
+                      <div class="pupil-list">
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Blessing Etuk</span> <span class="sex-badge f">F</span></span></div>
+                        <div class="m-roster-row" onclick="toggleManualMark(this); event.stopPropagation();"><span class="mr-left"><span class="mr-tick">✓</span><span class="mr-name">Chukwuemeka Uche</span> <span class="sex-badge m">M</span></span></div>
+                      </div>
+                    </div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="m-panels-2">
+            <div class="m-panel">
+              <div class="m-panel-title"><span>Term calendar · July</span></div>
+              <div class="m-cal-nav"><span>&#9664;</span><span>July 2026</span><span>&#9654;</span></div>
+              <div class="m-cal-weekdays"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+              <div class="m-cal-grid">
+                <div class="m-cal-cell blank"></div><div class="m-cal-cell blank"></div><div class="m-cal-cell blank"></div>
+                <div class="m-cal-cell" title="Regular school day">1</div><div class="m-cal-cell" title="Regular school day">2</div><div class="m-cal-cell" title="Regular school day">3</div><div class="m-cal-cell" title="Regular school day">4</div>
+                <div class="m-cal-cell" title="Regular school day">5</div><div class="m-cal-cell holiday" title="Public holiday">6</div><div class="m-cal-cell" title="Regular school day">7</div><div class="m-cal-cell" title="Regular school day">8</div><div class="m-cal-cell" title="Regular school day">9</div><div class="m-cal-cell" title="Regular school day">10</div><div class="m-cal-cell" title="Regular school day">11</div>
+                <div class="m-cal-cell" title="Regular school day">12</div><div class="m-cal-cell" title="Regular school day">13</div><div class="m-cal-cell" title="Regular school day">14</div><div class="m-cal-cell midterm" title="Mid-term break">15</div><div class="m-cal-cell midterm" title="Mid-term break">16</div><div class="m-cal-cell midterm" title="Mid-term break">17</div><div class="m-cal-cell today" title="Today">18</div>
+                <div class="m-cal-cell">19</div><div class="m-cal-cell">20</div><div class="m-cal-cell">21</div><div class="m-cal-cell">22</div><div class="m-cal-cell">23</div><div class="m-cal-cell">24</div><div class="m-cal-cell">25</div>
+              </div>
+              <div class="m-cal-legend"><span><i class="lg-amber"></i> Mid-term break</span><span><i class="lg-red"></i> Public holiday</span><span><i class="lg-sq"></i> Today</span></div>
+              <div class="m-cal-best">Next mid-term break: <b>15 to 17 Jul</b></div>
+            </div>
+
+            <div class="m-panel">
+              <div class="m-panel-title"><span>What the school spent today</span></div>
+              <div class="m-expense-row"><div><div class="m-expense-desc"><span class="m-expense-cat">Supplies</span>Textbooks, JSS sets</div><span class="m-expense-note">Restocked the library shelf</span></div><span class="m-expense-amt">₦15,000</span></div>
+              <div class="m-expense-row"><div><div class="m-expense-desc"><span class="m-expense-cat">Maintenance</span>Generator repair</div><span class="m-expense-note">Diesel pump replaced</span></div><span class="m-expense-amt">₦8,000</span></div>
+              <div class="m-expense-row"><div><div class="m-expense-desc"><span class="m-expense-cat">Supplies</span>Cleaning supplies</div></div><span class="m-expense-amt">₦4,200</span></div>
+              <div class="m-expense-total"><span>Total spent today</span><span>₦27,200</span></div>
+              <div class="m-expense-add">
+                <input type="text" placeholder="Amount">
+                <input type="text" placeholder="What was it for?">
+                <button title="Add expense">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="m-panel m-panel-full">
+            <div class="m-panel-title">
+              <span>Payments received</span>
+              <div class="m-toggle-row">
+                <button class="active" onclick="togglePayView(this,'whatsapp')">WhatsApp</button>
+                <button onclick="togglePayView(this,'pos')">POS</button>
+              </div>
+            </div>
+            <div class="m-pay-view active" id="payView-whatsapp">
+              <div class="m-wa-incoming">
+                <div class="wa-sender">Mrs. Okonkwo, parent of Ada Okonkwo, JSS 2</div>
+                <div class="wa-attach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Payment_proof.jpg</span></div>
+                <div class="wa-line">Bank transfer, ₦180,000, Term 2 fees</div>
+                <div class="m-wa-meta">10:42 AM</div>
+              </div>
+              <button class="confirm-btn">Mark as confirmed</button>
+            </div>
+            <div class="m-pay-view" id="payView-pos">
+              <div class="m-pos-row"><div><div class="pos-who">Godwin Peters, SS 3</div><span class="pos-meta">Front desk terminal · Ref #48213</span></div><span class="pos-amt">₦180,000</span></div>
+              <div class="m-pos-row"><div><div class="pos-who">Amaka Johnson, Primary 2</div><span class="pos-meta">Front desk terminal · Ref #48219</span></div><span class="pos-amt">₦95,000</span></div>
+              <div class="m-pos-row"><div><div class="pos-who">Tega Ogbeide, SS 3</div><span class="pos-meta">Front desk terminal · Ref #48227</span></div><span class="pos-amt">₦180,000</span></div>
             </div>
           </div>
         </div>
@@ -787,110 +1711,52 @@
   </div>
 </div>
 
-<section id="features">
-  <div class="wrap align-items-center ">
-    <div class="section-head features-head centered">
-      <div class="eyebrow eyebrow-cycle justify-content-center align-content-center">
-          What's inside
-      </div>
-  
-      <h6>
-          Built around what you actually do, each day.
-      </h6>
-  
-      <p style="max-width: 700px;">
-          Not a spreadsheet with a new coat of paint. Tap any line to see how it actually works.
-      </p>
-  </div>
-    <div class="feat-accordion">
-      <div class="feat-item open reveal">
-        <button class="feat-summary" onclick="toggleFeat(this)"><span class="feat-title">Point of sale</span><svg class="feat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="feat-body-wrap"><div class="feat-body">Ring up sales from a phone or tablet, works even when the network doesn't, and syncs the moment it's back.</div></div>
-      </div>
-      <div class="feat-item reveal" style="transition-delay:.05s">
-        <button class="feat-summary" onclick="toggleFeat(this)"><span class="feat-title">WhatsApp orders</span><svg class="feat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="feat-body-wrap"><div class="feat-body">Customer orders placed on WhatsApp land straight in your dashboard no copying details into a separate app.</div></div>
-      </div>
-      <div class="feat-item reveal" style="transition-delay:.1s">
-        <button class="feat-summary" onclick="toggleFeat(this)"><span class="feat-title">Receipt &amp; invoice generator</span><svg class="feat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="feat-body-wrap"><div class="feat-body">Every sale or booking generates a clean receipt automatically, sent by WhatsApp in one tap.</div></div>
-      </div>
-      <div class="feat-item reveal" style="transition-delay:.15s">
-        <button class="feat-summary" onclick="toggleFeat(this)"><span class="feat-title">Inventory</span><svg class="feat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="feat-body-wrap"><div class="feat-body">Stock deducts automatically on every sale. Low-stock alerts before you run out, not after.</div></div>
-      </div>
-      <div class="feat-item reveal" style="transition-delay:.2s">
-        <button class="feat-summary" onclick="toggleFeat(this)"><span class="feat-title">Sales &amp; booking calendar</span><svg class="feat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="feat-body-wrap"><div class="feat-body">See your best and worst days at a glance, with a full history you can page back through month by month.</div></div>
-      </div>
-      <div class="feat-item reveal" style="transition-delay:.25s">
-        <button class="feat-summary" onclick="toggleFeat(this)"><span class="feat-title">Bank &amp; wallet view</span><svg class="feat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="feat-body-wrap"><div class="feat-body">See your OPay, Moniepoint and bank balances alongside your sales no separate app, no separate login.</div></div>
-      </div>
-      <div class="feat-item reveal" style="transition-delay:.3s">
-        <button class="feat-summary" onclick="toggleFeat(this)"><span class="feat-title">Staff &amp; payroll</span><svg class="feat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="feat-body-wrap"><div class="feat-body">Shifts, attendance and pay in one place, with the deductions calculated correctly the first time.</div></div>
-      </div>
-      <div class="feat-item reveal" style="transition-delay:.35s">
-        <button class="feat-summary" onclick="toggleFeat(this)"><span class="feat-title">Reports</span><svg class="feat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="feat-body-wrap"><div class="feat-body">Plain language weekly summaries what sold, what didn't, what's owed to you no spreadsheet required.</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="problem">
-  <div class="wrap">
-    <div class="section-head centered">
-      <div class="eyebrow">The reality</div>
-      <h2>Five tools. <span class="underline-accent">Zero of them talk to each other.</span></h2>
-      <p>Excel for stock, WhatsApp for orders, a notebook for the rest. It's not disorganization it's what happens when no single tool was ever built for the whole job.</p>
-    </div>
-    <div class="duct-tape">
-      <div class="tool-pile">
-        <span class="tool-chip">Excel stock sheet</span>
-        <span class="tool-chip">WhatsApp orders</span>
-        <span class="tool-chip">Notebook ledger</span>
-        <span class="tool-chip">POS terminal app</span>
-        <span class="tool-chip">Banking app</span>
-        <span class="tool-chip">Staff attendance book</span>
-      </div>
-      <div class="arrow-col">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </div>
-      <div class="single-card reveal-card">
-        <span class="mono">Standpoint&nbsp;</span>
-        <h3>One dashboard, one login, one source of truth.</h3>
-        <p>Every sale updates stock. Every stock change reflects in reports. Every report is one tap from your bank balance without switching apps.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="testimonials">
   <div class="wrap">
-    <div class="section-head centered">
-      <div class="eyebrow eyebrow-cycle">Trusted early</div>
+    <div class="section-head centered testimonial-head">
+      <div class="eyebrow eyebrow-cycle" style="justify-content:center;">Trusted early</div>
       <h2>What early operators are saying.</h2>
       <p>Real shop owners, real feedback, while we're still in build.</p>
     </div>
     <div class="test-grid">
       <div class="test-card">
-        <div class="stars"></div>
+        <span class="quote-mark">"</span>
+        <div class="stars"> <img src="img/LOGO/PAVI.jpg" class="circle-sm rounded-circle w-25 " alt="victor."></div>
         <p>I stopped writing my stock in a notebook the first week. The low-stock alert alone saved me from running out of rice twice.</p>
-        <div class="who"><div class="avatar">AO</div><div><b>Anderson O.</b><span>Retail shop owner, Uyo</span></div></div>
+        <div class="who">
+          <div class="avatar">V . O</div>
+          <div>
+            <b>Victor O.</b><span>Retail shop owner, Uyo</span>
+            <div class="verify-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> Verified via email</div>
+          </div>
+        </div>
       </div>
       <div class="test-card">
-        <div class="stars"></div>
+        <span class="quote-mark">"</span>
+        <div class="stars"><img src="img/LOGO/bishop.jpg" class="circle-sm rounded-circle w-25 " alt="bishop."></div>
         <p>Sending receipts on WhatsApp instead of a separate app made my customers trust the business more, not less.</p>
-        <div class="who"><div class="avatar">TU</div><div><b>Mike Morris</b><span>Salon owner, Ghana</span></div></div>
+        <div class="who">
+          <div class="avatar">B . N</div>
+          <div>
+            <b>Bishop N.</b><span>Pharmercy owner, Cameroon</span>
+            <div class="verify-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> Verified via email</div>
+          </div>
+        </div>
       </div>
       <div class="test-card">
-        <div class="stars"></div>
+        <span class="quote-mark">"</span>
+        <div class="stars"><img src="img/LOGO/auntyp.jpg" class="circle-sm rounded-circle w-25 " alt="Pericous Life."> </div>
         <p>Seeing my bank balance next to today's sales changed how I make decisions before end of day.</p>
-        <div class="who"><div class="avatar">FK</div><div><b>Fatima K.</b><span>Pharmacy owner, Delta </span></div></div>
+        <div class="who">
+          <div class="avatar">P. L </div>
+          <div>
+            <b>Pericous E.</b><span> Pharmacy owner, Delta </span> 
+            <div class="verify-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> Verified via email</div>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="see-more-row"><a href="#" class="see-more-link">See more stories</a></div>
     <div class="counter-row" id="counterRow">
       <div class="counter"><div class="num" data-target="120" data-suffix="+">0</div><div class="lbl">Businesses onboarding</div></div>
       <div class="counter"><div class="num" data-target="4200000" data-prefix="₦" data-suffix="+" data-compact="true">0</div><div class="lbl">Naira tracked so far</div></div>
@@ -899,154 +1765,14 @@
   </div>
 </section>
 
-<section id="pricing">
-  <div class="wrap">
-    <div class="price-strip reveal">
-      <div class="left">
-        <h3>Pricing that grows the way your business does.</h3>
-        <p>Start on the plan that matches where you are today. Move up only when the next feature is one your business is actually ready to pay for.</p>
-      </div>
-      <div class="price-tag mono">from $3 · ₦4,500</div>
-      <button class="btn btn-deep" onclick="openPricing()">See plans</button>
-    </div>
-  </div>
-</section>
-
-<div class="pricing-overlay" id="pricingOverlay">
-  <div class="pricing-modal">
-    <div class="calc-head" style="margin-bottom:22px;">
-      <span>Choose a plan</span>
-      <span class="calc-close" onclick="closePricing()">&times;</span>
-    </div>
-
-    <div class="pricing-step" id="pricingStep1">
-      <p class="pricing-step-q">How would you like to pay?</p>
-      <div class="currency-choice">
-        <button class="currency-choice-btn" onclick="selectPricingCurrency('USD')">
-          <span class="cc-sign">$</span><span class="cc-label">Dollar</span>
-        </button>
-        <button class="currency-choice-btn" onclick="selectPricingCurrency('NGN')">
-          <span class="cc-sign">₦</span><span class="cc-label">Naira</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="pricing-step hidden" id="pricingStep2">
-      <button class="pricing-back" onclick="backToCurrency()">&larr; Change currency</button>
-      <div class="plan-grid" id="planGrid-USD">
-        <div class="plan-card">
-          <span class="plan-badge plan-badge-trial">18-day trial</span>
-          <div class="plan-name">New Business</div>
-          <div class="plan-price">$3<span>one-time</span></div>
-          <ul class="plan-features">
-            <li>Point of sale</li>
-            <li>Inventory</li>
-            <li>WhatsApp orders</li>
-            <li>Calendar &amp; notifications</li>
-            <li>3-week history limit</li>
-          </ul>
-          <button class="btn btn-outline-deep plan-cta">Start trial</button>
-        </div>
-        <div class="plan-card">
-          <div class="plan-name">Starter</div>
-          <div class="plan-price">$5<span>/month</span></div>
-          <ul class="plan-features">
-            <li>Point of sale</li>
-            <li>Inventory</li>
-            <li>WhatsApp orders</li>
-            <li>Calendar &amp; notifications</li>
-            <li>3-week history limit</li>
-          </ul>
-          <button class="btn btn-outline-deep plan-cta">Choose Starter</button>
-        </div>
-        <div class="plan-card featured">
-          <span class="plan-badge">Most popular</span>
-          <div class="plan-name">Growth</div>
-          <div class="plan-price">$7.60<span>/month</span></div>
-          <ul class="plan-features">
-            <li>Everything in Starter</li>
-            <li>Wallet view</li>
-            <li>Staff &amp; payroll</li>
-            <li>Full reports</li>
-            <li>Unlimited history</li>
-          </ul>
-          <button class="btn btn-deep plan-cta">Choose Growth</button>
-        </div>
-        <div class="plan-card">
-          <div class="plan-name">VIP</div>
-          <div class="plan-price">$10<span>/month</span></div>
-          <ul class="plan-features">
-            <li>Everything in Growth</li>
-            <li>AI suggestions</li>
-            <li>AI business monitor</li>
-            <li>Auto-calculator</li>
-          </ul>
-          <button class="btn btn-outline-deep plan-cta">Choose VIP</button>
-        </div>
-      </div>
-      <div class="plan-grid hidden" id="planGrid-NGN">
-        <div class="plan-card">
-          <span class="plan-badge plan-badge-trial">18-day trial</span>
-          <div class="plan-name">New Business</div>
-          <div class="plan-price">₦4,500<span>one-time</span></div>
-          <ul class="plan-features">
-            <li>Point of sale</li>
-            <li>Inventory</li>
-            <li>WhatsApp orders</li>
-            <li>Calendar &amp; notifications</li>
-            <li>3-week history limit</li>
-          </ul>
-          <button class="btn btn-outline-deep plan-cta">Start trial</button>
-        </div>
-        <div class="plan-card">
-          <div class="plan-name">Starter</div>
-          <div class="plan-price">₦7,500<span>/month</span></div>
-          <ul class="plan-features">
-            <li>Point of sale</li>
-            <li>Inventory</li>
-            <li>WhatsApp orders</li>
-            <li>Calendar &amp; notifications</li>
-            <li>3-week history limit</li>
-          </ul>
-          <button class="btn btn-outline-deep plan-cta">Choose Starter</button>
-        </div>
-        <div class="plan-card featured">
-          <span class="plan-badge">Most popular</span>
-          <div class="plan-name">Growth</div>
-          <div class="plan-price">₦11,500<span>/month</span></div>
-          <ul class="plan-features">
-            <li>Everything in Starter</li>
-            <li>Wallet view</li>
-            <li>Staff &amp; payroll</li>
-            <li>Full reports</li>
-            <li>Unlimited history</li>
-          </ul>
-          <button class="btn btn-deep plan-cta">Choose Growth</button>
-        </div>
-        <div class="plan-card">
-          <div class="plan-name">VIP</div>
-          <div class="plan-price">₦15,000<span>/month</span></div>
-          <ul class="plan-features">
-            <li>Everything in Growth</li>
-            <li>AI suggestions</li>
-            <li>AI business monitor</li>
-            <li>Auto-calculator</li>
-          </ul>
-          <button class="btn btn-outline-deep plan-cta">Choose VIP</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrap final-cta">
-  <div class="section-head centered">
-    <div class="eyebrow">Ready when you are</div>
+<div class="wrap">
+  <div class="final-cta">
+    <div class="eyebrow" style="justify-content:center;">Ready when you are</div>
     <h2>Stop switching tabs to run your business.</h2>
-  </div>
-  <div class="hero-actions">
-    <a href="startfree.html" class="btn btn-deep btn-lg">Start free</a>
-    <a href="#" class="btn btn-outline-deep btn-lg">Talk to us</a>
+    <div class="hero-actions">
+      <a href="startfree.html" class="btn btn-deep btn-lg">Start free</a>
+      <a href="#" class="btn btn-outline-deep btn-lg">Talk to us</a>
+    </div>
   </div>
 </div>
 
@@ -1054,21 +1780,16 @@
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <div class="logo">
-            <div class="logo-placehold"> <img src="img/LOGO/Untitled_design__3_-removebg-preview.png" class="w-100 big" alt="StandpointHQ Logo"></div>
-         
-        </div>
-        <p>One vantage point over your whole business sales, stock, staff and money, in one dashboard.</p>
+        <div class="logo-placehold"><img src="img/LOGO/Untitled_design__3_-removebg-preview.png" class="w-100 big" alt="Standpoint Logo"></div>
+        <p>One vantage point over your whole business: sales, stock, staff and money, in one dashboard.</p>
         <div class="foot-social">
           <a href="#" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
           <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"/></svg></a>
           <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/></svg></a>
         </div>
       </div>
-      <div class="foot-col"><h5>Product</h5><a href="#">Overview</a><a href="#">Features</a><a href="#">Pricing</a><a href="#">Security</a></div>
-      <div class="foot-col"><h5>Industries</h5><a href="#">Restaurants</a><a href="#">Salons</a><a href="#">Retail &amp; pharmacies</a><a href="#">Hotels &amp; bookings</a><a href="#">Schools</a><a href="#">Construction</a></div>
-      <div class="foot-col"><h5>Company</h5><a href="#">About</a><a href="#">Careers</a><a href="#">Contact</a><a href="#">Blog</a></div>
-      <div class="foot-col"><h5>Resources</h5><a class="foot-link text-danger" href="#"> Help center</a><a href="#">API docs</a><a href="#">Status</a><a href="#">Community</a></div>
+      <div class="foot-col"><h5>Product</h5><a href="why-standpoint.html">Why Standpoint</a><a href="feature.html">Features</a><a href="pricing.html">Pricing</a><a href="working.html">How it works</a></div>
+      <div class="foot-col"><h5>Company</h5><a href="#">About</a><a href="#">Contact</a><a class="text-danger" href="#">Help center</a></div>
     </div>
     <div class="foot-bottom">
       <span class="mono">© 2026 Standpoint. All rights reserved.</span>
@@ -1078,60 +1799,55 @@
 </footer>
 
 <script>
-  // topbar currency toggle — clicking jumps straight into the matching pricing plans
-  var preferredCurrency = null;
-  function setCurrency(cur){
-    document.getElementById('curNGN').classList.toggle('active', cur==='NGN');
-    document.getElementById('curUSD').classList.toggle('active', cur==='USD');
-    preferredCurrency = cur;
-    openPricing();
+  // topbar currency -> now navigates to the standalone pricing page
+  function goPricing(cur){
+    window.location.href = 'plans.html?currency=' + cur;
   }
 
-  // feature accordion (smooth height animation)
-  function toggleFeat(btn){
-    var item = btn.closest('.feat-item');
-    var wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.feat-item').forEach(function(fi){
-      fi.classList.remove('open');
-      fi.querySelector('.feat-body-wrap').style.maxHeight = null;
-    });
-    if(!wasOpen){
-      item.classList.add('open');
-      var wrap = item.querySelector('.feat-body-wrap');
-      wrap.style.maxHeight = wrap.scrollHeight + 'px';
-    }
-  }
-  window.addEventListener('load', function(){
-    var firstOpen = document.querySelector('.feat-item.open .feat-body-wrap');
-    if(firstOpen) firstOpen.style.maxHeight = firstOpen.scrollHeight + 'px';
-  });
-
-  // pricing modal
-  function openPricing(){
-    document.getElementById('pricingOverlay').classList.add('open');
-    if(preferredCurrency){
-      selectPricingCurrency(preferredCurrency);
+  // nav auto-hide on scroll (mobile only)
+  var lastScrollY = window.scrollY;
+  var navEl = document.getElementById('siteNav');
+  window.addEventListener('scroll', function(){
+    if(window.innerWidth > 860){ navEl.classList.remove('nav-hidden'); lastScrollY = window.scrollY; return; }
+    var currentY = window.scrollY;
+    if(currentY > lastScrollY && currentY > 90){
+      navEl.classList.add('nav-hidden');
     } else {
-      document.getElementById('pricingStep1').classList.remove('hidden');
-      document.getElementById('pricingStep2').classList.add('hidden');
+      navEl.classList.remove('nav-hidden');
     }
-  }
-  function closePricing(){
-    document.getElementById('pricingOverlay').classList.remove('open');
-  }
-  document.getElementById('pricingOverlay').addEventListener('click', function(e){
-    if(e.target === this) closePricing();
+    lastScrollY = currentY;
   });
-  function selectPricingCurrency(cur){
-    document.getElementById('pricingStep1').classList.add('hidden');
-    document.getElementById('pricingStep2').classList.remove('hidden');
-    document.getElementById('planGrid-USD').classList.toggle('hidden', cur !== 'USD');
-    document.getElementById('planGrid-NGN').classList.toggle('hidden', cur !== 'NGN');
-  }
-  function backToCurrency(){
-    document.getElementById('pricingStep1').classList.remove('hidden');
-    document.getElementById('pricingStep2').classList.add('hidden');
-  }
+  let lastScrollTop = 0;
+const navbar = document.querySelector('.navbar');
+
+const siteNav = document.getElementById('siteNav');
+
+if (siteNav) {
+    let lastScrollTop = 0;
+
+    window.addEventListener('scroll', function () {
+        const currentScroll =
+            window.pageYOffset || document.documentElement.scrollTop;
+
+        // Always show navbar at the top
+        if (currentScroll <= 10) {
+            siteNav.classList.remove('navbar-hidden');
+            lastScrollTop = currentScroll;
+            return;
+        }
+
+        // Scrolling down
+        if (currentScroll > lastScrollTop) {
+            siteNav.classList.add('navbar-hidden');
+        }
+        // Scrolling up
+        else {
+            siteNav.classList.remove('navbar-hidden');
+        }
+
+        lastScrollTop = currentScroll;
+    }, { passive: true });
+}
 
   // dashboard tab switch
   function switchDash(btn, id){
@@ -1157,6 +1873,194 @@
       btn.textContent = 'Back to calendar';
     }
   }
+
+  // school: staff attendance mode toggle (digital scan vs manual)
+  function toggleAttendMode(btn, mode){
+    btn.parentElement.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('attendView-digital').classList.toggle('active', mode === 'digital');
+    document.getElementById('attendView-manual').classList.toggle('active', mode === 'manual');
+  }
+
+  // school: student roster level toggle (primary vs secondary)
+  function toggleRoster(btn, level){
+    btn.parentElement.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('rosterView-primary').classList.toggle('active', level === 'primary');
+    document.getElementById('rosterView-secondary').classList.toggle('active', level === 'secondary');
+  }
+
+  // school: click a name to flip present/absent (works for both staff and student rows)
+  function toggleManualMark(row){
+    row.classList.toggle('is-absent');
+    var check = row.querySelector('.m-manual-check, .mr-tick');
+    if(!check) return;
+    if(row.classList.contains('is-absent')){
+      check.textContent = '–';
+    } else {
+      check.textContent = '✓';
+    }
+  }
+
+  // school: expand/collapse a class in the "By class" roster view, one open at a time per list
+  function toggleClassAcc(item){
+    var wasOpen = item.classList.contains('open');
+    var list = item.parentElement;
+    list.querySelectorAll('.m-class-acc-item').forEach(function(i){
+      i.classList.remove('open');
+      i.querySelector('.m-class-acc-body').style.maxHeight = null;
+    });
+    if(!wasOpen){
+      item.classList.add('open');
+      var body = item.querySelector('.m-class-acc-body');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  }
+
+  // school: show/hide the attendance summary panel
+  function toggleAttendSummary(){
+    var summary = document.getElementById('attendSummary');
+    var open = summary.classList.toggle('active');
+    document.getElementById('attendSummaryBtn').textContent = open ? 'Hide summary' : 'Summary';
+  }
+
+  // pharmacy: staff shift attendance toggle (digital scan vs manual)
+  function toggleAttendModePharm(btn, mode){
+    btn.parentElement.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('attendView-pharm-digital').classList.toggle('active', mode === 'digital');
+    document.getElementById('attendView-pharm-manual').classList.toggle('active', mode === 'manual');
+  }
+
+  // pharmacy: show/hide the lab revenue summary
+  function toggleLabSummary(){
+    var summary = document.getElementById('labSummary');
+    var open = summary.classList.toggle('active');
+    document.getElementById('labSummaryBtn').textContent = open ? 'Hide summary' : 'Summary';
+  }
+
+  // school: switch roster between individual list and grouped-by-class view
+  function toggleRosterView(btn, mode){
+    btn.parentElement.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.querySelectorAll('.m-class-view').forEach(function(v){
+      v.classList.toggle('active', v.getAttribute('data-mode') === mode);
+    });
+  }
+
+  // school: switch payments panel between WhatsApp and POS records
+  function togglePayView(btn, mode){
+    btn.parentElement.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('payView-whatsapp').classList.toggle('active', mode === 'whatsapp');
+    document.getElementById('payView-pos').classList.toggle('active', mode === 'pos');
+  }
+
+  // hotel: switch payments panel between WhatsApp and POS records
+  function togglePayViewHotel(btn, mode){
+    btn.parentElement.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('payView-hotel-whatsapp').classList.toggle('active', mode === 'whatsapp');
+    document.getElementById('payView-hotel-pos').classList.toggle('active', mode === 'pos');
+  }
+
+  // hotel: housekeeping mark-done toggle
+  function markHouseDone(btn){
+    var row = btn.closest('.m-house-row');
+    var isDone = row.classList.toggle('done');
+    btn.textContent = isDone ? 'Undo' : 'Mark done';
+  }
+
+  // hotel: room board click-to-see price and amenities
+  var roomData = {
+    '101': {tier:'standard', price:'₦18,000 / night', amenities:['AC','Queen bed','Wi-Fi','TV']},
+    '102': {tier:'vip', price:'₦35,000 / night', amenities:['AC','King bed','Wi-Fi','TV','Mini fridge','Balcony']},
+    '103': {tier:'standard', price:'₦18,000 / night', amenities:['AC','Queen bed','Wi-Fi','TV']},
+    '104': {tier:'standard', price:'₦18,000 / night', amenities:['AC','Queen bed','Wi-Fi','TV']},
+    '105': {tier:'premium', price:'₦55,000 / night', amenities:['AC','King bed','Wi-Fi','Smart TV','Mini bar','Jacuzzi','Balcony']},
+    '106': {tier:'vip', price:'₦35,000 / night', amenities:['AC','King bed','Wi-Fi','TV','Mini fridge','Balcony']},
+    '201': {tier:'standard', price:'₦18,000 / night', amenities:['AC','Queen bed','Wi-Fi','TV']},
+    '202': {tier:'vip', price:'₦35,000 / night', amenities:['AC','King bed','Wi-Fi','TV','Mini fridge','Balcony']},
+    '203': {tier:'standard', price:'₦18,000 / night', amenities:['AC','Queen bed','Wi-Fi','TV']},
+    '204': {tier:'premium', price:'₦55,000 / night', amenities:['AC','King bed','Wi-Fi','Smart TV','Mini bar','Jacuzzi','Balcony']},
+    '205': {tier:'standard', price:'₦18,000 / night', amenities:['AC','Queen bed','Wi-Fi','TV']},
+    '206': {tier:'vip', price:'₦35,000 / night', amenities:['AC','King bed','Wi-Fi','TV','Mini fridge','Balcony']}
+  };
+  var tierLabels = {standard:'Standard', vip:'VIP', premium:'Premium'};
+  function showRoomDetail(roomNum){
+    var data = roomData[roomNum];
+    var panel = document.getElementById('roomDetail');
+    if(!data){ return; }
+    panel.classList.remove('empty');
+    panel.innerHTML =
+      '<div class="rd-head"><b>Room ' + roomNum + '</b><span class="rd-tier ' + data.tier + '">' + tierLabels[data.tier] + '</span></div>' +
+      '<div class="rd-price">' + data.price + '</div>' +
+      '<div class="rd-amenities">' + data.amenities.map(function(a){ return '<span>' + a + '</span>'; }).join('') + '</div>' +
+      '<button class="btn btn-outline-deep rd-edit-btn">Edit room details</button>';
+  }
+
+  // hotel: live guest checkout timers
+  var guestDueTimes = {
+    g1: Date.now() + 110*60000,   // due in ~1h50m
+    g2: Date.now() + 15*60000,    // due in 15 minutes, ending soon
+    g3: Date.now() - 20*60000,    // already overdue by 20 minutes
+    g4: Date.now() + 1620*60000   // due in ~27 hours
+  };
+  function formatCountdown(ms){
+    var overdue = ms < 0;
+    var abs = Math.abs(ms);
+    var totalMinutes = Math.floor(abs/60000);
+    var days = Math.floor(totalMinutes/1440);
+    var hours = Math.floor((totalMinutes%1440)/60);
+    var mins = totalMinutes%60;
+    var text;
+    if(days > 0){ text = days + 'd ' + hours + 'h left'; }
+    else if(hours > 0){ text = hours + 'h ' + mins + 'm left'; }
+    else { text = mins + 'm left'; }
+    if(overdue){ text = 'Overdue ' + text.replace(' left',''); }
+    return text;
+  }
+  function updateGuestTimers(){
+    Object.keys(guestDueTimes).forEach(function(id){
+      var el = document.getElementById('timer-'+id);
+      if(!el) return;
+      var diff = guestDueTimes[id] - Date.now();
+      el.textContent = formatCountdown(diff);
+      el.classList.remove('warn','overdue');
+      if(diff < 0){ el.classList.add('overdue'); }
+      else if(diff < 30*60000){ el.classList.add('warn'); }
+    });
+  }
+  function renewGuest(id){
+    guestDueTimes[id] = Math.max(guestDueTimes[id], Date.now()) + 120*60000;
+    updateGuestTimers();
+    var dot = document.getElementById('renewed-'+id);
+    if(dot) dot.classList.add('show');
+  }
+
+  // renewal now requires a confirmed payment before the timer moves at all
+  var pendingRenew = null;
+  function openRenew(id, name, room){
+    pendingRenew = id;
+    var price = (roomData[room] && roomData[room].price) || 'Room rate';
+    document.getElementById('renewGuestName').textContent = name;
+    document.getElementById('renewGuestRoom').textContent = 'Room ' + room;
+    document.getElementById('renewAmount').textContent = price;
+    document.getElementById('renewOverlay').classList.add('open');
+  }
+  function closeRenew(){
+    pendingRenew = null;
+    document.getElementById('renewOverlay').classList.remove('open');
+  }
+  function confirmRenew(){
+    if(pendingRenew){ renewGuest(pendingRenew); }
+    closeRenew();
+  }
+  document.getElementById('renewOverlay').addEventListener('click', function(e){
+    if(e.target === this) closeRenew();
+  });
+  updateGuestTimers();
+  setInterval(updateGuestTimers, 15000);
 
   // calculator
   var calcExpr = '';
@@ -1187,10 +2091,27 @@
     }
   }
 
-  // scroll reveal
-  var revealEls = document.querySelectorAll('.reveal, .reveal-card');
-  var singleCard = document.querySelector('.single-card');
-  if(singleCard) singleCard.classList.add('reveal-target');
+  // barcode: open/close the scan modal, reset to step 1 each time
+  function toggleBarcode(open){
+    document.getElementById('barcodeOverlay').classList.toggle('open', open);
+    if(open){
+      document.getElementById('barcodeStep1').style.display = 'block';
+      document.getElementById('barcodeStep2').classList.remove('show');
+      document.getElementById('barcodeSuccess').classList.remove('show');
+    }
+  }
+  document.getElementById('barcodeOverlay').addEventListener('click', function(e){
+    if(e.target === this) toggleBarcode(false);
+  });
+  function simulateScan(){
+    document.getElementById('barcodeStep1').style.display = 'none';
+    document.getElementById('barcodeStep2').classList.add('show');
+  }
+  function confirmBarcodeAdd(){
+    document.getElementById('barcodeStep2').classList.remove('show');
+    document.getElementById('barcodeSuccess').classList.add('show');
+    setTimeout(function(){ toggleBarcode(false); }, 1400);
+  }
   var observer = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
@@ -1199,7 +2120,6 @@
     });
   }, {threshold:0.2});
   document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
-  if(singleCard) observer.observe(singleCard);
 
   // counters
   function formatCounter(el, val){
@@ -1207,11 +2127,8 @@
     var suffix = el.getAttribute('data-suffix') || '';
     var compact = el.getAttribute('data-compact') === 'true';
     var display;
-    if(compact){
-      display = (val/1000000).toFixed(1) + 'M';
-    } else {
-      display = Math.round(val).toLocaleString();
-    }
+    if(compact){ display = (val/1000000).toFixed(1) + 'M'; }
+    else { display = Math.round(val).toLocaleString(); }
     el.textContent = prefix + display + suffix;
   }
   var counterFrames = {};
@@ -1248,6 +2165,7 @@
   }, {threshold:0.4});
   if(counterRow) counterObserver.observe(counterRow);
 </script>
-
+<script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

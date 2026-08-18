@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setting up Standpoint — a complete guide for your business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="workings.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html"><div class="logo-placehold"><img src="img/LOGO/Untitled design.png" alt="Standpoint Logo"></div></a>
+    <div class="nav-links" id="navLinks">
+      <a href="why-standpoint.html">Why Standpoint</a>
+      <a href="feature.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="setup-guide.html" class="active">Setup guide</a>
+    </div>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-ghost">Log in</a>
+      <a href="signup.html" class="btn btn-primary">Sign up</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-hero">
+    <div class="eyebrow reveal" style="--d:0s">Setup guide</div>
+    <h1 class="reveal " style="--d:.1s ">Set up your business, your way</h1>
+    <p class="reveal" style="--d:.2s">Choose your business type below and follow a step-by-step guide built around how your business actually works, from your first setup to the tools you need to run every day.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="biz-list">
+
+    <button class="biz-row" onclick="openModal('super', this)">
+      <span class="ico-wrap"><i class="bi bi-cart3"></i></span>
+      <span class="label">Supermarket</span>
+      <i class="bi bi-arrow-right go"></i>
+    </button>
+
+    <button class="biz-row" onclick="openModal('pharm', this)">
+      <span class="ico-wrap"><i class="bi bi-capsule"></i></span>
+      <span class="label">Pharmacy</span>
+      <i class="bi bi-arrow-right go"></i>
+    </button>
+
+    <button class="biz-row" onclick="openModal('rest', this)">
+      <span class="ico-wrap"><i class="bi bi-cup-hot"></i></span>
+      <span class="label">Restaurant</span>
+      <i class="bi bi-arrow-right go"></i>
+    </button>
+
+    <button class="biz-row" onclick="openModal('hotel', this)">
+      <span class="ico-wrap"><i class="bi bi-building"></i></span>
+      <span class="label">Hotel</span>
+      <i class="bi bi-arrow-right go"></i>
+    </button>
+
+    <button class="biz-row" onclick="openModal('school', this)">
+      <span class="ico-wrap"><i class="bi bi-mortarboard"></i></span>
+      <span class="label">School</span>
+      <i class="bi bi-arrow-right go"></i>
+    </button>
+
+    <button class="biz-row" onclick="openModal('other', this)">
+      <span class="ico-wrap"><i class="bi bi-briefcase"></i></span>
+      <span class="label">Other business</span>
+      <i class="bi bi-arrow-right go"></i>
+    </button>
+
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="payroll-closer">
+    <i class="bi bi-shield-check pc-ico"></i>
+    <h4>Never pay staff late again</h4>
+    <p>Turn on Payday Reminders and Standpoint tells you 3 days early exactly who's owed what. Mark each person paid, and it's on record, no forgotten names, no disputes.</p>
+    <div class="pc-tags">
+      <span>Debt owed</span><span>Lateness fee</span><span>Unauthorized absence charge</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="mono">© 2026 Standpoint</span>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="why-standpoint.html">Why Standpoint</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="feature.html">Features</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ POPUPS ============ -->
+
+<div class="biz-modal" id="modal-super" onclick="closeModal(event,'super')">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <span class="modal-badge"><i class="bi bi-cart3"></i></span>
+      <span class="modal-title">Supermarket</span>
+      <button class="modal-close" onclick="closeModal(event,'super')" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="mini-step"><span class="mini-num">01</span><div><b>Set up your stock.</b> Go to Stock → Add item by entering the product name, price, quantity, category, and expiry date where applicable. <br>You can also add products faster with a barcode scanner. Once your scanner is connected, scan the product and Standpoint fills in the barcode information for you. Just confirm the details then save.</div></div>
+      <div class="mini-step"><span class="mini-num">02</span><div><b>Connect your barcode scanner.</b> Go to Settings → Devices. For a USB scanner, plug it into your computer and Standpoint will recognize it automatically. For a Bluetooth scanner, pair it with your device first, then test the connection. Once it works, you can scan products directly from the stock screen instead of entering them one by one.</div></div>
+      <div class="mini-step"><span class="mini-num">03</span><div><b>Add your staff &amp; shifts.</b> Go to Staff → Add staff member. Enter each person's name, phone number, role, and shift. Set their working days and hours so Standpoint knows when they are expected to be at work.</div></div>
+      <div class="mini-step"><span class="mini-num">4</span><div><b>Set up staff attendance.</b> Go to Attendance → Generate entrance code and create your business's attendance QR code. Print or display the code at the entrance. Staff scan it with their phone when they arrive and leave, and Standpoint records their attendance against their assigned shift. <br>Need to correct something manually? Go to Attendance → Manual and mark the staff member Early, Late, or Absent.</div></div>
+      <div class="mini-step"><span class="mini-num">05</span><div><b>Link your bank and Business Acc.</b> Go to Settings → Bank account → Connect. Choose your bank, enter your account details, and complete the verification. Once connected, payments can appear automatically on your dashboard.You can add up to two additional business accounts from the same section.</div></div>
+      <div class="mini-step"><span class="mini-num">06</span><div><b>Set up payroll.</b> Go to Payroll → Staff and bring your existing staff into payroll. For each employee, set their salary or pay amount, payment frequency, and payday. If everyone is not paid on the same day, assign each person their own payday. <br>Then choose whether attendance, lateness, absence, debt, or other deductions should affect their pay. Turn on Payday Reminders, it helps remind you ahead of time when payments are due.</div></div>
+      <div class="mini-step"><span class="mini-num">07</span><div><b>Connect your WhatsApp.</b> Go to WhatsApp → Connect. Link your business WhatsApp number to Standpoint and complete the connection. Once connected, customer orders and messages can appear in your dashboard. Customers can also send payment screenshots, receipts, or other proof of payment through WhatsApp, so your team can review the order and payment from one place.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="biz-modal" id="modal-pharm" onclick="closeModal(event,'pharm')">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <span class="modal-badge"><i class="bi bi-capsule"></i></span>
+      <span class="modal-title">Pharmacy</span>
+      <button class="modal-close" onclick="closeModal(event,'pharm')" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="mini-step"><span class="mini-num">01</span><div><b>Set up your drug stock.</b> Go to Stock → Add item. Enter the drug name, selling price, quantity, category, and expiry date. Standpoint keeps the expiry date visible and counts down automatically, helping you spot medicines that are approaching expiry. <br>For faster entry, connect your scanner under Settings → Devices, then scan the drug's barcode and confirm the product details.</div></div>
+      <div class="mini-step"><span class="mini-num">02</span><div><b>Add your staff &amp; shifts.</b> Go to Staff → Add staff member. Add each pharmacist, assistant, cashier, or other staff member with their name, role, phone number, and shift.</div></div>
+      <div class="mini-step"><span class="mini-num">03</span><div><b>Set up staff attendance.</b> Go to Attendance → Generate entrance code. Generate your pharmacy's QR code and place it at the entrance. Staff scan the code when they arrive and leave, and their attendance is recorded against their scheduled shift. <br>You can also use Attendance → Manual when you need to record or correct attendance yourself.</div></div>
+      <div class="mini-step"><span class="mini-num">04</span><div><b>Add patients under treatment.</b> Go to Patients → Add patient. Enter the patient's name, treatment start date, treatment length, prescribed drugs, and the times they should take them. <br>Standpoint counts down the treatment period automatically so you can see where each patient is in their course of treatment. If the patient has not paid in full, turn on Payment pending so the outstanding payment remains visible on their record.</div></div>
+      <div class="mini-step"><span class="mini-num">05</span><div><b>Link your bank and Business Acc.</b> Go to Settings → Bank account → Connect. Select your bank, enter your account details, and complete verification. Once connected, incoming payments can appear automatically on your dashboard.</div></div>
+      <div class="mini-step"><span class="mini-num">06</span><div><b>Set up payroll.</b> Go to Payroll → Staff and add the staff you've already created to payroll. Set each person's pay amount, payment schedule, and payday. If pharmacists, assistants, and other staff have different payment dates, give each person their own payday. <br>Set any deductions that should apply, then use Payroll → Payday reminders to see what's coming due.</div></div>
+      <div class="mini-step"><span class="mini-num">07</span><div><b>Connect your WhatsApp.</b> Go to WhatsApp → Connect. Link your pharmacy's business WhatsApp number to Standpoint. Once connected, customer messages and orders can appear in your dashboard, including payment screenshots, receipts, or other proof of payment sent through WhatsApp.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="biz-modal" id="modal-rest" onclick="closeModal(event,'rest')">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <span class="modal-badge"><i class="bi bi-cup-hot"></i></span>
+      <span class="modal-title">Restaurant</span>
+      <button class="modal-close" onclick="closeModal(event,'rest')" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="mini-step"><span class="mini-num">01</span><div><b>Set up your menu.</b> Go to Menu → Add item. Add each dish or drink with its name, price, and category. <br>Organize your menu into sections such as Breakfast, Main Meals, Drinks, Desserts, or whatever fits your restaurant.</div></div>
+      <div class="mini-step"><span class="mini-num">02</span><div><b>Set up your tables.</b> Go to Tables → Add table. Give each table a number or name and arrange them to match your restaurant.<br>This lets staff select the correct table when taking an order and keeps open orders connected to the right customer.</div></div>
+      <div class="mini-step"><span class="mini-num">03</span><div><b>Add your staff and shifts.</b> Go to Staff → Add staff member. Add waiters, kitchen staff, cashiers, managers, and other employees with their role and shift.</div></div>
+      <div class="mini-step"><span class="mini-num">04</span><div><b>Set up attendance.</b> Go to Attendance → Generate entrance code and display the QR code at your staff entrance. Staff scan when they arrive and leave. Their attendance is then recorded against their scheduled shift. <br>For corrections, use Attendance → Manual and mark the appropriate status.</div></div>
+      <div class="mini-step"><span class="mini-num">05</span><div><b>Connect your bank accounts.</b> Go to Settings → Bank account → Connect. Complete your bank details and verification so your business payments can flow into your dashboard automatically.</div></div>
+      <div class="mini-step"><span class="mini-num">06</span><div><b>Set up payroll.</b> Go to Payroll → Staff and select the staff members you want to pay through Standpoint. <br>Set their pay, payment frequency, payday, and any deductions. Different staff can have different payment dates, so you don't have to pay everyone on the same day.</div></div>
+      <div class="mini-step"><span class="mini-num">07</span><div><b>Connect your WhatsApp.</b> Go to WhatsApp → Connect. Link your restaurant's business WhatsApp number to Standpoint. Customer orders can then come into your dashboard, where your team can review what was ordered and check any payment screenshot, receipt, or proof of payment sent through WhatsApp.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="biz-modal" id="modal-hotel" onclick="closeModal(event,'hotel')">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <span class="modal-badge"><i class="bi bi-building"></i></span>
+      <span class="modal-title">Hotel</span>
+      <button class="modal-close" onclick="closeModal(event,'hotel')" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="mini-step"><span class="mini-num">01</span><div><b>Set up your rooms.</b> Add each room individually with its room number, room type, nightly price, and available features. Choose the features that belong to that specific room, such as AC, bed size, Wi-Fi, TV's, or Mini bar.</div></div>
+      <div class="mini-step"><span class="mini-num">02</span><div><b>Set up premium and VIP rooms.</b> When adding a Premium or VIP room, select its room type and add the features available in that room. For example, you can select Mini bar, Jacuzzi, and Balcony. Only select the features that the room actually has, since rooms can have different facilities.</div></div>
+      <div class="mini-step"><span class="mini-num">03</span><div><b>Set up apartments.</b> When adding an apartment, select Apartment it's available features, such as "parlor" & "kitchen"  then with  facilities it has, such as AC, bed size, Balcony etc. Save each apartment separately so its details and price remain clear to your staff.</div></div>
+      <div class="mini-step"><span class="mini-num">04</span><div><b>Maintenance.</b> Go to Rooms → Manage rooms, select the room that needs attention, and change its status to Under maintenance. Use this when a room needs repairs, equipment replacement, or other work that makes it unavailable to guests. Once it's fixed, return its status for booking.</div></div>
+      <div class="mini-step"><span class="mini-num">05</span><div><b>Add your staff and shifts.</b> Go to Staff → Add staff member. Add your front-desk staff, housekeeping team, maintenance staff, managers, and other employees. Enter their name, role, and shift so Standpoint knows who is responsible for each part of the hotel.</div></div>
+      <div class="mini-step"><span class="mini-num">06</span><div><b>Set up attendance.</b> Go to Attendance → Generate entrance code. Generate your hotel's staff QR code and place it at the entrance. Staff scan the code when they arrive and leave, and Standpoint records their attendance against their assigned shift. <br>If you need to correct an attendance record, go to Attendance → Manual and mark the staff member Early, Late, or Absent.</div></div>
+      <div class="mini-step"><span class="mini-num">07</span><div><b>Renew a guest's stay.</b> Go to Bookings, find the guest's current booking, and select Renew stay. Choose the new checkout date and record the payment. Standpoint keeps the renewed stay connected to the guest's existing booking instead of creating a separate reservation.</div></div>
+      <div class="mini-step"><span class="mini-num">08</span><div><b>Connect your WhatsApp.</b> Go to WhatsApp → Connect. Link your hotel's business WhatsApp number to Standpoint. Guests can send booking requests, messages, payment screenshots, receipts, or other proof of payment through WhatsApp, while your team can review the conversation and payment information from the dashboard.</div></div>
+      <div class="mini-step"><span class="mini-num">09</span><div><b>Set up payroll.</b> Go to Payroll → Staff, and bring your existing hotel employees into the staff list, then set their pay amount, payment frequency, payday and deductions. Indicate if they have different paydays Standpoint will use this information with attendance to calculate what each staff member is owed.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="biz-modal" id="modal-school" onclick="closeModal(event,'school')">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <span class="modal-badge"><i class="bi bi-mortarboard"></i></span>
+      <span class="modal-title">School</span>
+      <button class="modal-close" onclick="closeModal(event,'school')" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="mini-step"><span class="mini-num">01</span><div><b>Student roster.</b> Go to Students → Add student. Enter each student's name and assign them to the correct class. Once added, students appear under their class in Students → By class, where you can organize their class roles.</div></div>
+      <div class="mini-step"><span class="mini-num">02</span><div><b>Set up your Primary classes.</b> Go to Students → By class and select a Primary class. Select the front-desk officer from the staff members already added to Standpoint, then select the class captain from the students in that class. Save the class setup so their positions appear with the class roster.</div></div>
+      <div class="mini-step"><span class="mini-num">03</span><div><b>Set up JSS1 to SS2.</b> Go to Students → By class and select JSS1, JSS2, SS1, or SS2. Select the front-desk officer from your existing staff list, then select the class captain from the students in that class. Save the setup so the front-desk officer appears first, followed by the class captain and the remaining students in the roster.</div></div>
+      <div class="mini-step"><span class="mini-num">04</span><div><b>Set up SS3 leadership.</b> Go to Students → By class → SS3. Select the appropriate staff member as the front-desk officer, then assign the students to their leadership positions: Head Boy, Head Girl, Senior Prefect, Asst. Senior Prefect, Sports Prefect, Health Prefect, Social Prefect, and Library Prefect. <br>Once saved, each student's position will also appear on their roster, making their role easy to see in their record.</div></div>
+      <div class="mini-step"><span class="mini-num">05</span><div><b>Add staff &amp; shifts.</b> Go to Staff → Add staff member. Add each staff member's name, role, and shift. Once added, you can select them when assigning class duties without entering their details again.</div></div>
+      <div class="mini-step"><span class="mini-num">06</span><div><b>Attendance.</b> Go to Attendance → Generate entrance code. Generate your school's attendance QR code and place it at the staff entrance. Staff scan the code when they arrive and leave, and Standpoint records their attendance against their assigned shift. <br>If you need to correct a record manually, go to Attendance → Manual and mark the staff member Early, Late, or Absent.</div></div>
+      <div class="mini-step"><span class="mini-num">07</span><div><b>Set up your school calendar.</b> Go to Calendar → Add event. Add your school's term dates, holidays, and mid-term breaks to the calendar. Set the correct start and end dates for each break so they appear clearly on the dashboard calendar and staff can see when the school is open or closed.</div></div>
+      <div class="mini-step"><span class="mini-num">08</span><div><b>Connect your WhatsApp.</b> Go to WhatsApp → Connect. Link your school's business WhatsApp number to Standpoint. Parents or customers can send payment screenshots, receipts, or other proof of payment through WhatsApp, allowing your team to review the payment information alongside the relevant conversation.</div></div>
+      <div class="mini-step"><span class="mini-num">09</span><div><b>Link your bank.</b> Fees and payments reflect instantly. Add up to 2 more accounts.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="biz-modal" id="modal-other" onclick="closeModal(event,'other')">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <span class="modal-badge"><i class="bi bi-briefcase"></i></span>
+      <span class="modal-title">Other business</span>
+      <button class="modal-close" onclick="closeModal(event,'other')" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="mini-step"><span class="mini-num">01</span><div><b>Add what you sell or offer.</b> Manually, or scan it in.</div></div>
+      <div class="mini-step"><span class="mini-num">02</span><div><b>Add staff &amp; shifts.</b> Name, role, shift.</div></div>
+      <div class="mini-step"><span class="mini-num">03</span><div><b>Attendance.</b> QR scan at the door, or mark it manually.</div></div>
+      <div class="mini-step"><span class="mini-num">04</span><div><b>Link your bank.</b> Every payment reflects instantly. Add up to 2 more accounts.</div></div>
+    </div>
+  </div>
+</div>
+<script>
+  // Standpoint setup guide — rows morph into their info panel + mobile nav
+// No eval, no dynamic code execution, no external data parsing.
+// Uses a standard FLIP transform technique: pure geometry math and
+// CSS transitions only — nothing here reads or writes page content.
+
+(function () {
+  'use strict';
+
+  var OPEN_MS = 420;
+  var CLOSE_MS = 320;
+
+  var activeModal = null;
+  var activeCard = null;
+  var activeTrigger = null;
+
+  function computeFromTransform(sourceEl, targetEl) {
+    var sourceRect = sourceEl.getBoundingClientRect();
+    var targetRect = targetEl.getBoundingClientRect();
+
+    var sourceCX = sourceRect.left + sourceRect.width / 2;
+    var sourceCY = sourceRect.top + sourceRect.height / 2;
+    var targetCX = targetRect.left + targetRect.width / 2;
+    var targetCY = targetRect.top + targetRect.height / 2;
+
+    var dx = sourceCX - targetCX;
+    var dy = sourceCY - targetCY;
+    var sx = Math.max(sourceRect.width / targetRect.width, 0.05);
+    var sy = Math.max(sourceRect.height / targetRect.height, 0.05);
+
+    return 'translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) scale(' + sx + ',' + sy + ')';
+  }
+
+  window.openModal = function (key, btn) {
+    var modal = document.getElementById('modal-' + key);
+    if (!modal || !btn) return;
+
+    var card = modal.querySelector('.modal-card');
+    if (!card) return;
+
+    modal.classList.add('active');
+    document.body.classList.add('modal-open');
+
+    // Measure the card at its natural, centered resting size first.
+    card.style.transition = 'none';
+    card.style.opacity = '0.001';
+    card.style.transform = 'translate(-50%,-50%)';
+
+    var fromTransform = computeFromTransform(btn, card);
+
+    // Jump the card to the button's position/size with no transition,
+    // then animate it to its resting position on the next frame —
+    // this is what makes it feel like the row grows into the panel.
+    card.style.transform = fromTransform;
+
+    void card.offsetWidth; // force reflow
+
+    requestAnimationFrame(function () {
+      card.style.transition = 'transform ' + OPEN_MS + 'ms cubic-bezier(.16,1,.3,1), opacity ' + (OPEN_MS * 0.7) + 'ms ease';
+      card.style.transform = 'translate(-50%,-50%)';
+      card.style.opacity = '1';
+    });
+
+    activeModal = modal;
+    activeCard = card;
+    activeTrigger = btn;
+  };
+
+  window.closeModal = function (evt, key) {
+    var modal = document.getElementById('modal-' + key);
+    if (!modal) return;
+    var card = modal.querySelector('.modal-card');
+    if (!card) return;
+
+    var trigger = (modal === activeModal) ? activeTrigger : null;
+
+    if (trigger) {
+      var fromTransform = computeFromTransform(trigger, card);
+      card.style.transition = 'transform ' + CLOSE_MS + 'ms cubic-bezier(.4,0,1,1), opacity ' + CLOSE_MS + 'ms ease';
+      card.style.transform = fromTransform;
+      card.style.opacity = '0.001';
+    } else {
+      card.style.transition = 'opacity ' + CLOSE_MS + 'ms ease';
+      card.style.opacity = '0';
+    }
+
+    modal.classList.remove('active');
+    document.body.classList.remove('modal-open');
+
+    window.setTimeout(function () {
+      card.style.transition = '';
+      card.style.transform = '';
+      card.style.opacity = '';
+    }, CLOSE_MS + 30);
+
+    if (modal === activeModal) {
+      activeModal = null;
+      activeCard = null;
+      activeTrigger = null;
+    }
+  };
+
+  document.addEventListener('keydown', function (evt) {
+    if (evt.key === 'Escape' && activeModal) {
+      var openId = activeModal.id.replace('modal-', '');
+      window.closeModal(evt, openId);
+    }
+  });
+
+  // Mobile nav toggle
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function () {
+      var isOpen = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 860 && navLinks.classList.contains('open')) {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('open');
+      }
+    });
+  }
+})();
+</script> 
+
+<script src="workings.js"></script>
+</body>
+</html>
