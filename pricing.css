@@ -41,6 +41,8 @@
   .nav-mobile-panel a.active{color:var(--ink);}
   .nav-mobile-cta{display:flex; gap:10px; padding:13px 32px 18px;}
   .nav-mobile-cta .btn{flex:1; justify-content:center;}
+  #mean{color:var(--teal); font-weight:700; font-family:'Space Grotesk',sans-serif; font-size:clamp(28px,4.2vw,46px); }
+  #mean2{color:var(--teal-2); font-weight:600; font-family:'Space Grotesk',sans-serif; font-size:clamp(28px,4.2vw,46px); }
   
   @media (max-width:860px){
     .nav-links{display:none;}
