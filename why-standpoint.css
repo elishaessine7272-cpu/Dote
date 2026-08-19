@@ -251,5 +251,99 @@ a { text-decoration: none; color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   .sp-pulse, .sp-pill-red-blink, .sp-scattered-underline, .sp-blink-label,
-  .sp-cta-eyebrow-blink, .sp-anim-in, .sp-anim-in-delay { animation: none; opacity: 1; }
+  .sp-cta-eyebrow-blink, .sp-anim-in, .sp-anim-in-delay, [data-reveal] { animation: none; opacity: 1; transform: none; transition: none; }
+}
+
+/* ============================================================
+   ENTRANCE REVEAL — added only. Nothing above this line was
+   changed. This purely brings each section's existing content
+   in as the user scrolls to it; it does not alter any text,
+   color, font, spacing, or layout already defined above.
+   ============================================================ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tool cards: reveal one after another left to right, top to bottom */
+.sp-tools-grid > [data-reveal]:nth-child(1) { transition-delay: 0s; }
+.sp-tools-grid > [data-reveal]:nth-child(2) { transition-delay: 0.08s; }
+.sp-tools-grid > [data-reveal]:nth-child(3) { transition-delay: 0.16s; }
+.sp-tools-grid > [data-reveal]:nth-child(4) { transition-delay: 0.24s; }
+.sp-tools-grid > [data-reveal]:nth-child(5) { transition-delay: 0.32s; }
+.sp-tools-grid > [data-reveal]:nth-child(6) { transition-delay: 0.4s; }
+
+/* Fix rows: reveal one after another top to bottom */
+.sp-resolve-list > [data-reveal]:nth-of-type(1) { transition-delay: 0s; }
+.sp-resolve-list > [data-reveal]:nth-of-type(2) { transition-delay: 0.1s; }
+.sp-resolve-list > [data-reveal]:nth-of-type(3) { transition-delay: 0.2s; }
+.sp-resolve-list > [data-reveal]:nth-of-type(4) { transition-delay: 0.3s; }
+.sp-resolve-list > [data-reveal]:nth-of-type(5) { transition-delay: 0.4s; }
+
+/* ============================================================
+   1) "money, staff payday, contorl, time" — slipping motion.
+   Font, size, color and position are exactly what .sp-strong
+   already defines above; this only adds movement to each word,
+   staggered, once the section has scrolled into view.
+   ============================================================ */
+.slip-word { display: inline-block; }
+
+@keyframes sp-slip-word {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  45%      { transform: translateY(6px) rotate(-2deg); }
+  60%      { transform: translateY(2px) rotate(1deg); }
+}
+.sp-section-tight.is-visible .slip-word { animation: sp-slip-word 3.4s ease-in-out infinite; }
+.sp-section-tight.is-visible .slip-word:nth-of-type(1) { animation-delay: 0s; }
+.sp-section-tight.is-visible .slip-word:nth-of-type(2) { animation-delay: .45s; }
+.sp-section-tight.is-visible .slip-word:nth-of-type(3) { animation-delay: .9s; }
+.sp-section-tight.is-visible .slip-word:nth-of-type(4) { animation-delay: 1.35s; }
+
+/* ============================================================
+   2) Stock, Sales, Expenses (first three) enter from the left;
+   Payments, Cash flow, Staff records (last three) enter from
+   the right, each as its card scrolls into view. Final resting
+   position, size and spacing are unchanged from above.
+   ============================================================ */
+.sp-tools-grid > [data-reveal] { transform: translateX(-44px); }
+.sp-tools-grid > [data-reveal].is-visible { transform: translateX(0); }
+.sp-tools-grid > [data-reveal]:nth-child(4),
+.sp-tools-grid > [data-reveal]:nth-child(5),
+.sp-tools-grid > [data-reveal]:nth-child(6) { transform: translateX(44px); }
+.sp-tools-grid > [data-reveal]:nth-child(4).is-visible,
+.sp-tools-grid > [data-reveal]:nth-child(5).is-visible,
+.sp-tools-grid > [data-reveal]:nth-child(6).is-visible { transform: translateX(0); }
+
+/* ============================================================
+   3) The 01–04 text beside the picture enters from the left,
+   into the exact position it already sits in above.
+   ============================================================ */
+.sp-resolve-list > [data-reveal] { transform: translateX(-44px); }
+.sp-resolve-list > [data-reveal].is-visible { transform: translateX(0); }
+
+/* ============================================================
+   4) The picture: a slow rise and fall, contained within its
+   own space, once it has scrolled into view. On smaller screens
+   (matching the site's existing 1024px breakpoint) it gently
+   zooms in and out instead, since there's no room to float.
+   ============================================================ */
+@keyframes sp-float-updown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes sp-zoom-pulse   { 0%, 100% { transform: scale(1); }      50% { transform: scale(1.05); } }
+
+.sp-resolve-illustration.is-visible .sp-illustration-frame { animation: sp-float-updown 4.5s ease-in-out infinite; }
+
+@media (max-width: 1023px) {
+  .sp-resolve-illustration.is-visible .sp-illustration-frame { animation: sp-zoom-pulse 3.4s ease-in-out infinite; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slip-word,
+  .sp-tools-grid > [data-reveal],
+  .sp-resolve-list > [data-reveal],
+  .sp-resolve-illustration .sp-illustration-frame { animation: none; transform: none; }
 }

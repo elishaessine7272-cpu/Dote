@@ -68,7 +68,7 @@
     </section>
 
     <!-- THE REALITY -->
-    <section class="sp-section-tight">
+    <section class="sp-section-tight" data-reveal>
       <div class="sp-center sp-max-780">
         <span class="sp-pill-outline">
           <span class="sp-blink-label sp-eyebrow">Today's reality</span>
@@ -76,7 +76,7 @@
         
         <p class="sp-body sp-max-540">
           This is the honest setup of most growing businesses. It works until
-          <span class="sp-strong">money, staff payday, contorl, time</span>  start slipping.
+          <span class="sp-strong"><span class="slip-word">money</span>, <span class="slip-word">staff payday</span>, <span class="slip-word">contorl</span>, <span class="slip-word">time</span></span>  start slipping.
         </p>
       </div>
     </section>
@@ -85,7 +85,7 @@
     <section class="sp-section-tools">
       <div class="sp-tools-grid">
 
-        <div class="sp-tool-card">
+        <div class="sp-tool-card" data-reveal>
           <div class="sp-tool-body">
             <h3 class="sp-tool-name">Stock</h3>
             <p class="sp-tool-holder">Excel sheet</p>
@@ -93,7 +93,7 @@
           </div>
         </div>
 
-        <div class="sp-tool-card">
+        <div class="sp-tool-card" data-reveal>
           <div class="sp-tool-body">
             <h3 class="sp-tool-name">Sales</h3>
             <p class="sp-tool-holder">WhatsApp orders & Reciept</p>
@@ -101,7 +101,7 @@
           </div>
         </div>
 
-        <div class="sp-tool-card">
+        <div class="sp-tool-card" data-reveal>
           <div class="sp-tool-body">
             <h3 class="sp-tool-name">Expenses</h3>
             <p class="sp-tool-holder">Notebook ledger</p>
@@ -109,7 +109,7 @@
           </div>
         </div>
 
-        <div class="sp-tool-card">
+        <div class="sp-tool-card" data-reveal>
           <div class="sp-tool-body">
             <h3 class="sp-tool-name">Payments</h3>
             <p class="sp-tool-holder">POS and bank apps</p>
@@ -117,7 +117,7 @@
           </div>
         </div>
 
-        <div class="sp-tool-card">
+        <div class="sp-tool-card" data-reveal>
           <div class="sp-tool-body">
             <h3 class="sp-tool-name">Cash flow</h3>
             <p class="sp-tool-holder">Head and memory</p>
@@ -125,7 +125,7 @@
           </div>
         </div>
 
-        <div class="sp-tool-card">
+        <div class="sp-tool-card" data-reveal>
           <div class="sp-tool-body">
             <h3 class="sp-tool-name">Staff records</h3>
             <p class="sp-tool-holder">Attendance book</p>
@@ -139,7 +139,7 @@
     <!-- HOW STANDPOINT FIXES IT -->
     <section class="sp-section-resolve">
       <div class="sp-max-1080">
-        <div class="sp-center sp-max-700">
+        <div class="sp-center sp-max-700" data-reveal>
           <h2 class="sp-h2 sp-max-620">
             <span class="sp-gradient-teal">One place, wired together properly.</span>
           </h2>
@@ -149,7 +149,7 @@
         </div>
 
         <div class="sp-resolve-row">
-          <div class="sp-resolve-illustration">
+          <div class="sp-resolve-illustration" data-reveal>
             <div class="sp-illustration-frame">
               <img src="img/LOGO/Agent.png" class="img-fluid" alt="">
             </div>
@@ -157,7 +157,7 @@
 
           <div class="sp-resolve-list">
 
-            <div class="sp-fix-row">
+            <div class="sp-fix-row" data-reveal>
               <span class="sp-fix-index">01</span>
               <div>
                 <h3 class="sp-fix-title">Every sale updates stock on its own</h3>
@@ -165,7 +165,7 @@
               </div>
             </div>
 
-            <div class="sp-fix-row">
+            <div class="sp-fix-row" data-reveal>
               <span class="sp-fix-index">02</span>
               <div>
                 <h3 class="sp-fix-title">Orders stop living inside chats</h3>
@@ -173,7 +173,7 @@
               </div>
             </div>
 
-            <div class="sp-fix-row">
+            <div class="sp-fix-row" data-reveal>
               <span class="sp-fix-index">03</span>
               <div>
                 <h3 class="sp-fix-title">Money sits beside the sale it belongs to</h3>
@@ -181,7 +181,7 @@
               </div>
             </div>
 
-            <div class="sp-fix-row">
+            <div class="sp-fix-row" data-reveal>
               <span class="sp-fix-index">04</span>
               <div>
                 <h3 class="sp-fix-title">Reports are ready in plain language</h3>
@@ -189,7 +189,7 @@
               </div>
             </div>
 
-            <div class="sp-live ">
+            <div class="sp-live " data-reveal>
               Set up once, then it keeps itself current
             </div>
 
@@ -200,7 +200,7 @@
 
     <!-- CTA -->
     <section class="sp-section-cta">
-      <div class="sp-cta-box">
+      <div class="sp-cta-box" data-reveal>
         <div class="sp-cta-text">
           <p class="sp-cta-eyebrow-blink">Start free</p>
           <h2 class="sp-cta-title">See it with your own numbers.</h2>
@@ -247,6 +247,40 @@
     });
   });
 });
+// Standpoint — Why Standpoint page
+// Entrance-only reveal: watches every [data-reveal] element and adds
+// "is-visible" the moment it scrolls into view. It does not read,
+// write, or modify any text content, styles, or attributes beyond
+// that one class toggle.
+// No eval, no dynamic code execution, no external data parsing.
+
+(function () {
+  'use strict';
+
+  var targets = document.querySelectorAll('[data-reveal]');
+  if (targets.length === 0) return;
+
+  if (!('IntersectionObserver' in window)) {
+    // No IntersectionObserver support: just show everything immediately.
+    targets.forEach(function (el) { el.classList.add('is-visible'); });
+    return;
+  }
+
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.15 }
+  );
+
+  targets.forEach(function (el) { observer.observe(el); });
+})();
   </script>
+  <script src="why-standpoint-reveal.js"></script>
 </body>
 </html>
