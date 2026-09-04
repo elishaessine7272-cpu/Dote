@@ -1,0 +1,3469 @@
+/* =========================================================
+   STANDPOINT — BUILD MY BUSINESS
+   SECTION 01 CSS
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   INFORMATION BAR
+--------------------------------------------------------- */
+
+.sp-build-topbar {
+
+    position: relative;
+
+    z-index: 1000;
+
+    width: 100%;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    background: var(--ink-deep);
+
+    color: rgba(255,255,255,.84);
+
+    overflow: hidden;
+
+}
+
+
+.sp-build-topbar-left {
+
+    height: 100%;
+
+    padding: 0 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+
+    border-right:
+        1px solid
+        rgba(255,255,255,.10);
+
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: .12em;
+
+}
+
+
+.sp-build-live-dot {
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--teal);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(18,165,148,.10);
+
+}
+
+
+.sp-build-marquee {
+
+    flex: 1;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+}
+
+
+.sp-build-marquee-track {
+
+    display: flex;
+
+    align-items: center;
+
+    width: max-content;
+
+    gap: 22px;
+
+    animation:
+        spBuildMarquee 34s
+        linear infinite;
+
+}
+
+
+.sp-build-marquee-track span {
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+}
+
+
+.sp-build-marquee-track i {
+
+    color:
+        rgba(255,255,255,.30);
+
+    font-size: 10px;
+
+}
+
+
+@keyframes spBuildMarquee {
+
+    from {
+
+        transform:
+            translateX(0);
+
+    }
+
+    to {
+
+        transform:
+            translateX(-50%);
+
+    }
+
+}
+
+
+.sp-build-contact {
+
+    height: 100%;
+
+    padding: 0 18px;
+
+    border: 0;
+
+    border-left:
+        1px solid
+        rgba(255,255,255,.10);
+
+    background: transparent;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color:
+        rgba(255,255,255,.84);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.sp-build-contact:hover {
+
+    background:
+        rgba(255,255,255,.05);
+
+    color: #fff;
+
+}
+
+
+
+/* ---------------------------------------------------------
+   MAIN NAV
+--------------------------------------------------------- */
+
+.sp-build-nav {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 900;
+
+    background:
+        rgba(244,246,245,.95);
+
+    backdrop-filter:
+        blur(18px);
+
+    border-bottom:
+        1px solid var(--line);
+
+}
+
+
+.sp-build-nav-inner {
+
+    min-height: 86px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+
+/* ---------------------------------------------------------
+   LOGO
+--------------------------------------------------------- */
+
+.sp-build-logo {
+
+    width: 175px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.sp-build-logo img {
+
+    width: 165px;
+
+    height: auto;
+
+    display: block;
+
+}
+
+
+
+/* ---------------------------------------------------------
+   DESKTOP NAVIGATION
+--------------------------------------------------------- */
+
+.sp-build-desktop-nav {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    margin: 0 auto;
+
+}
+
+
+.sp-build-nav-link,
+.sp-build-nav-trigger {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    min-height: 38px;
+
+    padding: 0 11px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: var(--slate);
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        color .2s ease,
+        background .2s ease;
+
+}
+
+
+.sp-build-nav-link:hover,
+.sp-build-nav-trigger:hover {
+
+    color: var(--ink);
+
+    background:
+        var(--paper-alt);
+
+}
+
+
+.sp-build-nav-trigger i {
+
+    font-size: 8px;
+
+    transition:
+        transform .2s ease;
+
+}
+
+
+.sp-build-nav-trigger.active {
+
+    color: var(--red);
+
+    background:
+        var(--red-light);
+
+}
+
+
+.sp-build-nav-trigger.active i {
+
+    transform:
+        rotate(180deg);
+
+}
+
+
+
+/* ---------------------------------------------------------
+   DESKTOP ACTIONS
+--------------------------------------------------------- */
+
+.sp-build-actions {
+
+    width: 175px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 7px;
+
+}
+
+
+.sp-build-login {
+
+    padding: 10px 10px;
+
+    color: var(--ink);
+
+    border-radius: 9px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.sp-build-login:hover {
+
+    color: var(--red);
+
+}
+
+
+.sp-build-cta {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 10px 13px;
+
+    border-radius: 9px;
+
+    background: var(--red);
+
+    border: 1px solid var(--red);
+
+    color: #fff;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 18px
+        rgba(220,38,38,.13);
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+
+}
+
+
+.sp-build-cta:hover {
+
+    color: #fff;
+
+    background: #be2020;
+
+    border-color: #be2020;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+
+/* ---------------------------------------------------------
+   FULL-WIDTH MEGA MENU
+--------------------------------------------------------- */
+
+.sp-build-dropdown {
+
+    position: static;
+
+}
+
+
+.sp-build-mega {
+
+    position: absolute;
+
+    top: 100%;
+
+    left: 0;
+
+    right: 0;
+
+    width: 100%;
+
+    background:
+        rgba(244,246,245,.98);
+
+    backdrop-filter:
+        blur(24px);
+
+    border-bottom:
+        1px solid var(--line);
+
+    box-shadow:
+        0 25px 60px
+        rgba(15,27,51,.11);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform:
+        translateY(8px);
+
+    transition:
+        opacity .2s ease,
+        visibility .2s ease,
+        transform .2s ease;
+
+}
+
+
+.sp-build-dropdown.open
+.sp-build-mega {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        translateY(0);
+
+}
+
+
+
+/* ---------------------------------------------------------
+   MEGA LAYOUT
+--------------------------------------------------------- */
+
+.sp-build-mega-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        280px
+        minmax(0,1fr);
+
+    gap: 46px;
+
+    padding:
+        32px 0 36px;
+
+}
+
+
+.sp-build-mega-intro {
+
+    padding-right: 28px;
+
+    border-right:
+        1px solid var(--line);
+
+}
+
+
+.sp-build-mega-intro > span {
+
+    display: block;
+
+    color: var(--teal);
+
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    letter-spacing: .12em;
+
+}
+
+
+.sp-build-mega-intro h3 {
+
+    margin:
+        9px 0 12px;
+
+    color:
+        var(--ink);
+
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
+    font-size:
+        26px;
+
+    line-height:
+        1.08;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        -.035em;
+
+}
+
+
+.sp-build-mega-intro p {
+
+    max-width:
+        270px;
+
+    margin:
+        0;
+
+    color:
+        var(--slate);
+
+    font-size:
+        11px;
+
+    line-height:
+        1.7;
+
+}
+
+
+.sp-build-mega-intro > a {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    margin-top:
+        17px;
+
+    color:
+        var(--ink);
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+}
+
+
+.sp-build-mega-intro > a:hover {
+
+    color:
+        var(--red);
+
+}
+
+
+
+/* ---------------------------------------------------------
+   PLATFORM MENU CARDS
+--------------------------------------------------------- */
+
+.sp-build-mega-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        8px;
+
+}
+
+
+.sp-build-mega-grid > a {
+
+    position:
+        relative;
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        10px;
+
+    min-height:
+        103px;
+
+    padding:
+        14px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        12px;
+
+    background:
+        rgba(255,255,255,.32);
+
+    color:
+        var(--ink);
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+
+}
+
+
+.sp-build-mega-grid > a:hover {
+
+    color:
+        var(--ink);
+
+    background:
+        #fff;
+
+    border-color:
+        var(--line-strong);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(15,27,51,.06);
+
+}
+
+
+.sp-build-mega-icon {
+
+    width:
+        30px;
+
+    height:
+        30px;
+
+    flex-shrink:
+        0;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    border-radius:
+        8px;
+
+    background:
+        var(--red-light);
+
+    color:
+        var(--red);
+
+}
+
+
+.sp-build-mega-icon i {
+
+    font-size:
+        11px;
+
+}
+
+
+.sp-build-mega-grid > a strong {
+
+    display:
+        block;
+
+    padding-right:
+        14px;
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+}
+
+
+.sp-build-mega-grid > a small {
+
+    display:
+        block;
+
+    margin-top:
+        4px;
+
+    color:
+        var(--slate);
+
+    font-size:
+        8px;
+
+    line-height:
+        1.5;
+
+}
+
+
+.sp-build-mega-grid > a > .bi-arrow-up-right {
+
+    position:
+        absolute;
+
+    top:
+        13px;
+
+    right:
+        12px;
+
+    color:
+        #9b9f9c;
+
+    font-size:
+        7px;
+
+}
+
+
+.sp-build-mega-grid > a:hover >
+.bi-arrow-up-right {
+
+    color:
+        var(--red);
+
+}
+
+
+.sp-build-mega-highlight {
+
+    background:
+        rgba(180,67,71,.045) !important;
+
+    border-color:
+        rgba(180,67,71,.20) !important;
+
+}
+
+
+
+/* ---------------------------------------------------------
+   BUSINESS MENU
+--------------------------------------------------------- */
+
+.sp-build-business-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        9px;
+
+}
+
+
+.sp-build-business-grid > a {
+
+    position:
+        relative;
+
+    min-height:
+        142px;
+
+    padding:
+        15px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        flex-end;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        13px;
+
+    background:
+        rgba(255,255,255,.30);
+
+    color:
+        var(--ink);
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+
+}
+
+
+.sp-build-business-grid > a:hover {
+
+    color:
+        var(--ink);
+
+    background:
+        #fff;
+
+    border-color:
+        var(--line-strong);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 13px 28px
+        rgba(15,27,51,.06);
+
+}
+
+
+.sp-build-business-grid > a > span {
+
+    position:
+        absolute;
+
+    top:
+        14px;
+
+    left:
+        14px;
+
+    width:
+        31px;
+
+    height:
+        31px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    border-radius:
+        9px;
+
+}
+
+
+.sp-build-business-grid > a > span i {
+
+    font-size:
+        11px;
+
+}
+
+
+.sp-build-business-grid .salon {
+
+    background:
+        #f6e6e6;
+
+    color:
+        #98575e;
+
+}
+
+
+.sp-build-business-grid .chemist {
+
+    background:
+        #e5eef7;
+
+    color:
+        #42698f;
+
+}
+
+
+.sp-build-business-grid .retail {
+
+    background:
+        #ebefdf;
+
+    color:
+        #67734e;
+
+}
+
+
+.sp-build-business-grid .restaurant {
+
+    background:
+        #f4ead7;
+
+    color:
+        #9a7136;
+
+}
+
+
+.sp-build-business-grid .hotel {
+
+    background:
+        #ece9f8;
+
+    color:
+        #665b91;
+
+}
+
+
+.sp-build-business-grid .custom {
+
+    background:
+        var(--red-light);
+
+    color:
+        var(--red);
+
+}
+
+
+.sp-build-business-grid strong {
+
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+}
+
+
+.sp-build-business-grid small {
+
+    margin-top:
+        5px;
+
+    padding-right:
+        15px;
+
+    color:
+        var(--slate);
+
+    font-size:
+        8.5px;
+
+    line-height:
+        1.55;
+
+}
+
+
+.sp-build-business-grid > a > i {
+
+    position:
+        absolute;
+
+    top:
+        17px;
+
+    right:
+        14px;
+
+    color:
+        #9b9f9c;
+
+    font-size:
+        7px;
+
+}
+
+
+.sp-build-business-grid > a:hover > i {
+
+    color:
+        var(--red);
+
+}
+
+
+
+/* ---------------------------------------------------------
+   MOBILE BUTTON
+--------------------------------------------------------- */
+
+.sp-build-mobile-toggle {
+
+    display:
+        none;
+
+    width:
+        40px;
+
+    height:
+        40px;
+
+    padding:
+        0;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        4px;
+
+    border:
+        1px solid var(--line-strong);
+
+    border-radius:
+        9px;
+
+    background:
+        var(--paper-card);
+
+    cursor:
+        pointer;
+
+}
+
+
+.sp-build-mobile-toggle span {
+
+    width:
+        17px;
+
+    height:
+        1.5px;
+
+    background:
+        var(--ink);
+
+    border-radius:
+        9px;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+
+}
+
+
+.sp-build-mobile-toggle.open span:nth-child(1) {
+
+    transform:
+        translateY(5.5px)
+        rotate(45deg);
+
+}
+
+
+.sp-build-mobile-toggle.open span:nth-child(2) {
+
+    opacity:
+        0;
+
+}
+
+
+.sp-build-mobile-toggle.open span:nth-child(3) {
+
+    transform:
+        translateY(-5.5px)
+        rotate(-45deg);
+
+}
+
+
+
+/* ---------------------------------------------------------
+   MOBILE DRAWER
+--------------------------------------------------------- */
+
+.sp-build-mobile-drawer {
+
+    display:
+        none;
+
+    background:
+        rgba(244,246,245,.98);
+
+    border-top:
+        1px solid var(--line);
+
+}
+
+
+.sp-build-mobile-drawer.open {
+
+    display:
+        block;
+
+}
+
+
+.sp-build-mobile-drawer .wrap {
+
+    padding:
+        8px 32px 20px;
+
+}
+
+
+.sp-build-mobile-drawer
+.wrap > a {
+
+    min-height:
+        48px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    border-bottom:
+        1px solid var(--line);
+
+    color:
+        var(--ink);
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+}
+
+
+.sp-build-mobile-group > button {
+
+    width:
+        100%;
+
+    min-height:
+        48px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    border:
+        0;
+
+    border-bottom:
+        1px solid var(--line);
+
+    background:
+        transparent;
+
+    color:
+        var(--ink);
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+    text-align:
+        left;
+
+    cursor:
+        pointer;
+
+}
+
+
+.sp-build-mobile-group > button i {
+
+    font-size:
+        9px;
+
+    transition:
+        transform .2s ease;
+
+}
+
+
+.sp-build-mobile-group > button.open i {
+
+    transform:
+        rotate(180deg);
+
+}
+
+
+.sp-build-mobile-group > div {
+
+    display:
+        none;
+
+    padding:
+        5px 0 6px 13px;
+
+    border-bottom:
+        1px solid var(--line);
+
+}
+
+
+.sp-build-mobile-group > div.open {
+
+    display:
+        block;
+
+}
+
+
+.sp-build-mobile-group > div a {
+
+    display:
+        block;
+
+    padding:
+        8px 0;
+
+    color:
+        var(--slate);
+
+    font-size:
+        11px;
+
+}
+
+
+.sp-build-mobile-group > div a:hover {
+
+    color:
+        var(--red);
+
+}
+
+
+.sp-build-mobile-actions {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        8px;
+
+    padding-top:
+        15px;
+
+}
+
+
+.sp-build-mobile-actions a {
+
+    justify-content:
+        center;
+
+    min-height:
+        42px !important;
+
+    border:
+        1px solid var(--line-strong) !important;
+
+    border-radius:
+        9px;
+
+}
+
+
+.sp-build-mobile-actions a:last-child {
+
+    border-color:
+        var(--red) !important;
+
+    background:
+        var(--red);
+
+    color:
+        #fff;
+
+}
+
+
+
+/* ---------------------------------------------------------
+   TABLET
+--------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+
+    .sp-build-logo {
+
+        width:
+            150px;
+
+    }
+
+
+    .sp-build-logo img {
+
+        width:
+            140px;
+
+    }
+
+
+    .sp-build-actions {
+
+        width:
+            150px;
+
+    }
+
+
+    .sp-build-nav-link,
+    .sp-build-nav-trigger {
+
+        padding:
+            0 8px;
+
+        font-size:
+            11px;
+
+    }
+
+}
+
+
+
+/* ---------------------------------------------------------
+   MOBILE / TABLET NAV
+--------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+    .sp-build-desktop-nav,
+    .sp-build-actions {
+
+        display:
+            none;
+
+    }
+
+
+    .sp-build-mobile-toggle {
+
+        display:
+            flex;
+
+    }
+
+
+    .sp-build-nav-inner {
+
+        min-height:
+            70px;
+
+    }
+
+
+    .sp-build-logo {
+
+        width:
+            auto;
+
+    }
+
+
+    .sp-build-logo img {
+
+        width:
+            142px;
+
+    }
+
+
+    .sp-build-contact {
+
+        display:
+            none;
+
+    }
+
+}
+
+
+
+/* ---------------------------------------------------------
+   SMALL MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 575px) {
+
+    .sp-build-topbar {
+
+        height:
+            34px;
+
+    }
+
+
+    .sp-build-topbar-left {
+
+        padding:
+            0 11px;
+
+        font-size:
+            8px;
+
+    }
+
+
+    .sp-build-marquee-track span {
+
+        font-size:
+            8.5px;
+
+    }
+
+
+    .sp-build-mobile-drawer .wrap {
+
+        padding-left:
+            18px;
+
+        padding-right:
+            18px;
+
+    }
+
+
+    .sp-build-mobile-actions {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+/* =========================================================
+   STANDPOINT BUILD — HERO
+========================================================= */
+
+.sp-build-hero {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        92px 0 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--paper) 0%,
+            var(--paper-alt) 100%
+        );
+
+}
+
+
+/* =========================================================
+   ARCHITECTURAL GRID
+========================================================= */
+
+.sp-build-hero-grid {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+
+        linear-gradient(
+            rgba(15,27,51,.035) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(15,27,51,.035) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        46px 46px;
+
+    opacity:
+        .75;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            #000 0%,
+            #000 58%,
+            transparent 100%
+        );
+
+}
+
+
+/* =========================================================
+   SOFT CENTER GLOW
+========================================================= */
+
+.sp-build-hero-glow {
+
+    position: absolute;
+
+    width:
+        650px;
+
+    height:
+        650px;
+
+    left:
+        50%;
+
+    top:
+        100px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(18,165,148,.055),
+            transparent 68%
+        );
+
+    pointer-events:
+        none;
+
+}
+
+
+
+/* =========================================================
+   HERO COPY
+========================================================= */
+
+.sp-build-hero-content {
+
+    position:
+        relative;
+
+    z-index:
+        5;
+
+    max-width:
+        850px;
+
+    margin:
+        0 auto;
+
+    text-align:
+        center;
+
+}
+
+
+.sp-build-hero-eyebrow {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    margin-bottom:
+        20px;
+
+    color:
+        var(--teal);
+
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size:
+        9px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        .13em;
+
+}
+
+
+.sp-build-hero-eyebrow > span {
+
+    width:
+        25px;
+
+    height:
+        1px;
+
+    background:
+        rgba(18,165,148,.45);
+
+}
+
+
+.sp-build-hero-content h1 {
+
+    margin:
+        0;
+
+    color:
+        var(--ink);
+
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
+    font-size:
+        clamp(
+            48px,
+            7vw,
+            82px
+        );
+
+    line-height:
+        .99;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        -.065em;
+
+}
+
+
+.sp-build-hero-copy {
+
+    max-width:
+        620px;
+
+    margin:
+        24px auto 0;
+
+    color:
+        var(--slate);
+
+    font-size:
+        15.5px;
+
+    line-height:
+        1.7;
+
+}
+
+
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
+
+.sp-build-hero-actions {
+
+    margin-top:
+        27px;
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+}
+
+
+.sp-build-primary,
+.sp-build-secondary {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        8px;
+
+    min-height:
+        46px;
+
+    padding:
+        0 18px;
+
+    border-radius:
+        9px;
+
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
+    font-size:
+        11px;
+
+    font-weight:
+        600;
+
+    transition:
+        .2s ease;
+
+}
+
+
+.sp-build-primary {
+
+    background:
+        var(--ink);
+
+    color:
+        #fff;
+
+    box-shadow:
+        0 12px 25px
+        rgba(15,27,51,.14);
+
+}
+
+
+.sp-build-primary:hover {
+
+    color:
+        #fff;
+
+    background:
+        var(--ink-deep);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.sp-build-secondary {
+
+    border:
+        1px solid
+        var(--line-strong);
+
+    color:
+        var(--ink);
+
+    background:
+        rgba(255,255,255,.25);
+
+}
+
+
+.sp-build-secondary:hover {
+
+    color:
+        var(--ink);
+
+    background:
+        rgba(255,255,255,.7);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+
+/* =========================================================
+   HERO NOTES
+========================================================= */
+
+.sp-build-hero-note {
+
+    margin-top:
+        20px;
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+    flex-wrap:
+        wrap;
+
+}
+
+
+.sp-note-item {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        5px;
+
+    color:
+        #777c79;
+
+    font-size:
+        8px;
+
+    font-weight:
+        600;
+
+}
+
+
+.sp-note-item i {
+
+    color:
+        var(--teal);
+
+    font-size:
+        8px;
+
+}
+
+
+.sp-note-divider {
+
+    width:
+        3px;
+
+    height:
+        3px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(15,27,51,.25);
+
+}
+
+
+
+/* =========================================================
+   PRODUCT VISUAL
+========================================================= */
+
+.sp-build-hero-visual {
+
+    position:
+        relative;
+
+    max-width:
+        1080px;
+
+    margin:
+        58px auto 0;
+
+    padding:
+        0 30px;
+
+}
+
+
+.sp-system-back-panel {
+
+    position:
+        absolute;
+
+    left:
+        11%;
+
+    right:
+        11%;
+
+    top:
+        40px;
+
+    bottom:
+        -20px;
+
+    border:
+        1px solid
+        rgba(15,27,51,.07);
+
+    border-radius:
+        18px;
+
+    transform:
+        scale(.97);
+
+    background:
+        rgba(255,255,255,.26);
+
+}
+
+
+
+/* =========================================================
+   BACK LINES
+========================================================= */
+
+.sp-back-line {
+
+    position:
+        absolute;
+
+    left:
+        30px;
+
+    right:
+        30px;
+
+    height:
+        1px;
+
+    background:
+        rgba(15,27,51,.045);
+
+}
+
+
+.sp-back-line:nth-child(1) {
+
+    top:
+        26%;
+
+}
+
+
+.sp-back-line:nth-child(2) {
+
+    top:
+        51%;
+
+}
+
+
+.sp-back-line:nth-child(3) {
+
+    top:
+        76%;
+
+}
+
+
+
+/* =========================================================
+   MAIN SYSTEM CARD
+========================================================= */
+
+.sp-business-system-card {
+
+    position:
+        relative;
+
+    z-index:
+        5;
+
+    border:
+        1px solid
+        rgba(15,27,51,.13);
+
+    border-radius:
+        16px;
+
+    overflow:
+        hidden;
+
+    background:
+        rgba(255,255,255,.72);
+
+    backdrop-filter:
+        blur(16px);
+
+    box-shadow:
+        0 35px 80px
+        rgba(15,27,51,.13);
+
+    animation:
+        spSystemFloat 6s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes spSystemFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-5px);
+
+    }
+
+}
+
+
+
+/* =========================================================
+   SYSTEM HEADER
+========================================================= */
+
+.sp-system-header {
+
+    min-height:
+        62px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        15px;
+
+    padding:
+        0 18px;
+
+    border-bottom:
+        1px solid var(--line);
+
+    background:
+        rgba(249,250,248,.88);
+
+}
+
+
+.sp-system-header-left {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+}
+
+
+.sp-system-logo {
+
+    width:
+        29px;
+
+    height:
+        29px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        8px;
+
+    background:
+        var(--paper);
+
+}
+
+
+.sp-system-logo img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        contain;
+
+}
+
+
+.sp-system-header small,
+.sp-system-header strong {
+
+    display:
+        block;
+
+}
+
+
+.sp-system-header small {
+
+    color:
+        #929793;
+
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size:
+        6px;
+
+    letter-spacing:
+        .08em;
+
+}
+
+
+.sp-system-header strong {
+
+    margin-top:
+        3px;
+
+    color:
+        var(--ink);
+
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+
+}
+
+
+.sp-system-status {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        6px;
+
+    padding:
+        6px 8px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        999px;
+
+    color:
+        #69706b;
+
+    font-size:
+        7px;
+
+    font-weight:
+        600;
+
+}
+
+
+.sp-system-status span {
+
+    width:
+        5px;
+
+    height:
+        5px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--teal);
+
+}
+
+
+
+/* =========================================================
+   SYSTEM CONTENT
+========================================================= */
+
+.sp-system-content {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1.4fr
+        .8fr;
+
+    gap:
+        0;
+
+}
+
+
+.sp-system-overview {
+
+    padding:
+        23px;
+
+    border-right:
+        1px solid var(--line);
+
+}
+
+
+.sp-system-overview > small {
+
+    color:
+        var(--teal);
+
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size:
+        6px;
+
+    letter-spacing:
+        .11em;
+
+}
+
+
+.sp-system-overview h3 {
+
+    max-width:
+        400px;
+
+    margin:
+        7px 0 18px;
+
+    color:
+        var(--ink);
+
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
+    font-size:
+        23px;
+
+    line-height:
+        1.12;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        -.04em;
+
+}
+
+
+
+/* =========================================================
+   SYSTEM STATS
+========================================================= */
+
+.sp-system-stat-row {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        9px;
+
+    overflow:
+        hidden;
+
+}
+
+
+.sp-system-stat-row > div {
+
+    padding:
+        11px;
+
+    border-right:
+        1px solid var(--line);
+
+}
+
+
+.sp-system-stat-row > div:last-child {
+
+    border-right:
+        0;
+
+}
+
+
+.sp-system-stat-row span,
+.sp-system-stat-row strong,
+.sp-system-stat-row small {
+
+    display:
+        block;
+
+}
+
+
+.sp-system-stat-row span {
+
+    color:
+        #929793;
+
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size:
+        5.5px;
+
+    letter-spacing:
+        .08em;
+
+}
+
+
+.sp-system-stat-row strong {
+
+    margin-top:
+        7px;
+
+    color:
+        var(--ink);
+
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+}
+
+
+.sp-system-stat-row small {
+
+    margin-top:
+        2px;
+
+    color:
+        #989d9a;
+
+    font-size:
+        6px;
+
+}
+
+
+
+/* =========================================================
+   MINI CHART
+========================================================= */
+
+.sp-mini-chart {
+
+    margin-top:
+        12px;
+
+    padding:
+        13px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        9px;
+
+    background:
+        rgba(255,255,255,.36);
+
+}
+
+
+.sp-chart-top {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+}
+
+
+.sp-chart-top span {
+
+    color:
+        var(--ink);
+
+    font-size:
+        7px;
+
+    font-weight:
+        700;
+
+}
+
+
+.sp-chart-top small {
+
+    color:
+        #969b97;
+
+    font-size:
+        6px;
+
+}
+
+
+.sp-mini-chart-area {
+
+    position:
+        relative;
+
+    height:
+        130px;
+
+    margin-top:
+        10px;
+
+}
+
+
+.sp-mini-grid {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent calc(25% - 1px),
+            rgba(15,27,51,.055) calc(25% - 1px),
+            rgba(15,27,51,.055) 25%
+        );
+
+}
+
+
+.sp-mini-chart-area svg {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+}
+
+
+.sp-mini-chart-area path {
+
+    fill:
+        none;
+
+    stroke:
+        var(--teal);
+
+    stroke-width:
+        3;
+
+    stroke-linecap:
+        round;
+
+    vector-effect:
+        non-scaling-stroke;
+
+}
+
+
+
+/* =========================================================
+   SIDE PANEL
+========================================================= */
+
+.sp-system-side {
+
+    padding:
+        23px;
+
+    background:
+        rgba(247,249,247,.45);
+
+}
+
+
+.sp-system-side-head {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    margin-bottom:
+        10px;
+
+}
+
+
+.sp-system-side-head span {
+
+    color:
+        var(--teal);
+
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size:
+        6px;
+
+    letter-spacing:
+        .10em;
+
+}
+
+
+.sp-system-side-head i {
+
+    color:
+        #878e89;
+
+    font-size:
+        10px;
+
+}
+
+
+.sp-system-field {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        10px;
+
+    min-height:
+        41px;
+
+    border-bottom:
+        1px solid rgba(15,27,51,.07);
+
+}
+
+
+.sp-system-field > div {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+}
+
+
+.sp-system-field i {
+
+    color:
+        var(--teal);
+
+    font-size:
+        9px;
+
+}
+
+
+.sp-system-field span {
+
+    color:
+        #777c78;
+
+    font-size:
+        7px;
+
+}
+
+
+.sp-system-field strong {
+
+    color:
+        var(--ink);
+
+    font-size:
+        7px;
+
+    font-weight:
+        700;
+
+}
+
+
+
+/* =========================================================
+   BRANDING
+========================================================= */
+
+.sp-system-branding {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    margin-top:
+        14px;
+
+    padding:
+        10px;
+
+    border:
+        1px solid rgba(18,165,148,.18);
+
+    border-radius:
+        9px;
+
+    background:
+        rgba(18,165,148,.045);
+
+}
+
+
+.sp-branding-mark {
+
+    width:
+        26px;
+
+    height:
+        26px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    border-radius:
+        7px;
+
+    background:
+        var(--ink);
+
+    color:
+        #fff;
+
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
+    font-size:
+        9px;
+
+    font-weight:
+        700;
+
+}
+
+
+.sp-system-branding small,
+.sp-system-branding strong {
+
+    display:
+        block;
+
+}
+
+
+.sp-system-branding small {
+
+    color:
+        #929793;
+
+    font-size:
+        5px;
+
+    letter-spacing:
+        .08em;
+
+}
+
+
+.sp-system-branding strong {
+
+    margin-top:
+        2px;
+
+    color:
+        var(--ink);
+
+    font-size:
+        8px;
+
+}
+
+
+.sp-system-branding > i {
+
+    margin-left:
+        auto;
+
+    color:
+        var(--teal);
+
+    font-size:
+        11px;
+
+}
+
+
+
+/* =========================================================
+   SYSTEM FOOTER
+========================================================= */
+
+.sp-system-footer {
+
+    min-height:
+        39px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        0 17px;
+
+    border-top:
+        1px solid var(--line);
+
+    background:
+        #f8f9f7;
+
+    color:
+        #969b98;
+
+    font-size:
+        6px;
+
+}
+
+
+.sp-system-footer > div {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        5px;
+
+}
+
+
+.sp-system-footer > div span {
+
+    width:
+        5px;
+
+    height:
+        5px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--teal);
+
+}
+
+
+
+/* =========================================================
+   FLOATING CARDS
+========================================================= */
+
+.sp-build-float {
+
+    position:
+        absolute;
+
+    z-index:
+        15;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    min-width:
+        105px;
+
+    padding:
+        8px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        9px;
+
+    background:
+        rgba(255,255,255,.88);
+
+    backdrop-filter:
+        blur(12px);
+
+    box-shadow:
+        0 15px 30px
+        rgba(15,27,51,.10);
+
+    animation:
+        spBuildFloat 5s
+        ease-in-out
+        infinite;
+
+}
+
+
+.sp-float-one {
+
+    left:
+        -2px;
+
+    top:
+        25%;
+
+}
+
+
+.sp-float-two {
+
+    right:
+        -2px;
+
+    top:
+        46%;
+
+    animation-delay:
+        -2s;
+
+}
+
+
+.sp-float-three {
+
+    left:
+        4%;
+
+    bottom:
+        5%;
+
+    animation-delay:
+        -3.5s;
+
+}
+
+
+.sp-build-float > span {
+
+    width:
+        24px;
+
+    height:
+        24px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    border-radius:
+        7px;
+
+    background:
+        var(--teal-light);
+
+    color:
+        var(--teal);
+
+}
+
+
+.sp-build-float small,
+.sp-build-float strong {
+
+    display:
+        block;
+
+}
+
+
+.sp-build-float small {
+
+    color:
+        #959a96;
+
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size:
+        5px;
+
+}
+
+
+.sp-build-float strong {
+
+    margin-top:
+        2px;
+
+    color:
+        var(--ink);
+
+    font-size:
+        7px;
+
+}
+
+
+@keyframes spBuildFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-6px);
+
+    }
+
+}
+
+
+
+/* =========================================================
+   HERO BOTTOM
+========================================================= */
+
+.sp-build-hero-bottom {
+
+    position:
+        relative;
+
+    z-index:
+        5;
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    padding:
+        26px 0 35px;
+
+    color:
+        #8d928f;
+
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size:
+        7px;
+
+    letter-spacing:
+        .10em;
+
+}
+
+
+.sp-build-hero-bottom i {
+
+    color:
+        var(--teal);
+
+    font-size:
+        9px;
+
+}
+
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .sp-build-hero {
+
+        padding-top:
+            70px;
+
+    }
+
+
+    .sp-build-hero-visual {
+
+        padding:
+            0 15px;
+
+    }
+
+
+    .sp-system-content {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .sp-system-overview {
+
+        border-right:
+            0;
+
+        border-bottom:
+            1px solid var(--line);
+
+    }
+
+
+    .sp-float-one,
+    .sp-float-three {
+
+        left:
+            0;
+
+    }
+
+
+    .sp-float-two {
+
+        right:
+            0;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+    .sp-build-hero {
+
+        padding-top:
+            55px;
+
+    }
+
+
+    .sp-build-hero-content {
+
+        padding:
+            0 10px;
+
+    }
+
+
+    .sp-build-hero-content h1 {
+
+        font-size:
+            clamp(
+                42px,
+                12vw,
+                60px
+            );
+
+    }
+
+
+    .sp-build-hero-copy {
+
+        padding:
+            0 10px;
+
+        font-size:
+            13px;
+
+    }
+
+
+    .sp-build-hero-actions {
+
+        flex-direction:
+            column;
+
+        padding:
+            0 18px;
+
+    }
+
+
+    .sp-build-primary,
+    .sp-build-secondary {
+
+        width:
+            100%;
+
+    }
+
+
+    .sp-build-hero-note {
+
+        padding:
+            0 10px;
+
+        gap:
+            8px;
+
+    }
+
+
+    .sp-build-hero-visual {
+
+        margin-top:
+            35px;
+
+        padding:
+            0;
+
+    }
+
+
+    .sp-business-system-card {
+
+        border-radius:
+            12px;
+
+    }
+
+
+    .sp-system-header {
+
+        min-height:
+            53px;
+
+        padding:
+            0 11px;
+
+    }
+
+
+    .sp-system-logo {
+
+        width:
+            25px;
+
+        height:
+            25px;
+
+    }
+
+
+    .sp-system-header strong {
+
+        font-size:
+            10px;
+
+    }
+
+
+    .sp-system-status {
+
+        font-size:
+            6px;
+
+        padding:
+            5px 6px;
+
+    }
+
+
+    .sp-system-overview,
+    .sp-system-side {
+
+        padding:
+            15px;
+
+    }
+
+
+    .sp-system-overview h3 {
+
+        font-size:
+            20px;
+
+    }
+
+
+    .sp-system-stat-row strong {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .sp-mini-chart-area {
+
+        height:
+            105px;
+
+    }
+
+
+    .sp-build-float {
+
+        display:
+            none;
+
+    }
+
+
+    .sp-system-footer {
+
+        padding:
+            0 11px;
+
+    }
+
+}

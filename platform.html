@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="css/platform.css">
+
+</head>
+<body>
+    
+    <!-- =========================================================
+    STANDPOINT — BUILD MY BUSINESS PAGE
+    SECTION 01: TOPBAR + NAVBAR
+========================================================= -->
+
+
+<!-- TOP INFORMATION BAR -->
+
+<div class="sp-build-topbar">
+
+   <div class="sp-build-topbar-left">
+
+       <span class="sp-build-live-dot"></span>
+
+       STANDPOINT
+
+   </div>
+
+
+   <div class="sp-build-marquee">
+
+       <div class="sp-build-marquee-track">
+
+           <span>
+               Your business already has a way of working.
+           </span>
+
+           <i class="bi bi-dot"></i>
+
+           <span>
+               Standpoint can build the system around it.
+           </span>
+
+           <i class="bi bi-dot"></i>
+
+           <span>
+               Your brand. Your workflow. Your business system.
+           </span>
+
+           <i class="bi bi-dot"></i>
+
+
+           <!-- DUPLICATE FOR CONTINUOUS SCROLL -->
+
+           <span>
+               Your business already has a way of working.
+           </span>
+
+           <i class="bi bi-dot"></i>
+
+           <span>
+               Standpoint can build the system around it.
+           </span>
+
+           <i class="bi bi-dot"></i>
+
+           <span>
+               Your brand. Your workflow. Your business system.
+           </span>
+
+           <i class="bi bi-dot"></i>
+
+       </div>
+
+   </div>
+
+
+   <button
+       type="button"
+       class="sp-build-contact"
+       onclick="toggleContact(true)"
+   >
+
+       Talk to us
+
+       <i class="bi bi-arrow-up-right"></i>
+
+   </button>
+
+</div>
+
+
+
+<!-- MAIN NAVBAR -->
+
+<nav
+   class="sp-build-nav"
+   id="spBuildNav"
+>
+
+   <div class="wrap sp-build-nav-inner">
+
+
+       <!-- LOGO -->
+
+       <a
+           href="index.html"
+           class="sp-build-logo"
+           aria-label="Standpoint home"
+       >
+
+           <img
+               src="img/LOGO/Untitled design.png"
+               alt="Standpoint"
+           >
+
+       </a>
+
+
+
+       <!-- DESKTOP NAVIGATION -->
+
+       <div class="sp-build-desktop-nav">
+
+
+           <!-- PLATFORM -->
+
+           <div
+               class="sp-build-dropdown"
+               id="spBuildPlatform"
+           >
+
+               <button
+                   type="button"
+                   class="sp-build-nav-trigger"
+                   onclick="toggleBuildDropdown(event, 'spBuildPlatform')"
+                   aria-expanded="false"
+               >
+
+                   Platform
+
+                   <i class="bi bi-chevron-down"></i>
+
+               </button>
+
+
+               <div class="sp-build-mega">
+
+                   <div class="wrap">
+
+                       <div class="sp-build-mega-layout">
+
+
+                           <div class="sp-build-mega-intro">
+
+                               <span>
+                                   THE STANDPOINT PLATFORM
+                               </span>
+
+                               <h3>
+                                   One platform.
+                                   Two ways to use it.
+                               </h3>
+
+                               <p>
+                                   Run your business on Standpoint,
+                                   or have us build a private system
+                                   around the way your business works.
+                               </p>
+
+                               <a href="#platform">
+                                   Explore the platform
+                                   <i class="bi bi-arrow-right"></i>
+                               </a>
+
+                           </div>
+
+
+                           <div class="sp-build-mega-grid">
+
+
+                               <a href="#dashboard">
+
+                                   <span class="sp-build-mega-icon">
+                                       <i class="bi bi-grid"></i>
+                                   </span>
+
+                                   <div>
+
+                                       <strong>
+                                           Business Dashboard
+                                       </strong>
+
+                                       <small>
+                                           One clear view of your
+                                           business activity.
+                                       </small>
+
+                                   </div>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+
+                               <a href="#sales">
+
+                                   <span class="sp-build-mega-icon">
+                                       <i class="bi bi-receipt"></i>
+                                   </span>
+
+                                   <div>
+
+                                       <strong>
+                                           Sales & POS
+                                       </strong>
+
+                                       <small>
+                                           Record and understand
+                                           your business sales.
+                                       </small>
+
+                                   </div>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+
+                               <a href="#inventory">
+
+                                   <span class="sp-build-mega-icon">
+                                       <i class="bi bi-box-seam"></i>
+                                   </span>
+
+                                   <div>
+
+                                       <strong>
+                                           Inventory
+                                       </strong>
+
+                                       <small>
+                                           Know what you have,
+                                           what moved and what is low.
+                                       </small>
+
+                                   </div>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+
+                               <a href="#finance">
+
+                                   <span class="sp-build-mega-icon">
+                                       <i class="bi bi-wallet2"></i>
+                                   </span>
+
+                                   <div>
+
+                                       <strong>
+                                           Money & Expenses
+                                       </strong>
+
+                                       <small>
+                                           Keep income and spending
+                                           visible.
+                                       </small>
+
+                                   </div>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+
+                               <a href="#team">
+
+                                   <span class="sp-build-mega-icon">
+                                       <i class="bi bi-people"></i>
+                                   </span>
+
+                                   <div>
+
+                                       <strong>
+                                           Team & Access
+                                       </strong>
+
+                                       <small>
+                                           Staff, permissions,
+                                           attendance and payroll.
+                                       </small>
+
+                                   </div>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+
+                               <a href="#reports">
+
+                                   <span class="sp-build-mega-icon">
+                                       <i class="bi bi-bar-chart"></i>
+                                   </span>
+
+                                   <div>
+
+                                       <strong>
+                                           Reports
+                                       </strong>
+
+                                       <small>
+                                           Turn business records
+                                           into useful information.
+                                       </small>
+
+                                   </div>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+
+                               <a
+                                   href="#build-system"
+                                   class="sp-build-mega-highlight"
+                               >
+
+                                   <span class="sp-build-mega-icon">
+                                       <i class="bi bi-diagram-3"></i>
+                                   </span>
+
+                                   <div>
+
+                                       <strong>
+                                           Build My Business System
+                                       </strong>
+
+                                       <small>
+                                           A private system configured
+                                           around your business.
+                                       </small>
+
+                                   </div>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+                           </div>
+
+                       </div>
+
+                   </div>
+
+               </div>
+
+           </div>
+
+
+
+           <!-- BUSINESSES -->
+
+           <div
+               class="sp-build-dropdown"
+               id="spBuildBusinesses"
+           >
+
+               <button
+                   type="button"
+                   class="sp-build-nav-trigger"
+                   onclick="toggleBuildDropdown(event, 'spBuildBusinesses')"
+                   aria-expanded="false"
+               >
+
+                   Businesses
+
+                   <i class="bi bi-chevron-down"></i>
+
+               </button>
+
+
+               <div class="sp-build-mega">
+
+                   <div class="wrap">
+
+                       <div class="sp-build-mega-layout">
+
+
+                           <div class="sp-build-mega-intro">
+
+                               <span>
+                                   WHO IS IT FOR?
+                               </span>
+
+                               <h3>
+                                   Different businesses.
+                                   Different systems.
+                               </h3>
+
+                               <p>
+                                   Standpoint can start with a business
+                                   template or build around a unique
+                                   workflow.
+                               </p>
+
+                               <a href="#businesses">
+                                   Explore businesses
+                                   <i class="bi bi-arrow-right"></i>
+                               </a>
+
+                           </div>
+
+
+                           <div class="sp-build-business-grid">
+
+
+                               <a href="#salon">
+
+                                   <span class="salon">
+                                       <i class="bi bi-scissors"></i>
+                                   </span>
+
+                                   <strong>
+                                       Salon
+                                   </strong>
+
+                                   <small>
+                                       Clients, appointments,
+                                       staff and commissions.
+                                   </small>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+
+                               <a href="#chemist">
+
+                                   <span class="chemist">
+                                       <i class="bi bi-capsule"></i>
+                                   </span>
+
+                                   <strong>
+                                       Chemist
+                                   </strong>
+
+                                   <small>
+                                       Stock, batches,
+                                       expiry and sales.
+                                   </small>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+
+                               <a href="#retail">
+
+                                   <span class="retail">
+                                       <i class="bi bi-shop"></i>
+                                   </span>
+
+                                   <strong>
+                                       Retail
+                                   </strong>
+
+                                   <small>
+                                       POS, inventory,
+                                       suppliers and customers.
+                                   </small>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+
+                               <a href="#restaurant">
+
+                                   <span class="restaurant">
+                                       <i class="bi bi-cup-hot"></i>
+                                   </span>
+
+                                   <strong>
+                                       Restaurant
+                                   </strong>
+
+                                   <small>
+                                       Orders, tables,
+                                       kitchen and staff.
+                                   </small>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+
+                               <a href="#hotel">
+
+                                   <span class="hotel">
+                                       <i class="bi bi-building"></i>
+                                   </span>
+
+                                   <strong>
+                                       Hotel
+                                   </strong>
+
+                                   <small>
+                                       Rooms, guests,
+                                       bookings and operations.
+                                   </small>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+
+                               <a
+                                   href="#custom-business"
+                                   class="sp-build-custom-business"
+                               >
+
+                                   <span class="custom">
+                                       <i class="bi bi-sliders2"></i>
+                                   </span>
+
+                                   <strong>
+                                       Your Business
+                                   </strong>
+
+                                   <small>
+                                       Don't see yours?
+                                       We can build around it.
+                                   </small>
+
+                                   <i class="bi bi-arrow-up-right"></i>
+
+                               </a>
+
+                           </div>
+
+                       </div>
+
+                   </div>
+
+               </div>
+
+           </div>
+
+
+
+           <!-- NORMAL LINKS -->
+
+           <a
+               href="#how-it-works"
+               class="sp-build-nav-link"
+           >
+               How it works
+           </a>
+
+
+           <a
+               href="#pricing"
+               class="sp-build-nav-link"
+           >
+               Pricing
+           </a>
+
+
+           <a
+               href="#about"
+               class="sp-build-nav-link"
+           >
+               About
+           </a>
+
+       </div>
+
+
+
+       <!-- RIGHT SIDE -->
+
+       <div class="sp-build-actions">
+
+           <a
+               href="login.html"
+               class="sp-build-login"
+           >
+               Log in
+           </a>
+
+
+           <a
+               href="#build-system"
+               class="sp-build-cta"
+           >
+
+               Build your system
+
+               <i class="bi bi-arrow-up-right"></i>
+
+           </a>
+
+       </div>
+
+
+
+       <!-- MOBILE TOGGLE -->
+
+       <button
+           class="sp-build-mobile-toggle"
+           id="spBuildMobileToggle"
+           type="button"
+           onclick="toggleBuildMobile()"
+           aria-label="Open navigation"
+           aria-expanded="false"
+       >
+
+           <span></span>
+           <span></span>
+           <span></span>
+
+       </button>
+
+   </div>
+
+
+
+   <!-- MOBILE DRAWER -->
+
+   <div
+       class="sp-build-mobile-drawer"
+       id="spBuildMobileDrawer"
+   >
+
+       <div class="wrap">
+
+
+           <a href="#how-it-works">
+               How it works
+           </a>
+
+
+           <div class="sp-build-mobile-group">
+
+               <button
+                   type="button"
+                   onclick="toggleBuildMobileSub(this)"
+                   aria-expanded="false"
+               >
+
+                   Platform
+
+                   <i class="bi bi-chevron-down"></i>
+
+               </button>
+
+
+               <div>
+
+                   <a href="#dashboard">
+                       Business Dashboard
+                   </a>
+
+                   <a href="#sales">
+                       Sales & POS
+                   </a>
+
+                   <a href="#inventory">
+                       Inventory
+                   </a>
+
+                   <a href="#finance">
+                       Money & Expenses
+                   </a>
+
+                   <a href="#team">
+                       Team & Access
+                   </a>
+
+                   <a href="#reports">
+                       Reports
+                   </a>
+
+                   <a href="#build-system">
+                       Build My Business System
+                   </a>
+
+               </div>
+
+           </div>
+
+
+           <div class="sp-build-mobile-group">
+
+               <button
+                   type="button"
+                   onclick="toggleBuildMobileSub(this)"
+                   aria-expanded="false"
+               >
+
+                   Businesses
+
+                   <i class="bi bi-chevron-down"></i>
+
+               </button>
+
+
+               <div>
+
+                   <a href="#salon">
+                       Salon
+                   </a>
+
+                   <a href="#chemist">
+                       Chemist
+                   </a>
+
+                   <a href="#retail">
+                       Retail
+                   </a>
+
+                   <a href="#restaurant">
+                       Restaurant
+                   </a>
+
+                   <a href="#hotel">
+                       Hotel
+                   </a>
+
+                   <a href="#custom-business">
+                       Your Business
+                   </a>
+
+               </div>
+
+           </div>
+
+
+           <a href="#pricing">
+               Pricing
+           </a>
+
+
+           <a href="#about">
+               About
+           </a>
+
+
+           <div class="sp-build-mobile-actions">
+
+               <a href="login.html">
+                   Log in
+               </a>
+
+               <a href="#build-system">
+                   Build your system
+                   <i class="bi bi-arrow-up-right"></i>
+               </a>
+
+           </div>
+
+       </div>
+
+   </div>
+
+</nav>
+<!-- =========================================================
+STANDPOINT BUILD — HERO
+========================================================= -->
+
+<section class="sp-build-hero">
+
+<!-- Background grid -->
+
+<div class="sp-build-hero-grid" aria-hidden="true"></div>
+
+
+<!-- Soft background glow -->
+
+<div class="sp-build-hero-glow" aria-hidden="true"></div>
+
+
+<div class="wrap">
+
+
+   <!-- HERO CONTENT -->
+
+   <div class="sp-build-hero-content">
+
+
+       <!-- EYEBROW -->
+
+       <div class="sp-build-hero-eyebrow">
+
+           <span></span>
+
+           STANDPOINT BUSINESS SYSTEMS
+
+           <span></span>
+
+       </div>
+
+
+
+       <!-- MAIN HEADING -->
+
+       <h1>
+
+           Your business deserves
+
+           <br>
+
+           a system of its own.
+
+       </h1>
+
+
+
+       <!-- SUPPORTING COPY -->
+
+       <p class="sp-build-hero-copy">
+
+           Don't force the way you work into software that
+           wasn't built for you. Standpoint can build a
+           private business system around your workflow,
+           your people and your brand.
+
+       </p>
+
+
+
+       <!-- ACTIONS -->
+
+       <div class="sp-build-hero-actions">
+
+           <a
+               href="#build-system"
+               class="sp-build-primary"
+           >
+
+               Build my business system
+
+               <i class="bi bi-arrow-up-right"></i>
+
+           </a>
+
+
+           <a
+               href="#how-it-works"
+               class="sp-build-secondary"
+           >
+
+               See how it works
+
+               <i class="bi bi-arrow-down"></i>
+
+           </a>
+
+       </div>
+
+
+
+       <!-- SMALL TRUST LINE -->
+
+       <div class="sp-build-hero-note">
+
+           <span class="sp-note-item">
+
+               <i class="bi bi-check2"></i>
+
+               Your brand
+
+           </span>
+
+
+           <span class="sp-note-divider"></span>
+
+
+           <span class="sp-note-item">
+
+               <i class="bi bi-check2"></i>
+
+               Your workflow
+
+           </span>
+
+
+           <span class="sp-note-divider"></span>
+
+
+           <span class="sp-note-item">
+
+               <i class="bi bi-check2"></i>
+
+               Your business rules
+
+           </span>
+
+       </div>
+
+   </div>
+
+
+
+   <!-- =================================================
+        HERO VISUAL
+   ================================================== -->
+
+   <div class="sp-build-hero-visual">
+
+
+       <!-- BACK DEPTH PANEL -->
+
+       <div class="sp-system-back-panel">
+
+           <div class="sp-back-line"></div>
+
+           <div class="sp-back-line"></div>
+
+           <div class="sp-back-line"></div>
+
+       </div>
+
+
+
+       <!-- MAIN BUSINESS SYSTEM CARD -->
+
+       <div class="sp-business-system-card">
+
+
+           <!-- HEADER -->
+
+           <div class="sp-system-header">
+
+               <div class="sp-system-header-left">
+
+                   <div class="sp-system-logo">
+
+                       <img
+                           src="img/LOGO/Untitled design.png"
+                           alt="Standpoint"
+                       >
+
+                   </div>
+
+
+                   <div>
+
+                       <small>
+                           PRIVATE BUSINESS SYSTEM
+                       </small>
+
+                       <strong>
+                           Royal Touch
+                       </strong>
+
+                   </div>
+
+               </div>
+
+
+               <div class="sp-system-status">
+
+                   <span></span>
+
+                   Your workspace
+
+               </div>
+
+           </div>
+
+
+
+           <!-- SYSTEM CONTENT -->
+
+           <div class="sp-system-content">
+
+
+               <!-- LEFT -->
+
+               <div class="sp-system-overview">
+
+                   <small>
+                       BUSINESS OVERVIEW
+                   </small>
+
+                   <h3>
+                       Everything your business
+                       needs, in one place.
+                   </h3>
+
+
+                   <div class="sp-system-stat-row">
+
+
+                       <div>
+
+                           <span>SALES</span>
+
+                           <strong>
+                               ₦482,600
+                           </strong>
+
+                           <small>
+                               Today
+                           </small>
+
+                       </div>
+
+
+                       <div>
+
+                           <span>STOCK</span>
+
+                           <strong>
+                               3
+                           </strong>
+
+                           <small>
+                               Need attention
+                           </small>
+
+                       </div>
+
+
+                       <div>
+
+                           <span>TEAM</span>
+
+                           <strong>
+                               6 / 8
+                           </strong>
+
+                           <small>
+                               On shift
+                           </small>
+
+                       </div>
+
+                   </div>
+
+
+
+                   <!-- MINI CHART -->
+
+                   <div class="sp-mini-chart">
+
+                       <div class="sp-chart-top">
+
+                           <span>
+                               Business performance
+                           </span>
+
+                           <small>
+                               This week
+                           </small>
+
+                       </div>
+
+
+                       <div class="sp-mini-chart-area">
+
+                           <div
+                               class="sp-mini-grid"
+                           ></div>
+
+
+                           <svg
+                               viewBox="0 0 500 150"
+                               preserveAspectRatio="none"
+                           >
+
+                               <path
+                                   d="
+                                   M0 120
+                                   C35 112 54 104 85 108
+                                   S138 85 166 96
+                                   S216 75 247 82
+                                   S302 47 334 64
+                                   S387 34 420 49
+                                   S467 24 500 31
+                                   "
+                               ></path>
+
+                           </svg>
+
+                       </div>
+
+                   </div>
+
+               </div>
+
+
+
+               <!-- RIGHT -->
+
+               <div class="sp-system-side">
+
+
+                   <div class="sp-system-side-head">
+
+                       <span>
+                           YOUR SETUP
+                       </span>
+
+                       <i class="bi bi-sliders2"></i>
+
+                   </div>
+
+
+
+                   <div class="sp-system-field">
+
+                       <div>
+
+                           <i class="bi bi-tag"></i>
+
+                           <span>
+                               Business name
+                           </span>
+
+                       </div>
+
+                       <strong>
+                           Royal Touch
+                       </strong>
+
+                   </div>
+
+
+
+                   <div class="sp-system-field">
+
+                       <div>
+
+                           <i class="bi bi-diagram-3"></i>
+
+                           <span>
+                               Workflow
+                           </span>
+
+                       </div>
+
+                       <strong>
+                           Custom
+                       </strong>
+
+                   </div>
+
+
+
+                   <div class="sp-system-field">
+
+                       <div>
+
+                           <i class="bi bi-people"></i>
+
+                           <span>
+                               Team access
+                           </span>
+
+                       </div>
+
+                       <strong>
+                           8 members
+                       </strong>
+
+                   </div>
+
+
+
+                   <div class="sp-system-field">
+
+                       <div>
+
+                           <i class="bi bi-bar-chart"></i>
+
+                           <span>
+                               Reports
+                           </span>
+
+                       </div>
+
+                       <strong>
+                           6 active
+                       </strong>
+
+                   </div>
+
+
+
+                   <div class="sp-system-branding">
+
+                       <div class="sp-branding-mark">
+                           R
+                       </div>
+
+                       <div>
+
+                           <small>
+                               YOUR BRAND
+                           </small>
+
+                           <strong>
+                               Royal Touch
+                           </strong>
+
+                       </div>
+
+                       <i class="bi bi-check-circle-fill"></i>
+
+                   </div>
+
+               </div>
+
+           </div>
+
+
+
+           <!-- FOOTER -->
+
+           <div class="sp-system-footer">
+
+               <div>
+
+                   <span></span>
+
+                   Powered by Standpoint
+
+               </div>
+
+               <span>
+                   Private workspace
+               </span>
+
+           </div>
+
+       </div>
+
+
+
+       <!-- FLOATING INFO -->
+
+       <div class="sp-build-float sp-float-one">
+
+           <span>
+               <i class="bi bi-palette2"></i>
+           </span>
+
+           <div>
+
+               <small>
+                   BRAND
+               </small>
+
+               <strong>
+                   Yours
+
+               </strong>
+
+           </div>
+
+       </div>
+
+
+
+       <div class="sp-build-float sp-float-two">
+
+           <span>
+               <i class="bi bi-diagram-3"></i>
+           </span>
+
+           <div>
+
+               <small>
+                   WORKFLOW
+               </small>
+
+               <strong>
+                   Yours
+               </strong>
+
+           </div>
+
+       </div>
+
+
+
+       <div class="sp-build-float sp-float-three">
+
+           <span>
+               <i class="bi bi-shield-check"></i>
+           </span>
+
+           <div>
+
+               <small>
+                   ACCESS
+               </small>
+
+               <strong>
+                   Controlled
+               </strong>
+
+           </div>
+
+       </div>
+
+
+   </div>
+
+</div>
+
+
+<!-- HERO BOTTOM STATEMENT -->
+
+<div class="sp-build-hero-bottom">
+
+   <span>
+       START WITH THE WAY YOU WORK
+   </span>
+
+   <i class="bi bi-arrow-down"></i>
+
+</div>
+
+</section>
+
+<script>
+    // =========================================================
+// STANDPOINT — BUILD MY BUSINESS
+// SECTION 01 NAVIGATION
+// =========================================================
+
+
+/* ---------------------------------------------------------
+   DESKTOP MEGA MENUS
+--------------------------------------------------------- */
+
+function toggleBuildDropdown(event, dropdownId) {
+
+    event.preventDefault();
+
+    event.stopPropagation();
+
+
+    const clickedDropdown =
+        document.getElementById(dropdownId);
+
+
+    if (!clickedDropdown) return;
+
+
+    const allDropdowns =
+        document.querySelectorAll(
+            ".sp-build-dropdown"
+        );
+
+
+    allDropdowns.forEach(function (dropdown) {
+
+        const trigger =
+            dropdown.querySelector(
+                ".sp-build-nav-trigger"
+            );
+
+
+        if (dropdown.id === dropdownId) {
+
+            const isOpen =
+                dropdown.classList.toggle("open");
+
+
+            if (trigger) {
+
+                trigger.classList.toggle(
+                    "active",
+                    isOpen
+                );
+
+                trigger.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                );
+
+            }
+
+        } else {
+
+            dropdown.classList.remove("open");
+
+
+            if (trigger) {
+
+                trigger.classList.remove("active");
+
+                trigger.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+
+    });
+
+}
+
+
+
+/* ---------------------------------------------------------
+   CLOSE DESKTOP MENUS
+--------------------------------------------------------- */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        if (
+            event.target.closest(
+                ".sp-build-dropdown"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        document
+            .querySelectorAll(
+                ".sp-build-dropdown"
+            )
+            .forEach(function (dropdown) {
+
+                dropdown.classList.remove(
+                    "open"
+                );
+
+
+                const trigger =
+                    dropdown.querySelector(
+                        ".sp-build-nav-trigger"
+                    );
+
+
+                if (trigger) {
+
+                    trigger.classList.remove(
+                        "active"
+                    );
+
+                    trigger.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            });
+
+    }
+);
+
+
+
+/* ---------------------------------------------------------
+   MOBILE DRAWER
+--------------------------------------------------------- */
+
+function toggleBuildMobile() {
+
+    const drawer =
+        document.getElementById(
+            "spBuildMobileDrawer"
+        );
+
+
+    const button =
+        document.getElementById(
+            "spBuildMobileToggle"
+        );
+
+
+    if (!drawer || !button) return;
+
+
+    const isOpen =
+        drawer.classList.toggle("open");
+
+
+    button.classList.toggle(
+        "open",
+        isOpen
+    );
+
+
+    button.setAttribute(
+        "aria-expanded",
+        isOpen ? "true" : "false"
+    );
+
+}
+
+
+
+/* ---------------------------------------------------------
+   MOBILE SUBMENUS
+--------------------------------------------------------- */
+
+function toggleBuildMobileSub(button) {
+
+    if (!button) return;
+
+
+    const submenu =
+        button.nextElementSibling;
+
+
+    if (!submenu) return;
+
+
+    const isOpen =
+        submenu.classList.toggle("open");
+
+
+    button.classList.toggle(
+        "open",
+        isOpen
+    );
+
+
+    button.setAttribute(
+        "aria-expanded",
+        isOpen ? "true" : "false"
+    );
+
+}
+
+
+
+/* ---------------------------------------------------------
+   CLOSE MOBILE DRAWER AFTER LINK CLICK
+--------------------------------------------------------- */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        const link =
+            event.target.closest(
+                ".sp-build-mobile-drawer a"
+            );
+
+
+        if (!link) return;
+
+
+        const drawer =
+            document.getElementById(
+                "spBuildMobileDrawer"
+            );
+
+
+        const button =
+            document.getElementById(
+                "spBuildMobileToggle"
+            );
+
+
+        if (drawer) {
+
+            drawer.classList.remove(
+                "open"
+            );
+
+        }
+
+
+        if (button) {
+
+            button.classList.remove(
+                "open"
+            );
+
+            button.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* ---------------------------------------------------------
+   ESCAPE KEY
+--------------------------------------------------------- */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key !== "Escape") return;
+
+
+        document
+            .querySelectorAll(
+                ".sp-build-dropdown"
+            )
+            .forEach(function (dropdown) {
+
+                dropdown.classList.remove(
+                    "open"
+                );
+
+                const trigger =
+                    dropdown.querySelector(
+                        ".sp-build-nav-trigger"
+                    );
+
+
+                if (trigger) {
+
+                    trigger.classList.remove(
+                        "active"
+                    );
+
+                    trigger.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            });
+
+
+        const drawer =
+            document.getElementById(
+                "spBuildMobileDrawer"
+            );
+
+
+        const mobileButton =
+            document.getElementById(
+                "spBuildMobileToggle"
+            );
+
+
+        if (drawer) {
+
+            drawer.classList.remove(
+                "open"
+            );
+
+        }
+
+
+        if (mobileButton) {
+
+            mobileButton.classList.remove(
+                "open"
+            );
+
+            mobileButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    }
+);
+
+// =========================================================
+// STANDPOINT BUILD — HERO INTERACTION
+// =========================================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const systemCard =
+        document.querySelector(
+            ".sp-business-system-card"
+        );
+
+
+    if (!systemCard) return;
+
+
+    /*
+     * Subtle mouse movement on desktop.
+     * This gives the product card depth without
+     * making it feel like a flashy AI landing page.
+     */
+
+    if (window.matchMedia("(hover: hover)").matches) {
+
+        systemCard.addEventListener(
+            "mousemove",
+            function (event) {
+
+                const rect =
+                    systemCard.getBoundingClientRect();
+
+
+                const x =
+                    event.clientX - rect.left;
+
+
+                const y =
+                    event.clientY - rect.top;
+
+
+                const rotateY =
+                    ((x / rect.width) - 0.5) * 2;
+
+
+                const rotateX =
+                    ((y / rect.height) - 0.5) * -2;
+
+
+                systemCard.style.transform =
+                    `perspective(1600px)
+                     rotateX(${rotateX}deg)
+                     rotateY(${rotateY}deg)
+                     translateY(-3px)`;
+
+            }
+        );
+
+
+        systemCard.addEventListener(
+            "mouseleave",
+            function () {
+
+                systemCard.style.transform =
+                    "";
+
+            }
+        );
+
+    }
+
+});
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
