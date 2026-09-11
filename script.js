@@ -5,6 +5,101 @@
     return false;
   }
 
+  // ---------- NAV: mobile drawer, Industries accordion + dropdown ----------
+  // These functions are called from the nav markup (toggleMobileDrawer,
+  // closeMobileDrawer, toggleMobileSub, toggleDropdown, goToDashboard).
+
+  function toggleMobileDrawer(){
+    var drawer = document.getElementById('mobileDrawer');
+    var overlay = document.getElementById('drawerOverlay');
+    var btn = document.getElementById('navToggle');
+    if(!drawer || !overlay || !btn) return;
+
+    var opening = !drawer.classList.contains('open');
+    drawer.classList.toggle('open', opening);
+    overlay.classList.toggle('open', opening);
+    btn.classList.toggle('open', opening);
+    btn.setAttribute('aria-expanded', opening ? 'true' : 'false');
+    drawer.setAttribute('aria-hidden', opening ? 'false' : 'true');
+    document.body.style.overflow = opening ? 'hidden' : '';
+  }
+
+  function closeMobileDrawer(){
+    var drawer = document.getElementById('mobileDrawer');
+    var overlay = document.getElementById('drawerOverlay');
+    var btn = document.getElementById('navToggle');
+    if(!drawer || !drawer.classList.contains('open')) return;
+
+    drawer.classList.remove('open');
+    if(overlay) overlay.classList.remove('open');
+    if(btn){
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // mobile "Industries" accordion inside the drawer
+  function toggleMobileSub(headEl){
+    if(!headEl) return;
+    var isOpen = headEl.classList.contains('open');
+    headEl.classList.toggle('open', !isOpen);
+    headEl.setAttribute('aria-expanded', (!isOpen) ? 'true' : 'false');
+  }
+
+  // desktop "Industries" dropdown — click/tap support alongside the
+  // existing CSS :hover, so it also works on touch laptops/tablets
+  function toggleDropdown(e){
+    if(e){ e.preventDefault(); e.stopPropagation(); }
+    var dd = document.getElementById('industriesDropdown');
+    if(!dd) return;
+    var opening = !dd.classList.contains('dd-open');
+    dd.classList.toggle('dd-open', opening);
+    var trigger = dd.querySelector('.drop-trigger');
+    if(trigger) trigger.setAttribute('aria-expanded', opening ? 'true' : 'false');
+  }
+  document.addEventListener('click', function(e){
+    var dd = document.getElementById('industriesDropdown');
+    if(dd && dd.classList.contains('dd-open') && !dd.contains(e.target)){
+      dd.classList.remove('dd-open');
+      var trigger = dd.querySelector('.drop-trigger');
+      if(trigger) trigger.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      closeMobileDrawer();
+      var dd = document.getElementById('industriesDropdown');
+      if(dd) dd.classList.remove('dd-open');
+    }
+  });
+
+  // Industries link -> jump to the live dashboard preview and switch to the
+  // matching tab. Works from the desktop dropdown and the mobile drawer
+  // accordion; closes the drawer if it was open.
+  var industryTabIndex = { supermarket:0, pharmacy:1, restaurant:2, hotel:3, school:4 };
+  function goToDashboard(e, key){
+    if(e) e.preventDefault();
+    var tabs = document.querySelectorAll('.dash-tab');
+    var idx = industryTabIndex[key];
+    if(idx !== undefined && tabs[idx] && typeof switchDash === 'function'){
+      switchDash(tabs[idx], key);
+    }
+    var anchor = document.getElementById('dash-preview-anchor');
+    if(anchor) anchor.scrollIntoView({ behavior:'smooth', block:'start' });
+    closeMobileDrawer();
+    var dd = document.getElementById('industriesDropdown');
+    if(dd) dd.classList.remove('dd-open');
+    return false;
+  }
+
+  // close the drawer automatically if the viewport grows past the mobile
+  // breakpoint while it's open (e.g. rotating a tablet)
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 860) closeMobileDrawer();
+  });
+
 // ---------- dashboard comfort (dark) mode — scoped to the preview only ----------
   function toggleDashDark(){
     var wrap = document.getElementById('dash-preview-anchor');
@@ -46,54 +141,6 @@
     return false;
   }
 
-  // ---------- nav: mobile drawer ----------
-  function toggleMobileDrawer(){
-    var drawer = document.getElementById('mobileDrawer');
-    var toggle = document.getElementById('navToggle');
-    var open = drawer.classList.toggle('open');
-    toggle.classList.toggle('open', open);
-  }
-  function toggleMobileSub(head){
-    head.classList.toggle('open');
-    var sub = head.nextElementSibling;
-    sub.classList.toggle('open');
-  }
-
-  // ---------- nav: Industries dropdown, click fallback for touch/no-hover devices ----------
-  function toggleDropdown(e){
-    e.stopPropagation();
-    document.getElementById('industriesDropdown').classList.toggle('dd-open');
-  }
-  document.addEventListener('click', function(e){
-    var dd = document.getElementById('industriesDropdown');
-    if(dd && !dd.contains(e.target)) dd.classList.remove('dd-open');
-  });
-
-  // ---------- nav: jump straight to a dashboard tab from the Industries menu ----------
-  function goToDashboard(e, key){
-    e.preventDefault();
-    document.getElementById('industriesDropdown').classList.remove('dd-open');
-    document.getElementById('mobileDrawer').classList.remove('open');
-    document.getElementById('navToggle').classList.remove('open');
-    var tabBtn = document.querySelector('.dash-tab[onclick*="\'' + key + '\'"]');
-    if(tabBtn){ switchDash(tabBtn, key); }
-    document.getElementById('dash-preview-anchor').scrollIntoView({behavior:'smooth', block:'start'});
-    return false;
-  }
-
-  // nav auto-hide on scroll (mobile only)
-  var lastScrollY = window.scrollY;
-  var navEl = document.getElementById('siteNav');
-  window.addEventListener('scroll', function(){
-    if(window.innerWidth > 860){ navEl.classList.remove('nav-hidden'); lastScrollY = window.scrollY; return; }
-    var currentY = window.scrollY;
-    if(currentY > lastScrollY && currentY > 90){
-      navEl.classList.add('nav-hidden');
-    } else {
-      navEl.classList.remove('nav-hidden');
-    }
-    lastScrollY = currentY;
-  });
 
   // dashboard tab switch
   function switchDash(btn, id){
@@ -331,22 +378,64 @@
   }
 
   // school: add an expense row and keep the running total accurate
+  //
+  // SECURITY NOTE: this used to build the row with innerHTML and drop the
+  // visitor's typed note straight into it — so typing something like
+  // <img src=x onerror=alert(1)> into "What was it for?" would execute as
+  // real markup on the page. It's rebuilt below to use textContent and real
+  // DOM nodes instead, which can never be turned into live HTML. If you add
+  // more free-text inputs later, build their output the same way (or run the
+  // typed value through a helper like escapeForDisplay below) rather than
+  // concatenating it into an innerHTML string.
   function addExpense(){
     var amountInput = document.getElementById('expAmountInput');
     var noteInput = document.getElementById('expNoteInput');
+    if(!amountInput || !noteInput) return;
+
     var amount = parseFloat((amountInput.value || '').replace(/[^0-9.]/g,''));
     if(!amount || amount <= 0){ amountInput.focus(); return; }
-    var note = noteInput.value.trim() || 'Miscellaneous';
+
+    var rawNote = noteInput.value.trim() || 'Miscellaneous';
+    var note = rawNote.slice(0, 80); // hard cap so a pasted essay can't blow out the layout
+
     var totalRow = document.getElementById('schoolExpenseTotal');
+    if(!totalRow) return;
+
     var row = document.createElement('div');
     row.className = 'm-expense-row';
-    row.innerHTML = '<div><div class="m-expense-desc"><span class="m-expense-cat">Other</span>' + note + '</div></div><span class="m-expense-amt">₦' + amount.toLocaleString() + '</span>';
+
+    var descWrap = document.createElement('div');
+    var desc = document.createElement('div');
+    desc.className = 'm-expense-desc';
+    var cat = document.createElement('span');
+    cat.className = 'm-expense-cat';
+    cat.textContent = 'Other';
+    desc.appendChild(cat);
+    desc.appendChild(document.createTextNode(note)); // always plain text, never parsed as HTML
+    descWrap.appendChild(desc);
+
+    var amtSpan = document.createElement('span');
+    amtSpan.className = 'm-expense-amt';
+    amtSpan.textContent = '₦' + amount.toLocaleString();
+
+    row.appendChild(descWrap);
+    row.appendChild(amtSpan);
+
     totalRow.parentElement.insertBefore(row, totalRow);
     var totalSpan = totalRow.querySelector('span:last-child');
     var current = parseFloat(totalSpan.textContent.replace(/[^0-9.]/g,'')) || 0;
     totalSpan.textContent = '₦' + (current + amount).toLocaleString();
+
     amountInput.value = '';
     noteInput.value = '';
+  }
+
+  // small helper if you add more free-text inputs later and need to show
+  // typed text safely inside a larger innerHTML string
+  function escapeForDisplay(str){
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
   }
 
   // pharmacy: staff shift attendance toggle (digital scan vs manual)
