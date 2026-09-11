@@ -92,8 +92,8 @@
           <div class="md-sub">
             <a href="#" onclick="return goToDashboard(event,'restaurant')"><span>Restaurants</span><small>Tables, orders, kitchen flow</small></a>
             <a href="#" class="soon" onclick="return false;"><span>Salons</span><small>Bookings, staff commission</small><em class="soon-badge">Soon</em></a>
-            <a href="#" onclick="return goToDashboard(event,'supermarket')"><span>Retail shops</span><small>POS, stock, receipts</small></a>
-            <a href="#" onclick="return goToDashboard(event,'pharmacy')"><span>Pharmacies</span><small>Batch &amp; expiry tracking</small></a>
+            <a href="#" onclick="return goToDashboard(event,'supermarket')"><span> Supermarket/ Retail-shops</span><small>POS, stock, receipts &amp; finance</small></a>
+            <a href="#" onclick="return goToDashboard(event,'pharmacy')"><span>Pharmacies</span><small>Batch Control, Expiry Monitoring &amp; Flexible Financing</small></a>
             <a href="#" onclick="return goToDashboard(event,'school')"><span>Schools</span><small>Fees, records, attendance</small></a>
             <a href="#" onclick="return goToDashboard(event,'hotel')"><span>Hotels</span><small>Rooms, bookings, invoices</small></a>
             <a href="#" class="soon" onclick="return false;"><span>Construction</span><small>Projects &amp; milestones</small><em class="soon-badge">Soon</em></a>
@@ -211,7 +211,7 @@
       <button class="renew-cancel" onclick="closeRenew()">Cancel</button>
       <button class="renew-confirm" onclick="confirmRenew()">Confirm payment</button>
     </div>
-    <p class="renew-note">The timer only moves once payment is confirmed here — an unconfirmed guest stays on the clock.</p>
+    <p class="renew-note">The timer only moves once payment is confirmed here, an unconfirmed guest stays on the clock.</p>
   </div>
 </div>
 
@@ -231,7 +231,7 @@
     </button>
   </div>
   <div class="dash-tabs">
-    <button class="dash-tab active" onclick="switchDash(this,'supermarket')">Supermarket &amp; Shopping Mall</button>
+    <button class="dash-tab active" onclick="switchDash(this,'supermarket')">Supermarket &amp; Retail shops</button>
     <button class="dash-tab" onclick="switchDash(this,'pharmacy')">Pharmacy</button>
     <button class="dash-tab" onclick="switchDash(this,'restaurant')">Restaurants</button>
     <button class="dash-tab" onclick="switchDash(this,'hotel')">Hotels</button>
@@ -242,8 +242,18 @@
       <div class="mockup-topbar">
         <div class="mockup-dots"><span></span><span></span><span></span></div>
         <div class="mockup-url">
-          <span class="mockup-url-track">Your whole business, one screen · Sales · Stock · Staff · Wallet ·&nbsp;&nbsp;&nbsp;Your whole business, one screen · Sales · Stock · Staff · Wallet ·&nbsp;&nbsp;&nbsp;</span>
-          <span class="mockup-url-static">Live dashboard preview</span>
+          <div class="mockup-url-marquee">
+        
+            <span>
+              At a glance: know your business · Sales · Stock · Staff · Wallet ·
+              Everything happening in your business, today.
+            </span>
+        
+            <span aria-hidden="true">
+              Live dashboard preview
+            </span>
+        
+          </div>
         </div>
       </div>
       <div class="mockup-body">
@@ -502,7 +512,7 @@
       <div class="mockup-topbar">
         <div class="mockup-dots"><span></span><span></span><span></span></div>
         <div class="mockup-url">
-          <span class="mockup-url-track">Your whole pharmacy, one screen · Stock · Expiry · Emergencies · Lab ·&nbsp;&nbsp;&nbsp;Your whole pharmacy, one screen · Stock · Expiry · Emergencies · Lab ·&nbsp;&nbsp;&nbsp;</span>
+          <span class="mockup-url-marquee">Your whole pharmacy, one screen · Stock · Expiry · Emergencies · Lab ·&nbsp;&nbsp;&nbsp;Your whole pharmacy, one screen · Stock · Expiry · Emergencies · Lab ·&nbsp;&nbsp;&nbsp;</span>
           <span class="mockup-url-static">Live dashboard preview</span>
         </div>
       </div>
@@ -708,7 +718,7 @@
       <div class="mockup-topbar">
         <div class="mockup-dots"><span></span><span></span><span></span></div>
         <div class="mockup-url">
-          <span class="mockup-url-track">Your whole restaurant, one screen · Orders · Tables · Kitchen ·&nbsp;&nbsp;&nbsp;Your whole restaurant, one screen · Orders · Tables · Kitchen ·&nbsp;&nbsp;&nbsp;</span>
+          <span class="mockup-url-marquee">Your whole restaurant, one screen · Orders · Tables · Kitchen ·&nbsp;&nbsp;&nbsp;Your whole restaurant, one screen · Orders · Tables · Kitchen ·&nbsp;&nbsp;&nbsp;</span>
           <span class="mockup-url-static">Live dashboard preview</span>
         </div>
       </div>
@@ -856,7 +866,7 @@
       <div class="mockup-topbar">
         <div class="mockup-dots"><span></span><span></span><span></span></div>
         <div class="mockup-url">
-          <span class="mockup-url-track">Your whole hotel, one screen · Rooms · Guests · Housekeeping ·&nbsp;&nbsp;&nbsp;Your whole hotel, one screen · Rooms · Guests · Housekeeping ·&nbsp;&nbsp;&nbsp;</span>
+          <span class="mockup-url-marquee">Your whole hotel, one screen · Rooms · Guests · Housekeeping ·&nbsp;&nbsp;&nbsp;Your whole hotel, one screen · Rooms · Guests · Housekeeping ·&nbsp;&nbsp;&nbsp;</span>
           <span class="mockup-url-static">Live dashboard preview</span>
         </div>
       </div>
@@ -1068,7 +1078,7 @@
       <div class="mockup-topbar">
         <div class="mockup-dots"><span></span><span></span><span></span></div>
         <div class="mockup-url">
-          <span class="mockup-url-track">Your whole school, one screen · Fees · Attendance · Staff · Reports ·&nbsp;&nbsp;&nbsp;Your whole school, one screen · Fees · Attendance · Staff · Reports ·&nbsp;&nbsp;&nbsp;</span>
+          <span class="mockup-url-marquee">Your whole school, one screen · Fees · Attendance · Staff · Reports ·&nbsp;&nbsp;&nbsp;Your whole school, one screen · Fees · Attendance · Staff · Reports ·&nbsp;&nbsp;&nbsp;</span>
           <span class="mockup-url-static">Live dashboard preview</span>
         </div>
       </div>
@@ -1483,7 +1493,7 @@
     <!-- Add a photo here (real shopfronts, market scenes, staff at work). It
          sits deep behind the section, heavily darkened and masked toward the
          edges, so it reads as texture and authenticity, not a hero image. -->
-    <img class="testimonials-bg-img" src="" alt="" onerror="this.style.display='none'">
+    <img class="testimonials-bg-img" src="img/LOGO/test2.png" alt="" onerror="this.style.display='none'">
   </div>
   <div class="wrap">
     <div class="section-head centered testimonial-head">
@@ -1631,7 +1641,7 @@
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <div class="logo-placehold"><img src="img/LOGO/Untitled_design__3_-removebg-preview.png" class="w-100 big" alt="Standpoint Logo"></div>
+        <div class="logo-placehold"><img src="img/LOGO/loggs.png" class="w-100 big" alt="Standpoint Logo"></div>
         <p>One vantage point over your whole business: sales, stock, staff and money, in one dashboard.</p>
         <div class="foot-social">
           <a href="#" aria-label="Facebook" class="fs-fb">
