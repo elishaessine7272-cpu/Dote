@@ -117,11 +117,14 @@ nav .wrap{
   justify-self:center;
 }
 .nav-links > a, .nav-links > .has-dropdown > .drop-trigger{
-  color:var(--slate); position:relative; padding:10px 10px; display:inline-flex; align-items:center; gap:6px;
+  color:var(--ink); position:relative; padding:10px 10px; display:inline-flex; align-items:center; gap:6px;
   transition:color .18s ease; cursor:pointer; border-radius:18px; white-space:nowrap;
 }
 .nav-links > a:hover, .nav-links > .has-dropdown:hover > .drop-trigger, .nav-links > .has-dropdown.dd-open > .drop-trigger{color:var(--ink); background:var(--paper-alt);}
 .drop-trigger svg{width:12px; height:12px; transition:transform .18s ease;}
+.dis{
+  width:30px; height:48px; border-radius:5px; color:rgba(23, 23, 117, 0.651); 
+}
 .has-dropdown:hover .drop-trigger svg, .has-dropdown.dd-open .drop-trigger svg{transform:rotate(180deg);}
 .has-dropdown{
   position:static;
@@ -135,7 +138,7 @@ nav .wrap{
 
     transform:translate(-50%, 8px);
 
-    background:rgba(243, 242, 242, 0.82); /* light dim, not solid */
+    background:rgba(243, 242, 242, 0.527); /* light dim, not solid */
     backdrop-filter:blur(19px) saturate(150%);
     -webkit-backdrop-filter:blur(16px) saturate(150%);
     border:1px solid var(--line-strong);
@@ -168,14 +171,15 @@ nav .wrap{
   transition:background .15s ease; position:relative;
 }
 .dropdown a:hover{background:rgba(18,165,148,0.10);}
-.dropdown a .di{width:26px; height:26px; border-radius:7px; background:var(--teal-light); color:var(--teal); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; font-family:'Space Grotesk',sans-serif;}
-.dropdown a .dtext b{display:block; font-size:13.5px; font-weight:600; color:var(--ink);}
+.dropdown a .di{width:26px; height:26px; border-radius:7px;  flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:600; font-family:'Space Grotesk',sans-serif;}
+.dropdown a .dtext b{display:block; font-size:14.9px; font-weight:800; color:var(--slate)}
 .dropdown a .dtext span{font-size:11.5px; color:var(--slate);}
 .dropdown a.soon{cursor:default;}
 .dropdown a.soon .dtext b{color:var(--slate);}
 .dropdown a.soon:hover{background:transparent;}
 .soon-badge{margin-left:auto; align-self:flex-end; font-family:'IBM Plex Mono',monospace; font-size:9px; text-transform:uppercase; letter-spacing:.05em; color:white; background:#0f1b33d8; border:1px solid var(--line-strong); padding:2px 6px; border-radius:995px; flex-shrink:0;}
 .nav-cta{display:flex; align-items:center; gap:11px; flex-shrink:0; padding-left:18px; margin-left:20px;}
+
 
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:10px;
